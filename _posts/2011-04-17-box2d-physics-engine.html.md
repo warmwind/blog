@@ -1,16 +1,10 @@
 ---
 title: Box2D--Physics Engine
-category: PROGRAMMING
+category: 技术
 tags:
-- Angry Birds
 - Box2D
 - Physics Engine
 date: 2011-04-17
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
 ---
 [Demo](/apps.html#angry_tank)
 

@@ -1,21 +1,13 @@
 ---
 title: 从交付到产品
-category: WORK
+category: 工作
 tags:
-- .Net
-- Android
-- pressure
-- delivery
-- product
-- customer
-- Java
+- 压力
+- Delivery
+- 产品
+- 客户
 - Rails
 date: 2013-02-13
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
 ---
 这是一个七人的小团队产品组，正式加入刚好有一个月了。说长不长，不过可总结的倒是有一些。之所以会有些感慨，因为相对于前面所有的项目，这是比较特别的一个。
 

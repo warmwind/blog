@@ -1,17 +1,13 @@
 ---
 title: Half a year in TW
-category: WORK
+category: 工作
 tags:
-- pressure
+- 压力
 - coach
-- pair
+- 结对编程
 date: 2010-12-08
 status: publish
-type: post
 published: false
-meta:
-  _edit_last: '1'
-  _wp_old_slug: ''
 ---
 出国，第一次，一个人，直接去客户现场，RoR从未用过，手头资料有几张图表和几封邮件， 准备的时间是出发前的几天下班晚上。
 

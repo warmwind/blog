@@ -1,10 +1,8 @@
 ---
 title: Elasticsearch--动态类型字段的mapping
 date: 2014-11-24
-tags: Elasticsearch,搜索
-category: PROGRAMMING
-status: publish
-published: true
+tags: [Elasticsearch]
+category: 技术
 ---
 [ElasticSearch](http://www.elasticsearch.org/)是一个基于[Lucene](http://lucene.apache.org/core/)构建的搜索引擎，通过RESTful的api可以进行数据的更新与搜索。目前github就是用的ES。
 

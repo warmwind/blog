@@ -38,8 +38,8 @@
 <meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="软件发布实战 – 状态检查" />
 <meta property="og:locale" content="zh_CN" />
-<meta name="description" content="当前项目的发布周期是两个星期,指的是总共6,7个项目一起发布。从第一天code cut，经历如下的过程： 总共三个阶段，每次发布上去以后各个项目都要进行回归测试，发现bug就需要打tag，重新经过QA环境。 如果每次环境保持比较稳定，比如发布的操作系统，部署方式都没有改变，那基于已有稳定cloud环境保证的基础上，不会打太多tag。 但是我们就经历了上面两种方式的变化。系统从Debian改为CentOS，部署方式从同一个appliction变为两个application，同一台VM， 进而变为两个application，两个VM。这一次，在很短的时间里tag的数量就飙升到20。 在如此紧密的发布，这么多的小版本中，如何快速完成下面两个检测呢？ 快速查看发布了正确的版本。可以点击查看当前版本中更新的内容，但显然这需要记住每个tag更改的内容，在tag较多团队太多时不实际。&lt;/li&gt; 快速查看基础架构(比如数据库连接)运行良好。运行测试可以做到，但依然效率太低。&lt;/li&gt; Live Version和Health Check可以实现这一点。 1、Live Version 也就是显示当前运行的版本。Rails中默认显示index页面，我们可以将这个页面稍作改变，以支持版本显示。 1 2 3 4 5 6 7 8 9 #live_version.html.erb &lt;!DOCTYPE html&gt; &lt;html&gt; &lt;head&gt; &lt;meta name=&quot;package-git-sha&quot; content=&quot;&lt;%= package_git_sha %&gt;&quot;&gt; &lt;title&gt;Version: &lt;%= package_version %&gt;, &lt;%= package_git_sha %&gt;&lt;/title&gt; &lt;/head&gt; &lt;body&gt;&lt;%= package_version %&gt;&lt;/body&gt; &lt;/html&gt; 1 2 3 4 5 6 7 8 9 10 11 #version task task :version do write_version_file(&quot;live_version.html.erb&quot;, &quot;public/live_version.html&quot;) write_version_file(&quot;live_version.yml.erb&quot;, &quot;live_version.yml&quot;) end #get version from jenkins def package_version_label build_id = ENV[&#39;BUILD_NUMBER&#39;] || &#39;dev&#39; &quot;1.#{build_id}&quot; end 最上面是显示版本的页面模板, 默认的index链接到这个模板。下面是rake task, 当package整个应用时将给version具体的信息。其中用到了Jenkins Parameter的属性。这样当访问应用的根目录时会显示程序的版本信息， 实现中， 如果是普通提交构建，版本会使用时间戳，如果是Tag版本构建，会显示Git tag+ Build number+ App name的格式。 2、Health Check 它的作用在于快速显示程序的基本状态，比如数据库链接是否正常。我们使用了heartbeat和status两种: Heartbeat: 当一切正常返回OK。通常在发布过程中发布了一个应用后都会去检查Hearbeat是否正常。如果异常，将使用status来查看细节。 Status：显示每个连接的具体状态，仅在Heartbeat异常时帮助定位。 发布的过程并不需要每个分支去测试，因为基本的功能实现有各种单元测试和集成测试，所以这种状态信息的快速反馈十分必要，这是加快发布的重要一环。" />
-<meta property="og:description" content="当前项目的发布周期是两个星期,指的是总共6,7个项目一起发布。从第一天code cut，经历如下的过程： 总共三个阶段，每次发布上去以后各个项目都要进行回归测试，发现bug就需要打tag，重新经过QA环境。 如果每次环境保持比较稳定，比如发布的操作系统，部署方式都没有改变，那基于已有稳定cloud环境保证的基础上，不会打太多tag。 但是我们就经历了上面两种方式的变化。系统从Debian改为CentOS，部署方式从同一个appliction变为两个application，同一台VM， 进而变为两个application，两个VM。这一次，在很短的时间里tag的数量就飙升到20。 在如此紧密的发布，这么多的小版本中，如何快速完成下面两个检测呢？ 快速查看发布了正确的版本。可以点击查看当前版本中更新的内容，但显然这需要记住每个tag更改的内容，在tag较多团队太多时不实际。&lt;/li&gt; 快速查看基础架构(比如数据库连接)运行良好。运行测试可以做到，但依然效率太低。&lt;/li&gt; Live Version和Health Check可以实现这一点。 1、Live Version 也就是显示当前运行的版本。Rails中默认显示index页面，我们可以将这个页面稍作改变，以支持版本显示。 1 2 3 4 5 6 7 8 9 #live_version.html.erb &lt;!DOCTYPE html&gt; &lt;html&gt; &lt;head&gt; &lt;meta name=&quot;package-git-sha&quot; content=&quot;&lt;%= package_git_sha %&gt;&quot;&gt; &lt;title&gt;Version: &lt;%= package_version %&gt;, &lt;%= package_git_sha %&gt;&lt;/title&gt; &lt;/head&gt; &lt;body&gt;&lt;%= package_version %&gt;&lt;/body&gt; &lt;/html&gt; 1 2 3 4 5 6 7 8 9 10 11 #version task task :version do write_version_file(&quot;live_version.html.erb&quot;, &quot;public/live_version.html&quot;) write_version_file(&quot;live_version.yml.erb&quot;, &quot;live_version.yml&quot;) end #get version from jenkins def package_version_label build_id = ENV[&#39;BUILD_NUMBER&#39;] || &#39;dev&#39; &quot;1.#{build_id}&quot; end 最上面是显示版本的页面模板, 默认的index链接到这个模板。下面是rake task, 当package整个应用时将给version具体的信息。其中用到了Jenkins Parameter的属性。这样当访问应用的根目录时会显示程序的版本信息， 实现中， 如果是普通提交构建，版本会使用时间戳，如果是Tag版本构建，会显示Git tag+ Build number+ App name的格式。 2、Health Check 它的作用在于快速显示程序的基本状态，比如数据库链接是否正常。我们使用了heartbeat和status两种: Heartbeat: 当一切正常返回OK。通常在发布过程中发布了一个应用后都会去检查Hearbeat是否正常。如果异常，将使用status来查看细节。 Status：显示每个连接的具体状态，仅在Heartbeat异常时帮助定位。 发布的过程并不需要每个分支去测试，因为基本的功能实现有各种单元测试和集成测试，所以这种状态信息的快速反馈十分必要，这是加快发布的重要一环。" />
+<meta name="description" content="当前项目的发布周期是两个星期,指的是总共6,7个项目一起发布。从第一天code cut，经历如下的过程： 总共三个阶段，每次发布上去以后各个项目都要进行回归测试，发现bug就需要打tag，重新经过QA环境。" />
+<meta property="og:description" content="当前项目的发布周期是两个星期,指的是总共6,7个项目一起发布。从第一天code cut，经历如下的过程： 总共三个阶段，每次发布上去以后各个项目都要进行回归测试，发现bug就需要打tag，重新经过QA环境。" />
 <link rel="canonical" href="http://localhost:4000/posts/releae-in-action-healthcheck.html/" />
 <meta property="og:url" content="http://localhost:4000/posts/releae-in-action-healthcheck.html/" />
 <meta property="og:site_name" content="姜鹏的博客" />
@@ -49,7 +49,7 @@
 <meta property="twitter:title" content="软件发布实战 – 状态检查" />
 <meta name="twitter:site" content="@peng_jiang" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-10-16T00:00:00+08:00","datePublished":"2011-10-16T00:00:00+08:00","description":"当前项目的发布周期是两个星期,指的是总共6,7个项目一起发布。从第一天code cut，经历如下的过程： 总共三个阶段，每次发布上去以后各个项目都要进行回归测试，发现bug就需要打tag，重新经过QA环境。 如果每次环境保持比较稳定，比如发布的操作系统，部署方式都没有改变，那基于已有稳定cloud环境保证的基础上，不会打太多tag。 但是我们就经历了上面两种方式的变化。系统从Debian改为CentOS，部署方式从同一个appliction变为两个application，同一台VM， 进而变为两个application，两个VM。这一次，在很短的时间里tag的数量就飙升到20。 在如此紧密的发布，这么多的小版本中，如何快速完成下面两个检测呢？ 快速查看发布了正确的版本。可以点击查看当前版本中更新的内容，但显然这需要记住每个tag更改的内容，在tag较多团队太多时不实际。&lt;/li&gt; 快速查看基础架构(比如数据库连接)运行良好。运行测试可以做到，但依然效率太低。&lt;/li&gt; Live Version和Health Check可以实现这一点。 1、Live Version 也就是显示当前运行的版本。Rails中默认显示index页面，我们可以将这个页面稍作改变，以支持版本显示。 1 2 3 4 5 6 7 8 9 #live_version.html.erb &lt;!DOCTYPE html&gt; &lt;html&gt; &lt;head&gt; &lt;meta name=&quot;package-git-sha&quot; content=&quot;&lt;%= package_git_sha %&gt;&quot;&gt; &lt;title&gt;Version: &lt;%= package_version %&gt;, &lt;%= package_git_sha %&gt;&lt;/title&gt; &lt;/head&gt; &lt;body&gt;&lt;%= package_version %&gt;&lt;/body&gt; &lt;/html&gt; 1 2 3 4 5 6 7 8 9 10 11 #version task task :version do write_version_file(&quot;live_version.html.erb&quot;, &quot;public/live_version.html&quot;) write_version_file(&quot;live_version.yml.erb&quot;, &quot;live_version.yml&quot;) end #get version from jenkins def package_version_label build_id = ENV[&#39;BUILD_NUMBER&#39;] || &#39;dev&#39; &quot;1.#{build_id}&quot; end 最上面是显示版本的页面模板, 默认的index链接到这个模板。下面是rake task, 当package整个应用时将给version具体的信息。其中用到了Jenkins Parameter的属性。这样当访问应用的根目录时会显示程序的版本信息， 实现中， 如果是普通提交构建，版本会使用时间戳，如果是Tag版本构建，会显示Git tag+ Build number+ App name的格式。 2、Health Check 它的作用在于快速显示程序的基本状态，比如数据库链接是否正常。我们使用了heartbeat和status两种: Heartbeat: 当一切正常返回OK。通常在发布过程中发布了一个应用后都会去检查Hearbeat是否正常。如果异常，将使用status来查看细节。 Status：显示每个连接的具体状态，仅在Heartbeat异常时帮助定位。 发布的过程并不需要每个分支去测试，因为基本的功能实现有各种单元测试和集成测试，所以这种状态信息的快速反馈十分必要，这是加快发布的重要一环。","headline":"软件发布实战 – 状态检查","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/releae-in-action-healthcheck.html/"},"url":"http://localhost:4000/posts/releae-in-action-healthcheck.html/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-01-29T23:37:28+08:00","datePublished":"2011-10-16T00:00:00+08:00","description":"当前项目的发布周期是两个星期,指的是总共6,7个项目一起发布。从第一天code cut，经历如下的过程： 总共三个阶段，每次发布上去以后各个项目都要进行回归测试，发现bug就需要打tag，重新经过QA环境。","headline":"软件发布实战 – 状态检查","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/releae-in-action-healthcheck.html/"},"url":"http://localhost:4000/posts/releae-in-action-healthcheck.html/"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -679,6 +679,26 @@
 
     <!-- lastmod date -->
     
+    <span>
+      更新于
+      <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+
+<em class=""
+    data-ts="1675006648"
+    data-df="YYYY/MM/DD"
+    data-toggle="tooltip" data-placement="bottom">
+  2023/01/29
+</em>
+
+    </span>
+    
 
   
 
@@ -819,7 +839,7 @@
   <div class="post-meta mb-3">
     <i class="far fa-folder-open fa-fw mr-1"></i>
     
-      <a href='/categories/work/'>WORK</a>
+      <a href='/categories/%E5%B7%A5%E4%BD%9C/'>工作</a>
   </div>
   
 
@@ -829,13 +849,13 @@
     <i class="fa fa-tags fa-fw mr-1"></i>
       
       <a href="/tags/release/"
-          class="post-tag no-text-decoration" >release</a>
+          class="post-tag no-text-decoration" >Release</a>
       
       <a href="/tags/integration/"
-          class="post-tag no-text-decoration" >integration</a>
+          class="post-tag no-text-decoration" >Integration</a>
       
       <a href="/tags/feedback/"
-          class="post-tag no-text-decoration" >feedback</a>
+          class="post-tag no-text-decoration" >Feedback</a>
       
       <a href="/tags/health-check/"
           class="post-tag no-text-decoration" >Health Check</a>
@@ -933,6 +953,40 @@
 
 
 
+  <div id="access-lastmod" class="post">
+    <div class="panel-heading">最近更新</div>
+    <ul class="post-content pl-0 pb-1 ml-1 mt-2">
+      
+        
+        
+        
+      <li><a href="/posts/some-rails-helper-methods-those-are-confusing.html/">常用易混的四个Rails View Helper方法</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/alipay-generate-request-url.html/">支付宝集成——生成请求URL</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/alipay-verify-request.html/">支付宝集成——校验与应答</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/nginx-unicorn.html/">Nginx 与 Unicorn</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/tricks-on-upgrading-rails-from-3-2-to-4-0.html/">Tricks On Upgrading Rails From 3.2 to 4.0</a></li>
+      
+    </ul>
+  </div> <!-- #access-lastmod -->
+
+
+
       
 
 
@@ -949,11 +1003,6 @@
 
 
 
-  
-    
-    
-    
-    
   
     
     
@@ -1188,6 +1237,81 @@
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -1212,6 +1336,10 @@
     
     
     
+      
+        
+        
+
   
     
     
@@ -1244,6 +1372,10 @@
     
     
     
+      
+        
+        
+
   
     
     
@@ -1264,10 +1396,7 @@
     
     
     
-  
-    
-    
-    
+      
     
   
     
@@ -1279,110 +1408,7 @@
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -1548,414 +1574,6 @@
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -2005,39 +1623,6 @@
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -2062,168 +1647,6 @@
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -2356,44 +1779,12 @@
     
     
     
-      
-    
-  
-    
-    
-    
-    
   
     
     
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -2487,7 +1878,35 @@
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -2520,6 +1939,321 @@
     
     
       
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -2543,34 +2277,34 @@
 
     
       
+      <a class="post-tag" href="/tags/rails/">Rails</a>
+    
+      
       <a class="post-tag" href="/tags/javascript/">Javascript</a>
     
       
       <a class="post-tag" href="/tags/box2d/">Box2D</a>
     
       
-      <a class="post-tag" href="/tags/release/">release</a>
-    
-      
-      <a class="post-tag" href="/tags/test/">test</a>
-    
-      
-      <a class="post-tag" href="/tags/alipay/">alipay</a>
-    
-      
-      <a class="post-tag" href="/tags/angry-birds/">Angry Birds</a>
-    
-      
       <a class="post-tag" href="/tags/coffeescript/">CoffeeScript</a>
     
       
-      <a class="post-tag" href="/tags/feedback/">feedback</a>
+      <a class="post-tag" href="/tags/physics-engine/">Physics Engine</a>
+    
+      
+      <a class="post-tag" href="/tags/release/">Release</a>
+    
+      
+      <a class="post-tag" href="/tags/test/">Test</a>
+    
+      
+      <a class="post-tag" href="/tags/elasticsearch/">Elasticsearch</a>
+    
+      
+      <a class="post-tag" href="/tags/feedback/">Feedback</a>
     
       
       <a class="post-tag" href="/tags/html5/">HTML5</a>
-    
-      
-      <a class="post-tag" href="/tags/integration/">integration</a>
     
 
     </div>
@@ -2615,71 +2349,6 @@
 
 
 
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 
   
@@ -3566,11 +3235,6 @@ Feedback是一种文化，也是一种力量。
     
     
     
-  
-    
-    
-    
-    
       
         
         
@@ -3615,6 +3279,81 @@ Feedback是一种文化，也是一种力量。
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -3639,6 +3378,10 @@ Feedback是一种文化，也是一种力量。
     
     
     
+      
+        
+        
+
   
     
     
@@ -3671,6 +3414,10 @@ Feedback是一种文化，也是一种力量。
     
     
     
+      
+        
+        
+
   
     
     
@@ -3691,10 +3438,7 @@ Feedback是一种文化，也是一种力量。
     
     
     
-  
-    
-    
-    
+      
     
   
     
@@ -3706,110 +3450,7 @@ Feedback是一种文化，也是一种力量。
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -3975,414 +3616,6 @@ Feedback是一种文化，也是一种力量。
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -4432,39 +3665,6 @@ Feedback是一种文化，也是一种力量。
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -4489,168 +3689,6 @@ Feedback是一种文化，也是一种力量。
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -4783,44 +3821,12 @@ Feedback是一种文化，也是一种力量。
     
     
     
-      
-    
-  
-    
-    
-    
-    
   
     
     
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -4914,7 +3920,35 @@ Feedback是一种文化，也是一种力量。
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -4947,6 +3981,321 @@ Feedback是一种文化，也是一种力量。
     
     
       
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -4970,34 +4319,34 @@ Feedback是一种文化，也是一种力量。
 
     
       
+      <a class="post-tag" href="/tags/rails/">Rails</a>
+    
+      
       <a class="post-tag" href="/tags/javascript/">Javascript</a>
     
       
       <a class="post-tag" href="/tags/box2d/">Box2D</a>
     
       
-      <a class="post-tag" href="/tags/release/">release</a>
-    
-      
-      <a class="post-tag" href="/tags/test/">test</a>
-    
-      
-      <a class="post-tag" href="/tags/alipay/">alipay</a>
-    
-      
-      <a class="post-tag" href="/tags/angry-birds/">Angry Birds</a>
-    
-      
       <a class="post-tag" href="/tags/coffeescript/">CoffeeScript</a>
     
       
-      <a class="post-tag" href="/tags/feedback/">feedback</a>
+      <a class="post-tag" href="/tags/physics-engine/">Physics Engine</a>
+    
+      
+      <a class="post-tag" href="/tags/release/">Release</a>
+    
+      
+      <a class="post-tag" href="/tags/test/">Test</a>
+    
+      
+      <a class="post-tag" href="/tags/elasticsearch/">Elasticsearch</a>
+    
+      
+      <a class="post-tag" href="/tags/feedback/">Feedback</a>
     
       
       <a class="post-tag" href="/tags/html5/">HTML5</a>
-    
-      
-      <a class="post-tag" href="/tags/integration/">integration</a>
     
 
     </div>

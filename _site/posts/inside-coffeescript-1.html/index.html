@@ -38,8 +38,8 @@
 <meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="Inside CoffeeScript：语法强大" />
 <meta property="og:locale" content="zh_CN" />
-<meta name="description" content="第一次听说CoffeeScript是Rails 3.1将它作为默认的支持，第二次深入的理解是Nodejs的兴起，CoffeeScript用它独特的语法样式，使我这个面向对象出身的程序员在写JavaScript时找到了似曾相识的感觉。当然如果对它的理解仅仅停留在语法的简化，那么只能说对JS(The World’s Most Misunderstood Programming Language)本身并不熟悉。 « JavaScript语言精粹 »一书中提交了很多JS本身语法存在的缺陷，例如全局变量，分号自动补全，==等。CoffeeScript的golden rule是“It’s just JavaScript”, 但是它如何避免这些陷阱，则从另一方面体现了它的强大。本文将从语法强大方面来举例分析。 READMORE 1）函数默认参数 + 字符串连接 1 2 3 4 5 6 7 favorite = function(language){ if(language == null){ language = &#39;CoffeeScript&#39;; } console.log(&quot;I love &quot; + language + &quot; best&quot;); } favorite() 1 favorite = (language = &#39;CoffeeScript&#39;) -&gt; console.log &quot;I love #{language} best&quot; 2）可变参数Splats 这样一个例子：足球赛事中，一般的排名是，冠军，亚军，和其他球队，这里再复杂一点，加上最后一名。也就是： 1 2 3 4 5 6 7 8 9 10 Given allTeams = [&#39;Chelsea&#39;, &#39;Bayern&#39;, &#39;Barcelona&#39;, &#39;Real Madrid&#39;, &#39;Milan&#39;, &#39;Inter&#39;, &#39;HengDa&#39;] Output: champaion: Chelsea runner-up: Bayern others:Barcelona, Real Madrid, Milan, Inter last:HengDa 用JS和CoffeeScript分别实现 1 2 3 4 5 6 7 8 9 10 11 12 13 var allTeams = [&#39;Chelsea&#39;, &#39;Bayern&#39;, &#39;Barcelona&#39;, &#39;Real Madrid&#39;, &#39;Milan&#39;, &#39;Inter&#39;, &#39;HengDa&#39;]; order = function(teams) { var champion = teams[0]; var runnerup = teams[1]; var others = teams.length &gt;= 3 ? teams.slice(2, teams.length - 1) : []; var last = teams[teams.length - 1]; console.log(&quot;Champion is &quot; + champion); console.log(&quot;Runnerup is &quot; + runnerup); console.log(&quot;others are &quot; + others); console.log(&quot;last is &quot; + last); }; order(allTeams); 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 allTeams = [ &#39;Chelsea&#39; &#39;Bayern&#39; &#39;Barcelona&#39; &#39;Real Madrid&#39; &#39;Milan&#39; &#39;Inter&#39; &#39;HengDa&#39; ] order = (champion, runnerup, others..., last) -&gt; console.log &quot;Champion is #{champion}&quot; console.log &quot;Runnerup is #{runnerup}&quot; console.log &quot;others are #{others}&quot; console.log &quot;last is #{last}&quot; order allTeams... 3）Destructing Assignment 在Ruby中有同样的语法，下面的例子实现了Fibonacci数列 1 2 3 4 5 6 7 8 #Fibonacci [last, current] = [0,1] for i in [0..10] console.log last [last, current] = [current, current + last] console.log last 更加强大的是当右侧是一个对象时，会根据该对象的属性进行赋值： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 class Shape constructor: (@width) -&gt; computeArea: -&gt; throw new Error(&#39;I am an abstract class!&#39;) class Square extends Shape computeArea: -&gt; Math.pow @width, 2 class Circle extends Shape radius: -&gt; @width / 2 computeArea: -&gt; Math.PI * Math.pow @radius(), 2 #The instanceof operator tests presence of constructor.prototype in object prototype chain. showArea = (shape) -&gt; unless shape instanceof Shape throw new Error(&#39;showArea requires a Shape instance!&#39;) console.log shape.computeArea() showArea new Square(2) # 4 showArea new Circle(2) # pi 1 2 3 4 5 6 7 8 9 10 11 12 13 14 myRect = x: 100 y: 200 {x: myX, y: myY} = myRect #定义了myX和myY两个变量，并调用myRect.x和myRect.y分别赋值 console.log myX console.log myY #当定义的变量名称与右侧对象的key值相同时，可以更精简为 {x, y} = myRect console.log x console.log y 4）class与inheritance 定义了class与extends来是语法来包装JS使其更加类似面向对象的语言。给个简单例子 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 class Shape constructor: (@width) -&gt; computeArea: -&gt; throw new Error(&#39;I am an abstract class!&#39;) class Square extends Shape computeArea: -&gt; Math.pow @width, 2 class Circle extends Shape radius: -&gt; @width / 2 computeArea: -&gt; Math.PI * Math.pow @radius(), 2 #The instanceof operator tests presence of constructor.prototype in object prototype chain. showArea = (shape) -&gt; unless shape instanceof Shape throw new Error(&#39;showArea requires a Shape instance!&#39;) console.log shape.computeArea() showArea new Square(2) # 4 showArea new Circle(2) # pi" />
-<meta property="og:description" content="第一次听说CoffeeScript是Rails 3.1将它作为默认的支持，第二次深入的理解是Nodejs的兴起，CoffeeScript用它独特的语法样式，使我这个面向对象出身的程序员在写JavaScript时找到了似曾相识的感觉。当然如果对它的理解仅仅停留在语法的简化，那么只能说对JS(The World’s Most Misunderstood Programming Language)本身并不熟悉。 « JavaScript语言精粹 »一书中提交了很多JS本身语法存在的缺陷，例如全局变量，分号自动补全，==等。CoffeeScript的golden rule是“It’s just JavaScript”, 但是它如何避免这些陷阱，则从另一方面体现了它的强大。本文将从语法强大方面来举例分析。 READMORE 1）函数默认参数 + 字符串连接 1 2 3 4 5 6 7 favorite = function(language){ if(language == null){ language = &#39;CoffeeScript&#39;; } console.log(&quot;I love &quot; + language + &quot; best&quot;); } favorite() 1 favorite = (language = &#39;CoffeeScript&#39;) -&gt; console.log &quot;I love #{language} best&quot; 2）可变参数Splats 这样一个例子：足球赛事中，一般的排名是，冠军，亚军，和其他球队，这里再复杂一点，加上最后一名。也就是： 1 2 3 4 5 6 7 8 9 10 Given allTeams = [&#39;Chelsea&#39;, &#39;Bayern&#39;, &#39;Barcelona&#39;, &#39;Real Madrid&#39;, &#39;Milan&#39;, &#39;Inter&#39;, &#39;HengDa&#39;] Output: champaion: Chelsea runner-up: Bayern others:Barcelona, Real Madrid, Milan, Inter last:HengDa 用JS和CoffeeScript分别实现 1 2 3 4 5 6 7 8 9 10 11 12 13 var allTeams = [&#39;Chelsea&#39;, &#39;Bayern&#39;, &#39;Barcelona&#39;, &#39;Real Madrid&#39;, &#39;Milan&#39;, &#39;Inter&#39;, &#39;HengDa&#39;]; order = function(teams) { var champion = teams[0]; var runnerup = teams[1]; var others = teams.length &gt;= 3 ? teams.slice(2, teams.length - 1) : []; var last = teams[teams.length - 1]; console.log(&quot;Champion is &quot; + champion); console.log(&quot;Runnerup is &quot; + runnerup); console.log(&quot;others are &quot; + others); console.log(&quot;last is &quot; + last); }; order(allTeams); 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 allTeams = [ &#39;Chelsea&#39; &#39;Bayern&#39; &#39;Barcelona&#39; &#39;Real Madrid&#39; &#39;Milan&#39; &#39;Inter&#39; &#39;HengDa&#39; ] order = (champion, runnerup, others..., last) -&gt; console.log &quot;Champion is #{champion}&quot; console.log &quot;Runnerup is #{runnerup}&quot; console.log &quot;others are #{others}&quot; console.log &quot;last is #{last}&quot; order allTeams... 3）Destructing Assignment 在Ruby中有同样的语法，下面的例子实现了Fibonacci数列 1 2 3 4 5 6 7 8 #Fibonacci [last, current] = [0,1] for i in [0..10] console.log last [last, current] = [current, current + last] console.log last 更加强大的是当右侧是一个对象时，会根据该对象的属性进行赋值： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 class Shape constructor: (@width) -&gt; computeArea: -&gt; throw new Error(&#39;I am an abstract class!&#39;) class Square extends Shape computeArea: -&gt; Math.pow @width, 2 class Circle extends Shape radius: -&gt; @width / 2 computeArea: -&gt; Math.PI * Math.pow @radius(), 2 #The instanceof operator tests presence of constructor.prototype in object prototype chain. showArea = (shape) -&gt; unless shape instanceof Shape throw new Error(&#39;showArea requires a Shape instance!&#39;) console.log shape.computeArea() showArea new Square(2) # 4 showArea new Circle(2) # pi 1 2 3 4 5 6 7 8 9 10 11 12 13 14 myRect = x: 100 y: 200 {x: myX, y: myY} = myRect #定义了myX和myY两个变量，并调用myRect.x和myRect.y分别赋值 console.log myX console.log myY #当定义的变量名称与右侧对象的key值相同时，可以更精简为 {x, y} = myRect console.log x console.log y 4）class与inheritance 定义了class与extends来是语法来包装JS使其更加类似面向对象的语言。给个简单例子 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 class Shape constructor: (@width) -&gt; computeArea: -&gt; throw new Error(&#39;I am an abstract class!&#39;) class Square extends Shape computeArea: -&gt; Math.pow @width, 2 class Circle extends Shape radius: -&gt; @width / 2 computeArea: -&gt; Math.PI * Math.pow @radius(), 2 #The instanceof operator tests presence of constructor.prototype in object prototype chain. showArea = (shape) -&gt; unless shape instanceof Shape throw new Error(&#39;showArea requires a Shape instance!&#39;) console.log shape.computeArea() showArea new Square(2) # 4 showArea new Circle(2) # pi" />
+<meta name="description" content="第一次听说CoffeeScript是Rails 3.1将它作为默认的支持，第二次深入的理解是Nodejs的兴起，CoffeeScript用它独特的语法样式，使我这个面向对象出身的程序员在写JavaScript时找到了似曾相识的感觉。当然如果对它的理解仅仅停留在语法的简化，那么只能说对JS(The World’s Most Misunderstood Programming Language)本身并不熟悉。" />
+<meta property="og:description" content="第一次听说CoffeeScript是Rails 3.1将它作为默认的支持，第二次深入的理解是Nodejs的兴起，CoffeeScript用它独特的语法样式，使我这个面向对象出身的程序员在写JavaScript时找到了似曾相识的感觉。当然如果对它的理解仅仅停留在语法的简化，那么只能说对JS(The World’s Most Misunderstood Programming Language)本身并不熟悉。" />
 <link rel="canonical" href="http://localhost:4000/posts/inside-coffeescript-1.html/" />
 <meta property="og:url" content="http://localhost:4000/posts/inside-coffeescript-1.html/" />
 <meta property="og:site_name" content="姜鹏的博客" />
@@ -49,7 +49,7 @@
 <meta property="twitter:title" content="Inside CoffeeScript：语法强大" />
 <meta name="twitter:site" content="@peng_jiang" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2012-05-26T00:00:00+08:00","datePublished":"2012-05-26T00:00:00+08:00","description":"第一次听说CoffeeScript是Rails 3.1将它作为默认的支持，第二次深入的理解是Nodejs的兴起，CoffeeScript用它独特的语法样式，使我这个面向对象出身的程序员在写JavaScript时找到了似曾相识的感觉。当然如果对它的理解仅仅停留在语法的简化，那么只能说对JS(The World’s Most Misunderstood Programming Language)本身并不熟悉。 « JavaScript语言精粹 »一书中提交了很多JS本身语法存在的缺陷，例如全局变量，分号自动补全，==等。CoffeeScript的golden rule是“It’s just JavaScript”, 但是它如何避免这些陷阱，则从另一方面体现了它的强大。本文将从语法强大方面来举例分析。 READMORE 1）函数默认参数 + 字符串连接 1 2 3 4 5 6 7 favorite = function(language){ if(language == null){ language = &#39;CoffeeScript&#39;; } console.log(&quot;I love &quot; + language + &quot; best&quot;); } favorite() 1 favorite = (language = &#39;CoffeeScript&#39;) -&gt; console.log &quot;I love #{language} best&quot; 2）可变参数Splats 这样一个例子：足球赛事中，一般的排名是，冠军，亚军，和其他球队，这里再复杂一点，加上最后一名。也就是： 1 2 3 4 5 6 7 8 9 10 Given allTeams = [&#39;Chelsea&#39;, &#39;Bayern&#39;, &#39;Barcelona&#39;, &#39;Real Madrid&#39;, &#39;Milan&#39;, &#39;Inter&#39;, &#39;HengDa&#39;] Output: champaion: Chelsea runner-up: Bayern others:Barcelona, Real Madrid, Milan, Inter last:HengDa 用JS和CoffeeScript分别实现 1 2 3 4 5 6 7 8 9 10 11 12 13 var allTeams = [&#39;Chelsea&#39;, &#39;Bayern&#39;, &#39;Barcelona&#39;, &#39;Real Madrid&#39;, &#39;Milan&#39;, &#39;Inter&#39;, &#39;HengDa&#39;]; order = function(teams) { var champion = teams[0]; var runnerup = teams[1]; var others = teams.length &gt;= 3 ? teams.slice(2, teams.length - 1) : []; var last = teams[teams.length - 1]; console.log(&quot;Champion is &quot; + champion); console.log(&quot;Runnerup is &quot; + runnerup); console.log(&quot;others are &quot; + others); console.log(&quot;last is &quot; + last); }; order(allTeams); 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 allTeams = [ &#39;Chelsea&#39; &#39;Bayern&#39; &#39;Barcelona&#39; &#39;Real Madrid&#39; &#39;Milan&#39; &#39;Inter&#39; &#39;HengDa&#39; ] order = (champion, runnerup, others..., last) -&gt; console.log &quot;Champion is #{champion}&quot; console.log &quot;Runnerup is #{runnerup}&quot; console.log &quot;others are #{others}&quot; console.log &quot;last is #{last}&quot; order allTeams... 3）Destructing Assignment 在Ruby中有同样的语法，下面的例子实现了Fibonacci数列 1 2 3 4 5 6 7 8 #Fibonacci [last, current] = [0,1] for i in [0..10] console.log last [last, current] = [current, current + last] console.log last 更加强大的是当右侧是一个对象时，会根据该对象的属性进行赋值： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 class Shape constructor: (@width) -&gt; computeArea: -&gt; throw new Error(&#39;I am an abstract class!&#39;) class Square extends Shape computeArea: -&gt; Math.pow @width, 2 class Circle extends Shape radius: -&gt; @width / 2 computeArea: -&gt; Math.PI * Math.pow @radius(), 2 #The instanceof operator tests presence of constructor.prototype in object prototype chain. showArea = (shape) -&gt; unless shape instanceof Shape throw new Error(&#39;showArea requires a Shape instance!&#39;) console.log shape.computeArea() showArea new Square(2) # 4 showArea new Circle(2) # pi 1 2 3 4 5 6 7 8 9 10 11 12 13 14 myRect = x: 100 y: 200 {x: myX, y: myY} = myRect #定义了myX和myY两个变量，并调用myRect.x和myRect.y分别赋值 console.log myX console.log myY #当定义的变量名称与右侧对象的key值相同时，可以更精简为 {x, y} = myRect console.log x console.log y 4）class与inheritance 定义了class与extends来是语法来包装JS使其更加类似面向对象的语言。给个简单例子 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 class Shape constructor: (@width) -&gt; computeArea: -&gt; throw new Error(&#39;I am an abstract class!&#39;) class Square extends Shape computeArea: -&gt; Math.pow @width, 2 class Circle extends Shape radius: -&gt; @width / 2 computeArea: -&gt; Math.PI * Math.pow @radius(), 2 #The instanceof operator tests presence of constructor.prototype in object prototype chain. showArea = (shape) -&gt; unless shape instanceof Shape throw new Error(&#39;showArea requires a Shape instance!&#39;) console.log shape.computeArea() showArea new Square(2) # 4 showArea new Circle(2) # pi","headline":"Inside CoffeeScript：语法强大","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/inside-coffeescript-1.html/"},"url":"http://localhost:4000/posts/inside-coffeescript-1.html/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-01-29T23:37:28+08:00","datePublished":"2012-05-26T00:00:00+08:00","description":"第一次听说CoffeeScript是Rails 3.1将它作为默认的支持，第二次深入的理解是Nodejs的兴起，CoffeeScript用它独特的语法样式，使我这个面向对象出身的程序员在写JavaScript时找到了似曾相识的感觉。当然如果对它的理解仅仅停留在语法的简化，那么只能说对JS(The World’s Most Misunderstood Programming Language)本身并不熟悉。","headline":"Inside CoffeeScript：语法强大","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/inside-coffeescript-1.html/"},"url":"http://localhost:4000/posts/inside-coffeescript-1.html/"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -594,6 +594,26 @@
 
     <!-- lastmod date -->
     
+    <span>
+      更新于
+      <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+
+<em class=""
+    data-ts="1675006648"
+    data-df="YYYY/MM/DD"
+    data-toggle="tooltip" data-placement="bottom">
+  2023/01/29
+</em>
+
+    </span>
+    
 
   
 
@@ -917,7 +937,7 @@ last:HengDa
   <div class="post-meta mb-3">
     <i class="far fa-folder-open fa-fw mr-1"></i>
     
-      <a href='/categories/programming/'>PROGRAMMING</a>
+      <a href='/categories/%E6%8A%80%E6%9C%AF/'>技术</a>
   </div>
   
 
@@ -1025,6 +1045,40 @@ last:HengDa
 
 
 
+  <div id="access-lastmod" class="post">
+    <div class="panel-heading">最近更新</div>
+    <ul class="post-content pl-0 pb-1 ml-1 mt-2">
+      
+        
+        
+        
+      <li><a href="/posts/some-rails-helper-methods-those-are-confusing.html/">常用易混的四个Rails View Helper方法</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/alipay-generate-request-url.html/">支付宝集成——生成请求URL</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/alipay-verify-request.html/">支付宝集成——校验与应答</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/nginx-unicorn.html/">Nginx 与 Unicorn</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/tricks-on-upgrading-rails-from-3-2-to-4-0.html/">Tricks On Upgrading Rails From 3.2 to 4.0</a></li>
+      
+    </ul>
+  </div> <!-- #access-lastmod -->
+
+
+
       
 
 
@@ -1041,11 +1095,6 @@ last:HengDa
 
 
 
-  
-    
-    
-    
-    
   
     
     
@@ -1280,6 +1329,81 @@ last:HengDa
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -1304,6 +1428,10 @@ last:HengDa
     
     
     
+      
+        
+        
+
   
     
     
@@ -1336,6 +1464,10 @@ last:HengDa
     
     
     
+      
+        
+        
+
   
     
     
@@ -1356,10 +1488,7 @@ last:HengDa
     
     
     
-  
-    
-    
-    
+      
     
   
     
@@ -1371,110 +1500,7 @@ last:HengDa
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -1640,414 +1666,6 @@ last:HengDa
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -2097,39 +1715,6 @@ last:HengDa
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -2154,168 +1739,6 @@ last:HengDa
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -2448,44 +1871,12 @@ last:HengDa
     
     
     
-      
-    
-  
-    
-    
-    
-    
   
     
     
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -2579,7 +1970,35 @@ last:HengDa
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -2612,6 +2031,321 @@ last:HengDa
     
     
       
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -2635,34 +2369,34 @@ last:HengDa
 
     
       
+      <a class="post-tag" href="/tags/rails/">Rails</a>
+    
+      
       <a class="post-tag" href="/tags/javascript/">Javascript</a>
     
       
       <a class="post-tag" href="/tags/box2d/">Box2D</a>
     
       
-      <a class="post-tag" href="/tags/release/">release</a>
-    
-      
-      <a class="post-tag" href="/tags/test/">test</a>
-    
-      
-      <a class="post-tag" href="/tags/alipay/">alipay</a>
-    
-      
-      <a class="post-tag" href="/tags/angry-birds/">Angry Birds</a>
-    
-      
       <a class="post-tag" href="/tags/coffeescript/">CoffeeScript</a>
     
       
-      <a class="post-tag" href="/tags/feedback/">feedback</a>
+      <a class="post-tag" href="/tags/physics-engine/">Physics Engine</a>
+    
+      
+      <a class="post-tag" href="/tags/release/">Release</a>
+    
+      
+      <a class="post-tag" href="/tags/test/">Test</a>
+    
+      
+      <a class="post-tag" href="/tags/elasticsearch/">Elasticsearch</a>
+    
+      
+      <a class="post-tag" href="/tags/feedback/">Feedback</a>
     
       
       <a class="post-tag" href="/tags/html5/">HTML5</a>
-    
-      
-      <a class="post-tag" href="/tags/integration/">integration</a>
     
 
     </div>
@@ -2707,71 +2441,6 @@ last:HengDa
 
 
 
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 
   
@@ -3660,11 +3329,6 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
-  
-    
-    
-    
-    
       
         
         
@@ -3709,6 +3373,81 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -3733,6 +3472,10 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
+      
+        
+        
+
   
     
     
@@ -3765,6 +3508,10 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
+      
+        
+        
+
   
     
     
@@ -3785,10 +3532,7 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
-  
-    
-    
-    
+      
     
   
     
@@ -3800,110 +3544,7 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -4069,414 +3710,6 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -4526,39 +3759,6 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -4583,168 +3783,6 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -4877,44 +3915,12 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
-      
-    
-  
-    
-    
-    
-    
   
     
     
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -5008,7 +4014,35 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -5041,6 +4075,321 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
       
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -5064,34 +4413,34 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
 
     
       
+      <a class="post-tag" href="/tags/rails/">Rails</a>
+    
+      
       <a class="post-tag" href="/tags/javascript/">Javascript</a>
     
       
       <a class="post-tag" href="/tags/box2d/">Box2D</a>
     
       
-      <a class="post-tag" href="/tags/release/">release</a>
-    
-      
-      <a class="post-tag" href="/tags/test/">test</a>
-    
-      
-      <a class="post-tag" href="/tags/alipay/">alipay</a>
-    
-      
-      <a class="post-tag" href="/tags/angry-birds/">Angry Birds</a>
-    
-      
       <a class="post-tag" href="/tags/coffeescript/">CoffeeScript</a>
     
       
-      <a class="post-tag" href="/tags/feedback/">feedback</a>
+      <a class="post-tag" href="/tags/physics-engine/">Physics Engine</a>
+    
+      
+      <a class="post-tag" href="/tags/release/">Release</a>
+    
+      
+      <a class="post-tag" href="/tags/test/">Test</a>
+    
+      
+      <a class="post-tag" href="/tags/elasticsearch/">Elasticsearch</a>
+    
+      
+      <a class="post-tag" href="/tags/feedback/">Feedback</a>
     
       
       <a class="post-tag" href="/tags/html5/">HTML5</a>
-    
-      
-      <a class="post-tag" href="/tags/integration/">integration</a>
     
 
     </div>

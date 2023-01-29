@@ -1,15 +1,10 @@
 ---
 title: Inside CoffeeScript：语法强壮
-category: PROGRAMMING
+category: 技术
 tags:
 - CoffeeScript
 - Javascript
 date: 2012-05-26
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
 ---
 前一篇文章主要说了CoffeeScript的语法强大的几点，它极大的简化了JS的语法，更清晰简洁，另外很重要的一点是它从语法本身的角度避免了JS的若干陷阱。
 

@@ -1,15 +1,10 @@
 ---
 title: ! 'Inside Ruby: Object Model'
-category: PROGRAMMING
+category: 技术
 tags:
 - Metaprogramming
 - Ruby
 date: 2012-02-02
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
 ---
 今天来重新了解一下ruby的Object Model，之所以是重新，因为是从内部来看，而不是从外部的使用上。
 

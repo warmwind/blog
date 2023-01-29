@@ -1,14 +1,11 @@
 ---
 title: Express Js
-category: PROGRAMMING
+category: 技术
 tags:
 - Express
 - Javascript
-- Node.js
+- NodeJS
 date: 2011-07-04
-status: publish
-type: post
-published: true
 meta:
   _edit_last: '1'
 ---

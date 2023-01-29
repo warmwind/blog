@@ -1,19 +1,10 @@
 ---
 title: Web Framework大杂烩之Data Binding
-category: PROGRAMMING
+category: 技术
 tags:
-- ASP.NET MVC
-- Data Binding
-- Name convention
 - Rails
 - Spring MVC
 date: 2011-01-11
-status: publish
-type: post
-published: true
-meta:
-  _wp_old_slug: ''
-  _edit_last: '1'
 ---
 昨天在使用Spring MVC做界面，一边做一边在想着前面使用ASP.NET MVC时是如何实现的。在花了一段时间把CRUD搞定之后，不禁感叹，做到这个程度，似乎也就是做了Rails中下面的一句话：
 

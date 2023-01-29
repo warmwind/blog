@@ -38,8 +38,8 @@
 <meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="Box2D-Post Collision Detection" />
 <meta property="og:locale" content="zh_CN" />
-<meta name="description" content="Demo 在检测到碰撞后，我们往往需要进行一些处理，比如在Angry Birds中当小鸟撞击到障碍或者击中猪后，会有碰撞的声音，破碎的效果等，这些都是在碰撞检测后进行处理的。 如上图，坦克发出的炮弹击中了空中飞行的物体，之后炮弹消失，物体旋转下落。 实现的代码如下 1 2 3 4 5 6 7 8 9 10 11 12 var contactListener = new Box2D.Dynamics.b2ContactListener; contactListener.BeginContact = function(contact) { var bullet = contact.GetFixtureB().GetBody(); var fly = contact.GetFixtureA().GetBody() var fly_data = fly.GetUserData() if(bullet.GetUserData() == &quot;bullet&quot; &amp;&amp; fly_data != null &amp;amp;&amp;amp; fly_data.indexOf(&quot;fly&quot;) != -1){ trace(&quot;bullet collision detected&quot;); bullet.SetUserData(&quot;dead&quot;) fly.SetLinearVelocity(new b2Vec2(0, 3)) fly.SetAngularVelocity(2) } }; Box2D中Body拥有一个userData属性，可以在里面存储任何数据。当引擎检测到碰撞时，就会回掉上面的函数，此时可以使用userData中存储的数据来判断碰撞的对象。对于上面的效果，首先根据userData判断出子弹和物理，然后设置炮弹的userData为dead，以及给飞行物体设置新的线速度和角速度。这样飞行物体就会改变飞行状态，而在下一次的界面update操作中可以destroy所有dead的物体。 这里需要注意的是不能直接在回掉函数中destroy body，box2D不允许这样做，原因是body可能用于与其他物体的碰撞检测中。所以只能在回掉函数中记录需要destroy的物体并且在更新函数中销毁。" />
-<meta property="og:description" content="Demo 在检测到碰撞后，我们往往需要进行一些处理，比如在Angry Birds中当小鸟撞击到障碍或者击中猪后，会有碰撞的声音，破碎的效果等，这些都是在碰撞检测后进行处理的。 如上图，坦克发出的炮弹击中了空中飞行的物体，之后炮弹消失，物体旋转下落。 实现的代码如下 1 2 3 4 5 6 7 8 9 10 11 12 var contactListener = new Box2D.Dynamics.b2ContactListener; contactListener.BeginContact = function(contact) { var bullet = contact.GetFixtureB().GetBody(); var fly = contact.GetFixtureA().GetBody() var fly_data = fly.GetUserData() if(bullet.GetUserData() == &quot;bullet&quot; &amp;&amp; fly_data != null &amp;amp;&amp;amp; fly_data.indexOf(&quot;fly&quot;) != -1){ trace(&quot;bullet collision detected&quot;); bullet.SetUserData(&quot;dead&quot;) fly.SetLinearVelocity(new b2Vec2(0, 3)) fly.SetAngularVelocity(2) } }; Box2D中Body拥有一个userData属性，可以在里面存储任何数据。当引擎检测到碰撞时，就会回掉上面的函数，此时可以使用userData中存储的数据来判断碰撞的对象。对于上面的效果，首先根据userData判断出子弹和物理，然后设置炮弹的userData为dead，以及给飞行物体设置新的线速度和角速度。这样飞行物体就会改变飞行状态，而在下一次的界面update操作中可以destroy所有dead的物体。 这里需要注意的是不能直接在回掉函数中destroy body，box2D不允许这样做，原因是body可能用于与其他物体的碰撞检测中。所以只能在回掉函数中记录需要destroy的物体并且在更新函数中销毁。" />
+<meta name="description" content="Demo" />
+<meta property="og:description" content="Demo" />
 <link rel="canonical" href="http://localhost:4000/posts/box2d-post-collision-detection.html/" />
 <meta property="og:url" content="http://localhost:4000/posts/box2d-post-collision-detection.html/" />
 <meta property="og:site_name" content="姜鹏的博客" />
@@ -49,7 +49,7 @@
 <meta property="twitter:title" content="Box2D-Post Collision Detection" />
 <meta name="twitter:site" content="@peng_jiang" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-06-01T00:00:00+08:00","datePublished":"2011-06-01T00:00:00+08:00","description":"Demo 在检测到碰撞后，我们往往需要进行一些处理，比如在Angry Birds中当小鸟撞击到障碍或者击中猪后，会有碰撞的声音，破碎的效果等，这些都是在碰撞检测后进行处理的。 如上图，坦克发出的炮弹击中了空中飞行的物体，之后炮弹消失，物体旋转下落。 实现的代码如下 1 2 3 4 5 6 7 8 9 10 11 12 var contactListener = new Box2D.Dynamics.b2ContactListener; contactListener.BeginContact = function(contact) { var bullet = contact.GetFixtureB().GetBody(); var fly = contact.GetFixtureA().GetBody() var fly_data = fly.GetUserData() if(bullet.GetUserData() == &quot;bullet&quot; &amp;&amp; fly_data != null &amp;amp;&amp;amp; fly_data.indexOf(&quot;fly&quot;) != -1){ trace(&quot;bullet collision detected&quot;); bullet.SetUserData(&quot;dead&quot;) fly.SetLinearVelocity(new b2Vec2(0, 3)) fly.SetAngularVelocity(2) } }; Box2D中Body拥有一个userData属性，可以在里面存储任何数据。当引擎检测到碰撞时，就会回掉上面的函数，此时可以使用userData中存储的数据来判断碰撞的对象。对于上面的效果，首先根据userData判断出子弹和物理，然后设置炮弹的userData为dead，以及给飞行物体设置新的线速度和角速度。这样飞行物体就会改变飞行状态，而在下一次的界面update操作中可以destroy所有dead的物体。 这里需要注意的是不能直接在回掉函数中destroy body，box2D不允许这样做，原因是body可能用于与其他物体的碰撞检测中。所以只能在回掉函数中记录需要destroy的物体并且在更新函数中销毁。","headline":"Box2D-Post Collision Detection","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/box2d-post-collision-detection.html/"},"url":"http://localhost:4000/posts/box2d-post-collision-detection.html/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-01-29T23:37:28+08:00","datePublished":"2011-06-01T00:00:00+08:00","description":"Demo","headline":"Box2D-Post Collision Detection","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/box2d-post-collision-detection.html/"},"url":"http://localhost:4000/posts/box2d-post-collision-detection.html/"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -679,6 +679,26 @@
 
     <!-- lastmod date -->
     
+    <span>
+      更新于
+      <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+
+<em class=""
+    data-ts="1675006648"
+    data-df="YYYY/MM/DD"
+    data-toggle="tooltip" data-placement="bottom">
+  2023/01/29
+</em>
+
+    </span>
+    
 
   
 
@@ -781,7 +801,7 @@
   <div class="post-meta mb-3">
     <i class="far fa-folder-open fa-fw mr-1"></i>
     
-      <a href='/categories/programming/'>PROGRAMMING</a>
+      <a href='/categories/%E6%8A%80%E6%9C%AF/'>技术</a>
   </div>
   
 
@@ -796,8 +816,8 @@
       <a href="/tags/collision-detection/"
           class="post-tag no-text-decoration" >Collision Detection</a>
       
-      <a href="/tags/physical-engine/"
-          class="post-tag no-text-decoration" >Physical Engine</a>
+      <a href="/tags/physics-engine/"
+          class="post-tag no-text-decoration" >Physics Engine</a>
       
   </div>
   
@@ -892,6 +912,40 @@
 
 
 
+  <div id="access-lastmod" class="post">
+    <div class="panel-heading">最近更新</div>
+    <ul class="post-content pl-0 pb-1 ml-1 mt-2">
+      
+        
+        
+        
+      <li><a href="/posts/some-rails-helper-methods-those-are-confusing.html/">常用易混的四个Rails View Helper方法</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/alipay-generate-request-url.html/">支付宝集成——生成请求URL</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/alipay-verify-request.html/">支付宝集成——校验与应答</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/nginx-unicorn.html/">Nginx 与 Unicorn</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/tricks-on-upgrading-rails-from-3-2-to-4-0.html/">Tricks On Upgrading Rails From 3.2 to 4.0</a></li>
+      
+    </ul>
+  </div> <!-- #access-lastmod -->
+
+
+
       
 
 
@@ -908,11 +962,6 @@
 
 
 
-  
-    
-    
-    
-    
   
     
     
@@ -1147,6 +1196,81 @@
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -1171,6 +1295,10 @@
     
     
     
+      
+        
+        
+
   
     
     
@@ -1203,6 +1331,10 @@
     
     
     
+      
+        
+        
+
   
     
     
@@ -1223,10 +1355,7 @@
     
     
     
-  
-    
-    
-    
+      
     
   
     
@@ -1238,110 +1367,7 @@
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -1507,414 +1533,6 @@
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -1964,39 +1582,6 @@
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -2021,168 +1606,6 @@
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -2315,44 +1738,12 @@
     
     
     
-      
-    
-  
-    
-    
-    
-    
   
     
     
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -2446,7 +1837,35 @@
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -2479,6 +1898,321 @@
     
     
       
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -2502,34 +2236,34 @@
 
     
       
+      <a class="post-tag" href="/tags/rails/">Rails</a>
+    
+      
       <a class="post-tag" href="/tags/javascript/">Javascript</a>
     
       
       <a class="post-tag" href="/tags/box2d/">Box2D</a>
     
       
-      <a class="post-tag" href="/tags/release/">release</a>
-    
-      
-      <a class="post-tag" href="/tags/test/">test</a>
-    
-      
-      <a class="post-tag" href="/tags/alipay/">alipay</a>
-    
-      
-      <a class="post-tag" href="/tags/angry-birds/">Angry Birds</a>
-    
-      
       <a class="post-tag" href="/tags/coffeescript/">CoffeeScript</a>
     
       
-      <a class="post-tag" href="/tags/feedback/">feedback</a>
+      <a class="post-tag" href="/tags/physics-engine/">Physics Engine</a>
+    
+      
+      <a class="post-tag" href="/tags/release/">Release</a>
+    
+      
+      <a class="post-tag" href="/tags/test/">Test</a>
+    
+      
+      <a class="post-tag" href="/tags/elasticsearch/">Elasticsearch</a>
+    
+      
+      <a class="post-tag" href="/tags/feedback/">Feedback</a>
     
       
       <a class="post-tag" href="/tags/html5/">HTML5</a>
-    
-      
-      <a class="post-tag" href="/tags/integration/">integration</a>
     
 
     </div>
@@ -2574,71 +2308,6 @@
 
 
 
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 
   
@@ -3146,6 +2815,47 @@
       
       
       <div class="card">
+        <a href="/posts/box2d-physics-engine.html/">
+          <div class="card-body">
+            <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+
+<em class="small"
+    data-ts="1302969600"
+    data-df="YYYY/MM/DD"
+    >
+  2011/04/17
+</em>
+
+            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Box2D--Physics Engine</h3>
+            <div class="text-muted small">
+              <p>
+                
+
+
+
+
+
+                Demo
+
+Box2D是一个强大的物理引擎(Physics Engine)，有c++, java, js等多种版本。当前流行的Angry birds游戏就使用它作为物理引擎。Wikipedia中给出的定义是：
+
+  A physics engine is computer software that provides an approximate simulation of certain ...
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+      
+      
+      <div class="card">
         <a href="/posts/box2d-collision-detection.html/">
           <div class="card-body">
             <!--
@@ -3190,7 +2900,7 @@
       
       
       <div class="card">
-        <a href="/posts/box2d-physics-engine.html/">
+        <a href="/posts/some-rails-helper-methods-those-are-confusing.html/">
           <div class="card-body">
             <!--
   Date format snippet
@@ -3202,13 +2912,13 @@
 
 
 <em class="small"
-    data-ts="1302969600"
+    data-ts="1385827200"
     data-df="YYYY/MM/DD"
     >
-  2011/04/17
+  2013/12/01
 </em>
 
-            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Box2D--Physics Engine</h3>
+            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>常用易混的四个Rails View Helper方法</h3>
             <div class="text-muted small">
               <p>
                 
@@ -3217,57 +2927,18 @@
 
 
 
-                Demo
+                Rails中有非常多强大的View Helper，今天其实想在这里简单总结其中4个与安全相关但又容易混淆的。
 
-Box2D是一个强大的物理引擎(Physics Engine)，有c++, java, js等多种版本。当前流行的Angry birds游戏就使用它作为物理引擎。Wikipedia中给出的定义是：
+它们分别是: h, html_safe, simple_format, sanitize。
 
-  A physics engine is computer software that provides an approximate simulation of certain ...
-              </p>
-            </div>
-          </div>
-        </a>
-      </div>
-    
-      
-      
-      <div class="card">
-        <a href="/posts/secret-of-rails-csrf-token.html/">
-          <div class="card-body">
-            <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
+READMORE
 
+h
 
-
-
-
-<em class="small"
-    data-ts="1411660800"
-    data-df="YYYY/MM/DD"
-    >
-  2014/09/26
-</em>
-
-            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Rails CSRF token 探秘</h3>
-            <div class="text-muted small">
-              <p>
-                
-
-
-
-
-
-                CSRF(Cross-Site Request Forgery)是一种常见的攻击手段，Rails中下面的代码帮助我们的应用来阻止CSRF攻击。
+我们经常需要在页面上动态展示文字，这些完全可能来自用户的输入。所以为了防止XSS，在页面渲染时，需要对文字进行转义。在Rails2时，经常见到如下的代码
 
 1
-2
-3
-4
-5
-class ApplicationController &amp;lt; ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For ...
+&amp;...
               </p>
             </div>
           </div>
@@ -3525,11 +3196,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
-    
       
         
         
@@ -3574,6 +3240,81 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -3598,6 +3339,10 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
+      
+        
+        
+
   
     
     
@@ -3630,6 +3375,10 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
+      
+        
+        
+
   
     
     
@@ -3650,10 +3399,7 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
+      
     
   
     
@@ -3665,110 +3411,7 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -3934,414 +3577,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -4391,39 +3626,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -4448,168 +3650,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -4742,44 +3782,12 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-      
-    
-  
-    
-    
-    
-    
   
     
     
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -4873,7 +3881,35 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -4906,6 +3942,321 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
       
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -4929,34 +4280,34 @@ class ApplicationController &amp;lt; ActionController::Base
 
     
       
+      <a class="post-tag" href="/tags/rails/">Rails</a>
+    
+      
       <a class="post-tag" href="/tags/javascript/">Javascript</a>
     
       
       <a class="post-tag" href="/tags/box2d/">Box2D</a>
     
       
-      <a class="post-tag" href="/tags/release/">release</a>
-    
-      
-      <a class="post-tag" href="/tags/test/">test</a>
-    
-      
-      <a class="post-tag" href="/tags/alipay/">alipay</a>
-    
-      
-      <a class="post-tag" href="/tags/angry-birds/">Angry Birds</a>
-    
-      
       <a class="post-tag" href="/tags/coffeescript/">CoffeeScript</a>
     
       
-      <a class="post-tag" href="/tags/feedback/">feedback</a>
+      <a class="post-tag" href="/tags/physics-engine/">Physics Engine</a>
+    
+      
+      <a class="post-tag" href="/tags/release/">Release</a>
+    
+      
+      <a class="post-tag" href="/tags/test/">Test</a>
+    
+      
+      <a class="post-tag" href="/tags/elasticsearch/">Elasticsearch</a>
+    
+      
+      <a class="post-tag" href="/tags/feedback/">Feedback</a>
     
       
       <a class="post-tag" href="/tags/html5/">HTML5</a>
-    
-      
-      <a class="post-tag" href="/tags/integration/">integration</a>
     
 
     </div>

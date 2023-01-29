@@ -1,15 +1,9 @@
 ---
 title: HTML5大赛感 (一)：尝试
-category: WORK
+category: 工作
 tags:
 - HTML5
 date: 2010-12-09
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
-  _wp_old_slug: ''
 ---
 [Demo](/apps.html#magic_grid)
 

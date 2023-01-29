@@ -1,17 +1,12 @@
 ---
 title: 软件发布实战 -- 集成
-category: WORK
+category: 工作
 tags:
-- release
-- integration
-- heroku
-- test
+- Release
+- Integration
+- Heroku
+- Test
 date: 2011-10-16
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
 ---
 作为一个程序员， 每天开心的新程序，让所有的测试通，最后打浏览器，输入“localhost/newapp”， 看到开发的功能展现在眼前, 那种愉悦和满足不言而喻。
 

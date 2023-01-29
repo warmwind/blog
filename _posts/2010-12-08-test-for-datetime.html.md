@@ -1,16 +1,10 @@
 ---
 title: Test For DateTime
-category: PROGRAMMING
+category: 技术
 tags:
 - DateTime
-- test
+- Test
 date: 2010-12-08
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
-  _wp_old_slug: ''
 ---
 在代码中经常遇到在某个方法内部获取当前时间，并对时间进行一定处理。这往往会使测试遇到困难，因为在测试中无法准确获取产品代码内部的当前时间。例如下面的产品与测试代码，
 

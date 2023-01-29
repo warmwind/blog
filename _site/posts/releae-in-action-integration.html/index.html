@@ -38,8 +38,8 @@
 <meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="软件发布实战 – 集成" />
 <meta property="og:locale" content="zh_CN" />
-<meta name="description" content="作为一个程序员， 每天开心的新程序，让所有的测试通，最后打浏览器，输入“localhost/newapp”， 看到开发的功能展现在眼前, 那种愉悦和满足不言而喻。 但是有没有想过如何发布让其他人共享你的成果呢？ 当然！使用heroku,输入下面的命令就可以轻松的帮你完成。 1 git push heroku master 那如果同时要发布6 ，7个项目呢？项目之间可能共用数据库，共享若干代码。情况似乎就不那么简单。 需要考虑的因素很多，其中集成无疑是非常重要的，下面两点，可见一斑。 1、 与其他项目的集成 一个很简单的例子。我们的项目的唯一入口是另一个项目中一个连接 1 2 old link: http://host/show?name=jiangpeng new link: http://host/show 需求是把old link改成new link,以前name参数是必传的,否则就会失败，现在是可选择的。 我们对自己的代码库非常熟悉，很快将验证必选的逻辑去掉。接下来就要去修改另一个代码库，那是个陈旧的用Perl完成的代码，修改完成之后甚至不知道怎么运行测试，而且CI还是红的,没法build出package,也没法提交。 过了两天才顺利的做完，build出最新的版本，deploy到cloud上，功能完美，QA竖起大拇指说做的不错，没有bug！ 等到发布的时候只要把最新的包部署到production上面。这样就可以了么？ 不行！ 当前对于两个工程的修改在发布时是有依赖的。如果Perl工程先发布，就必然导致在我们工程发布之前的这个时间段，我们的功能将无法访问。通常，发布会持续两三天，也就是说最坏的情况，三天之内我们的应用都不可用。 这对于要求7*24小时在线的应用来说是不可接受的。 其实这个问题是可以避免，在cloud上我们有E2E的测试，但是由于要在那个环境上做BAT，所以恰好关掉了cloud的自动部署。 虽然只是这么微小的改变都有可能导致产品无法访问的巨大后果，这就是集成考虑不全面的后果。 2、与数据库的集成 发布从大的方面可以分为数据库与代码库两个部分，数据库先于代码库发布，如果发布持续3天，通常第一天第一步就是应用所有的数据库修改，然后陆续的发布不同项目的代码。 如果只是增加新列或表，这个过程没有问题。如果是修改列名呢？ 按照前面的发布顺序，数据库发布之后，代码发布之前，应用必然异常，会提示数据库列不存在。以下的几个方案可以考虑实施： 不要在最开始就执行数据库的修改，可以将修改列名这一个操作放在发布对应代码之前。这种方案其实就是缩短两者之间的时间差，期望在这个时间段内没有用户访问。 与Business的人商量，如果允许产品下线，那么采用步骤1即可。通常Business的人对这种要求都会比较谨慎的思考，所以提出这样的建议前，也需要想清楚可否避免。 与发布相关的集成点有的时候需要dev在开发结阶段不要仅仅局限于代码功能完成本身,而需要从发布的角度仔细想想才会避免. 当然更加科学的做法是通过足够的自动化测试来保证，纯粹靠程序员的思考，很难保证每一次都不出问题。 《软件开发沉思录–ThoughtWorks文集》中的第一章：Solving the Business Software “Last Mile”，更加详细和理论的阐述了大型项目发布的问题，不论是否参与过这样的发布, 都值得学习一下。" />
-<meta property="og:description" content="作为一个程序员， 每天开心的新程序，让所有的测试通，最后打浏览器，输入“localhost/newapp”， 看到开发的功能展现在眼前, 那种愉悦和满足不言而喻。 但是有没有想过如何发布让其他人共享你的成果呢？ 当然！使用heroku,输入下面的命令就可以轻松的帮你完成。 1 git push heroku master 那如果同时要发布6 ，7个项目呢？项目之间可能共用数据库，共享若干代码。情况似乎就不那么简单。 需要考虑的因素很多，其中集成无疑是非常重要的，下面两点，可见一斑。 1、 与其他项目的集成 一个很简单的例子。我们的项目的唯一入口是另一个项目中一个连接 1 2 old link: http://host/show?name=jiangpeng new link: http://host/show 需求是把old link改成new link,以前name参数是必传的,否则就会失败，现在是可选择的。 我们对自己的代码库非常熟悉，很快将验证必选的逻辑去掉。接下来就要去修改另一个代码库，那是个陈旧的用Perl完成的代码，修改完成之后甚至不知道怎么运行测试，而且CI还是红的,没法build出package,也没法提交。 过了两天才顺利的做完，build出最新的版本，deploy到cloud上，功能完美，QA竖起大拇指说做的不错，没有bug！ 等到发布的时候只要把最新的包部署到production上面。这样就可以了么？ 不行！ 当前对于两个工程的修改在发布时是有依赖的。如果Perl工程先发布，就必然导致在我们工程发布之前的这个时间段，我们的功能将无法访问。通常，发布会持续两三天，也就是说最坏的情况，三天之内我们的应用都不可用。 这对于要求7*24小时在线的应用来说是不可接受的。 其实这个问题是可以避免，在cloud上我们有E2E的测试，但是由于要在那个环境上做BAT，所以恰好关掉了cloud的自动部署。 虽然只是这么微小的改变都有可能导致产品无法访问的巨大后果，这就是集成考虑不全面的后果。 2、与数据库的集成 发布从大的方面可以分为数据库与代码库两个部分，数据库先于代码库发布，如果发布持续3天，通常第一天第一步就是应用所有的数据库修改，然后陆续的发布不同项目的代码。 如果只是增加新列或表，这个过程没有问题。如果是修改列名呢？ 按照前面的发布顺序，数据库发布之后，代码发布之前，应用必然异常，会提示数据库列不存在。以下的几个方案可以考虑实施： 不要在最开始就执行数据库的修改，可以将修改列名这一个操作放在发布对应代码之前。这种方案其实就是缩短两者之间的时间差，期望在这个时间段内没有用户访问。 与Business的人商量，如果允许产品下线，那么采用步骤1即可。通常Business的人对这种要求都会比较谨慎的思考，所以提出这样的建议前，也需要想清楚可否避免。 与发布相关的集成点有的时候需要dev在开发结阶段不要仅仅局限于代码功能完成本身,而需要从发布的角度仔细想想才会避免. 当然更加科学的做法是通过足够的自动化测试来保证，纯粹靠程序员的思考，很难保证每一次都不出问题。 《软件开发沉思录–ThoughtWorks文集》中的第一章：Solving the Business Software “Last Mile”，更加详细和理论的阐述了大型项目发布的问题，不论是否参与过这样的发布, 都值得学习一下。" />
+<meta name="description" content="作为一个程序员， 每天开心的新程序，让所有的测试通，最后打浏览器，输入“localhost/newapp”， 看到开发的功能展现在眼前, 那种愉悦和满足不言而喻。" />
+<meta property="og:description" content="作为一个程序员， 每天开心的新程序，让所有的测试通，最后打浏览器，输入“localhost/newapp”， 看到开发的功能展现在眼前, 那种愉悦和满足不言而喻。" />
 <link rel="canonical" href="http://localhost:4000/posts/releae-in-action-integration.html/" />
 <meta property="og:url" content="http://localhost:4000/posts/releae-in-action-integration.html/" />
 <meta property="og:site_name" content="姜鹏的博客" />
@@ -49,7 +49,7 @@
 <meta property="twitter:title" content="软件发布实战 – 集成" />
 <meta name="twitter:site" content="@peng_jiang" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-10-16T00:00:00+08:00","datePublished":"2011-10-16T00:00:00+08:00","description":"作为一个程序员， 每天开心的新程序，让所有的测试通，最后打浏览器，输入“localhost/newapp”， 看到开发的功能展现在眼前, 那种愉悦和满足不言而喻。 但是有没有想过如何发布让其他人共享你的成果呢？ 当然！使用heroku,输入下面的命令就可以轻松的帮你完成。 1 git push heroku master 那如果同时要发布6 ，7个项目呢？项目之间可能共用数据库，共享若干代码。情况似乎就不那么简单。 需要考虑的因素很多，其中集成无疑是非常重要的，下面两点，可见一斑。 1、 与其他项目的集成 一个很简单的例子。我们的项目的唯一入口是另一个项目中一个连接 1 2 old link: http://host/show?name=jiangpeng new link: http://host/show 需求是把old link改成new link,以前name参数是必传的,否则就会失败，现在是可选择的。 我们对自己的代码库非常熟悉，很快将验证必选的逻辑去掉。接下来就要去修改另一个代码库，那是个陈旧的用Perl完成的代码，修改完成之后甚至不知道怎么运行测试，而且CI还是红的,没法build出package,也没法提交。 过了两天才顺利的做完，build出最新的版本，deploy到cloud上，功能完美，QA竖起大拇指说做的不错，没有bug！ 等到发布的时候只要把最新的包部署到production上面。这样就可以了么？ 不行！ 当前对于两个工程的修改在发布时是有依赖的。如果Perl工程先发布，就必然导致在我们工程发布之前的这个时间段，我们的功能将无法访问。通常，发布会持续两三天，也就是说最坏的情况，三天之内我们的应用都不可用。 这对于要求7*24小时在线的应用来说是不可接受的。 其实这个问题是可以避免，在cloud上我们有E2E的测试，但是由于要在那个环境上做BAT，所以恰好关掉了cloud的自动部署。 虽然只是这么微小的改变都有可能导致产品无法访问的巨大后果，这就是集成考虑不全面的后果。 2、与数据库的集成 发布从大的方面可以分为数据库与代码库两个部分，数据库先于代码库发布，如果发布持续3天，通常第一天第一步就是应用所有的数据库修改，然后陆续的发布不同项目的代码。 如果只是增加新列或表，这个过程没有问题。如果是修改列名呢？ 按照前面的发布顺序，数据库发布之后，代码发布之前，应用必然异常，会提示数据库列不存在。以下的几个方案可以考虑实施： 不要在最开始就执行数据库的修改，可以将修改列名这一个操作放在发布对应代码之前。这种方案其实就是缩短两者之间的时间差，期望在这个时间段内没有用户访问。 与Business的人商量，如果允许产品下线，那么采用步骤1即可。通常Business的人对这种要求都会比较谨慎的思考，所以提出这样的建议前，也需要想清楚可否避免。 与发布相关的集成点有的时候需要dev在开发结阶段不要仅仅局限于代码功能完成本身,而需要从发布的角度仔细想想才会避免. 当然更加科学的做法是通过足够的自动化测试来保证，纯粹靠程序员的思考，很难保证每一次都不出问题。 《软件开发沉思录–ThoughtWorks文集》中的第一章：Solving the Business Software “Last Mile”，更加详细和理论的阐述了大型项目发布的问题，不论是否参与过这样的发布, 都值得学习一下。","headline":"软件发布实战 – 集成","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/releae-in-action-integration.html/"},"url":"http://localhost:4000/posts/releae-in-action-integration.html/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-01-29T23:37:28+08:00","datePublished":"2011-10-16T00:00:00+08:00","description":"作为一个程序员， 每天开心的新程序，让所有的测试通，最后打浏览器，输入“localhost/newapp”， 看到开发的功能展现在眼前, 那种愉悦和满足不言而喻。","headline":"软件发布实战 – 集成","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/releae-in-action-integration.html/"},"url":"http://localhost:4000/posts/releae-in-action-integration.html/"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -594,6 +594,26 @@
 
     <!-- lastmod date -->
     
+    <span>
+      更新于
+      <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+
+<em class=""
+    data-ts="1675006648"
+    data-df="YYYY/MM/DD"
+    data-toggle="tooltip" data-placement="bottom">
+  2023/01/29
+</em>
+
+    </span>
+    
 
   
 
@@ -707,7 +727,7 @@ new link: http://host/show
   <div class="post-meta mb-3">
     <i class="far fa-folder-open fa-fw mr-1"></i>
     
-      <a href='/categories/work/'>WORK</a>
+      <a href='/categories/%E5%B7%A5%E4%BD%9C/'>工作</a>
   </div>
   
 
@@ -717,16 +737,16 @@ new link: http://host/show
     <i class="fa fa-tags fa-fw mr-1"></i>
       
       <a href="/tags/release/"
-          class="post-tag no-text-decoration" >release</a>
+          class="post-tag no-text-decoration" >Release</a>
       
       <a href="/tags/integration/"
-          class="post-tag no-text-decoration" >integration</a>
+          class="post-tag no-text-decoration" >Integration</a>
       
       <a href="/tags/heroku/"
-          class="post-tag no-text-decoration" >heroku</a>
+          class="post-tag no-text-decoration" >Heroku</a>
       
       <a href="/tags/test/"
-          class="post-tag no-text-decoration" >test</a>
+          class="post-tag no-text-decoration" >Test</a>
       
   </div>
   
@@ -821,6 +841,40 @@ new link: http://host/show
 
 
 
+  <div id="access-lastmod" class="post">
+    <div class="panel-heading">最近更新</div>
+    <ul class="post-content pl-0 pb-1 ml-1 mt-2">
+      
+        
+        
+        
+      <li><a href="/posts/some-rails-helper-methods-those-are-confusing.html/">常用易混的四个Rails View Helper方法</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/alipay-generate-request-url.html/">支付宝集成——生成请求URL</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/alipay-verify-request.html/">支付宝集成——校验与应答</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/nginx-unicorn.html/">Nginx 与 Unicorn</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/tricks-on-upgrading-rails-from-3-2-to-4-0.html/">Tricks On Upgrading Rails From 3.2 to 4.0</a></li>
+      
+    </ul>
+  </div> <!-- #access-lastmod -->
+
+
+
       
 
 
@@ -837,11 +891,6 @@ new link: http://host/show
 
 
 
-  
-    
-    
-    
-    
   
     
     
@@ -1076,6 +1125,81 @@ new link: http://host/show
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -1100,6 +1224,10 @@ new link: http://host/show
     
     
     
+      
+        
+        
+
   
     
     
@@ -1132,6 +1260,10 @@ new link: http://host/show
     
     
     
+      
+        
+        
+
   
     
     
@@ -1152,10 +1284,7 @@ new link: http://host/show
     
     
     
-  
-    
-    
-    
+      
     
   
     
@@ -1167,110 +1296,7 @@ new link: http://host/show
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -1436,414 +1462,6 @@ new link: http://host/show
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -1893,39 +1511,6 @@ new link: http://host/show
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -1950,168 +1535,6 @@ new link: http://host/show
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -2244,44 +1667,12 @@ new link: http://host/show
     
     
     
-      
-    
-  
-    
-    
-    
-    
   
     
     
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -2375,7 +1766,35 @@ new link: http://host/show
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -2408,6 +1827,321 @@ new link: http://host/show
     
     
       
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -2431,34 +2165,34 @@ new link: http://host/show
 
     
       
+      <a class="post-tag" href="/tags/rails/">Rails</a>
+    
+      
       <a class="post-tag" href="/tags/javascript/">Javascript</a>
     
       
       <a class="post-tag" href="/tags/box2d/">Box2D</a>
     
       
-      <a class="post-tag" href="/tags/release/">release</a>
-    
-      
-      <a class="post-tag" href="/tags/test/">test</a>
-    
-      
-      <a class="post-tag" href="/tags/alipay/">alipay</a>
-    
-      
-      <a class="post-tag" href="/tags/angry-birds/">Angry Birds</a>
-    
-      
       <a class="post-tag" href="/tags/coffeescript/">CoffeeScript</a>
     
       
-      <a class="post-tag" href="/tags/feedback/">feedback</a>
+      <a class="post-tag" href="/tags/physics-engine/">Physics Engine</a>
+    
+      
+      <a class="post-tag" href="/tags/release/">Release</a>
+    
+      
+      <a class="post-tag" href="/tags/test/">Test</a>
+    
+      
+      <a class="post-tag" href="/tags/elasticsearch/">Elasticsearch</a>
+    
+      
+      <a class="post-tag" href="/tags/feedback/">Feedback</a>
     
       
       <a class="post-tag" href="/tags/html5/">HTML5</a>
-    
-      
-      <a class="post-tag" href="/tags/integration/">integration</a>
     
 
     </div>
@@ -2503,71 +2237,6 @@ new link: http://host/show
 
 
 
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 
   
@@ -3452,11 +3121,6 @@ public void validate(Person person, List&amp;lt;String&amp;gt; errors) {
     
     
     
-  
-    
-    
-    
-    
       
         
         
@@ -3501,6 +3165,81 @@ public void validate(Person person, List&amp;lt;String&amp;gt; errors) {
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -3525,6 +3264,10 @@ public void validate(Person person, List&amp;lt;String&amp;gt; errors) {
     
     
     
+      
+        
+        
+
   
     
     
@@ -3557,6 +3300,10 @@ public void validate(Person person, List&amp;lt;String&amp;gt; errors) {
     
     
     
+      
+        
+        
+
   
     
     
@@ -3577,10 +3324,7 @@ public void validate(Person person, List&amp;lt;String&amp;gt; errors) {
     
     
     
-  
-    
-    
-    
+      
     
   
     
@@ -3592,110 +3336,7 @@ public void validate(Person person, List&amp;lt;String&amp;gt; errors) {
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -3861,414 +3502,6 @@ public void validate(Person person, List&amp;lt;String&amp;gt; errors) {
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -4318,39 +3551,6 @@ public void validate(Person person, List&amp;lt;String&amp;gt; errors) {
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -4375,168 +3575,6 @@ public void validate(Person person, List&amp;lt;String&amp;gt; errors) {
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -4669,44 +3707,12 @@ public void validate(Person person, List&amp;lt;String&amp;gt; errors) {
     
     
     
-      
-    
-  
-    
-    
-    
-    
   
     
     
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -4800,7 +3806,35 @@ public void validate(Person person, List&amp;lt;String&amp;gt; errors) {
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -4833,6 +3867,321 @@ public void validate(Person person, List&amp;lt;String&amp;gt; errors) {
     
     
       
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -4856,34 +4205,34 @@ public void validate(Person person, List&amp;lt;String&amp;gt; errors) {
 
     
       
+      <a class="post-tag" href="/tags/rails/">Rails</a>
+    
+      
       <a class="post-tag" href="/tags/javascript/">Javascript</a>
     
       
       <a class="post-tag" href="/tags/box2d/">Box2D</a>
     
       
-      <a class="post-tag" href="/tags/release/">release</a>
-    
-      
-      <a class="post-tag" href="/tags/test/">test</a>
-    
-      
-      <a class="post-tag" href="/tags/alipay/">alipay</a>
-    
-      
-      <a class="post-tag" href="/tags/angry-birds/">Angry Birds</a>
-    
-      
       <a class="post-tag" href="/tags/coffeescript/">CoffeeScript</a>
     
       
-      <a class="post-tag" href="/tags/feedback/">feedback</a>
+      <a class="post-tag" href="/tags/physics-engine/">Physics Engine</a>
+    
+      
+      <a class="post-tag" href="/tags/release/">Release</a>
+    
+      
+      <a class="post-tag" href="/tags/test/">Test</a>
+    
+      
+      <a class="post-tag" href="/tags/elasticsearch/">Elasticsearch</a>
+    
+      
+      <a class="post-tag" href="/tags/feedback/">Feedback</a>
     
       
       <a class="post-tag" href="/tags/html5/">HTML5</a>
-    
-      
-      <a class="post-tag" href="/tags/integration/">integration</a>
     
 
     </div>

@@ -1,10 +1,8 @@
 ---
 title: 重视贡献，为成果而工作
 date: 2023-01-29
-tags: Management
-category: MANAGEMENT
-status: publish
-published: true
+tags: [客户, 团队]
+category: 管理
 ---
 > 有效的管理者重视对外界的贡献。他们并非为工作而工作，而是为成果而工作。
 > 

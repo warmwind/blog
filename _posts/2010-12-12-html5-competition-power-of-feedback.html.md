@@ -1,17 +1,11 @@
 ---
 title: ! 'HTML5大赛感 (二) : Power of Feedback'
-category: WORK
+category: 工作
 tags:
-- feedback
+- Feedback
 - HTML5
-- showcase
+- Showcase
 date: 2010-12-12
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
-  _wp_old_slug: ''
 ---
 [Demo](/apps.html#magic_grid)
 

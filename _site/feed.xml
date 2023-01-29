@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>姜鹏的博客</title>
   <subtitle>分享金数据、浩客的故事，创业、管理、技术</subtitle>
-  <updated>2023-01-29T22:29:30+08:00</updated>
+  <updated>2023-01-29T23:38:33+08:00</updated>
   <author>
     <name>Oscar</name>
     <uri>http://localhost:4000/</uri>
@@ -24,7 +24,7 @@
     <link href="http://localhost:4000/posts/focus-on-contribution.html/" rel="alternate" type="text/html" title="重视贡献，为成果而工作" />
     <published>2023-01-29T00:00:00+08:00</published>
   
-    <updated>2023-01-29T00:00:00+08:00</updated>
+    <updated>2023-01-29T23:37:28+08:00</updated>
   
     <id>http://localhost:4000/posts/focus-on-contribution.html/</id>
     <content src="http://localhost:4000/posts/focus-on-contribution.html/" />
@@ -34,7 +34,7 @@
 
   
     
-    <category term="MANAGEMENT" />
+    <category term="管理" />
     
   
 
@@ -70,23 +70,21 @@
 
   
   <entry>
-    <title>Enable Google Page Views</title>
-    <link href="http://localhost:4000/posts/enable-google-pv/" rel="alternate" type="text/html" title="Enable Google Page Views" />
-    <published>2021-01-04T07:32:00+08:00</published>
+    <title>为什么Turbolinks发送了两次请求</title>
+    <link href="http://localhost:4000/posts/turbolinks-request-twice.html/" rel="alternate" type="text/html" title="为什么Turbolinks发送了两次请求" />
+    <published>2015-01-22T00:00:00+08:00</published>
   
-    <updated>2021-01-04T07:32:00+08:00</updated>
+    <updated>2023-01-29T23:37:28+08:00</updated>
   
-    <id>http://localhost:4000/posts/enable-google-pv/</id>
-    <content src="http://localhost:4000/posts/enable-google-pv/" />
+    <id>http://localhost:4000/posts/turbolinks-request-twice.html/</id>
+    <content src="http://localhost:4000/posts/turbolinks-request-twice.html/" />
     <author>
-      <name>sille_bille</name>
+      <name>Oscar</name>
     </author>
 
   
     
-    <category term="Blogging" />
-    
-    <category term="Tutorial" />
+    <category term="技术" />
     
   
 
@@ -98,11 +96,17 @@
 
 
 
-      
-  The content of this post applies only to Universal Analytics property (UA), not Google Analytics 4 (GA 4). In addition, since UA is about to be deprecated on Jul 1, 2023, the Page Views feature of Chirpy will also be deprecated at that time.
+      前面有一篇文章介绍过使用Turbolinks遇到的一个问题，最近又发现了另一个问题。
 
+开发时，tail后台的log会发现某些情况下，同一个请求会触发两次，不过因为都是get请求，而且同一个地址请求后的响应式相同的，所以前台不能完全察觉到。不够下面的场景跟预期就不一致了。
 
-This post is to enable Page Views on the Chirpy theme based blog that you just built. This requires technical knowledge and it’s recommended to keep t...
+假设需要一个功能可以在后台管理页面禁止用户账户，被禁止的账户在随后的所有访问当会重定向到禁止页面。
+
+从实现上来讲，当判断出用户的禁用状态后，就会清除他的登录session，然后重定向到禁止页面。但是现象是用户会直接跳转到登录页面，当重新登陆后，则看到禁止页。查看后台就发现同一个地址请求了两次，第一次清除了session，第二次再访问因为没有session就转向到登陆页面了。
+
+当然这种问题看看源码就清楚了，从Turbolinks的代码可以看出，在三种情况下，Turbolinks会尝试第二次请求同一个url。
+
+...
     </summary>
   
 
@@ -110,23 +114,21 @@ This post is to enable Page Views on the Chirpy theme based blog that you just b
 
   
   <entry>
-    <title>Customize the Favicon</title>
-    <link href="http://localhost:4000/posts/customize-the-favicon/" rel="alternate" type="text/html" title="Customize the Favicon" />
-    <published>2019-08-11T00:34:00+08:00</published>
+    <title>Elasticsearch--更新策略</title>
+    <link href="http://localhost:4000/posts/elasticsearch-update-strategy.html/" rel="alternate" type="text/html" title="Elasticsearch--更新策略" />
+    <published>2014-11-25T00:00:00+08:00</published>
   
-    <updated>2019-08-11T00:34:00+08:00</updated>
+    <updated>2023-01-29T23:37:28+08:00</updated>
   
-    <id>http://localhost:4000/posts/customize-the-favicon/</id>
-    <content src="http://localhost:4000/posts/customize-the-favicon/" />
+    <id>http://localhost:4000/posts/elasticsearch-update-strategy.html/</id>
+    <content src="http://localhost:4000/posts/elasticsearch-update-strategy.html/" />
     <author>
-      <name>cotes</name>
+      <name>Oscar</name>
     </author>
 
   
     
-    <category term="Blogging" />
-    
-    <category term="Tutorial" />
+    <category term="技术" />
     
   
 
@@ -138,11 +140,19 @@ This post is to enable Page Views on the Chirpy theme based blog that you just b
 
 
 
-      The favicons of Chirpy are placed in the directory assets/img/favicons/. You may want to replace them with your own. The following sections will guide you to create and replace the default favicons.
+      前一篇文章介绍了如何在Elasticsearch上做动态映射，这篇文章会介绍下如何更有效的做ES的数据更新。
 
-Generate the favicon
+更新频率
+如果把ES看做另一个数据库，那么它总是会比系统原有的数据库滞后，因为数据会先存入原有数据库，再同步到ES。那么滞后的时间就是一个敏感的参数。根据业务的不同，差别很大。我了解到有的系统可以接受10分钟以上的延迟，不过我们作为一个数据平台，用户提交或修改数据后，是希望能立刻查询到修改的结果的，所以理论上是越短越好，但频繁的更新会给ES服务器带来很大的开销。
 
-Prepare a square image (PNG, JPG, or SVG) with a size of 512x512 or more, and then go to the online tool Real Favicon Generator and click the button Select your Favicon image ...
+异步更新
+更新可以采用同步和异步两种方式。
+
+
+  
+    同步：
+使用elasticsearch-rails这个gem中的Automatic-Callback
+，在inlcudeElasticsearch::Model::Callbacks后，实际上就是在每一次数据增删改后使用callback来往ES发送请求...
     </summary>
   
 
@@ -150,23 +160,21 @@ Prepare a square image (PNG, JPG, or SVG) with a size of 512x512 or more, and th
 
   
   <entry>
-    <title>Getting Started</title>
-    <link href="http://localhost:4000/posts/getting-started/" rel="alternate" type="text/html" title="Getting Started" />
-    <published>2019-08-09T20:55:00+08:00</published>
+    <title>Elasticsearch--动态类型字段的mapping</title>
+    <link href="http://localhost:4000/posts/elasticsearch-mapping.html/" rel="alternate" type="text/html" title="Elasticsearch--动态类型字段的mapping" />
+    <published>2014-11-24T00:00:00+08:00</published>
   
-    <updated>2019-08-09T20:55:00+08:00</updated>
+    <updated>2023-01-29T23:37:28+08:00</updated>
   
-    <id>http://localhost:4000/posts/getting-started/</id>
-    <content src="http://localhost:4000/posts/getting-started/" />
+    <id>http://localhost:4000/posts/elasticsearch-mapping.html/</id>
+    <content src="http://localhost:4000/posts/elasticsearch-mapping.html/" />
     <author>
-      <name>cotes</name>
+      <name>Oscar</name>
     </author>
 
   
     
-    <category term="Blogging" />
-    
-    <category term="Tutorial" />
+    <category term="技术" />
     
   
 
@@ -178,19 +186,11 @@ Prepare a square image (PNG, JPG, or SVG) with a size of 512x512 or more, and th
 
 
 
-      Prerequisites
+      ElasticSearch是一个基于Lucene构建的搜索引擎，通过RESTful的api可以进行数据的更新与搜索。目前github就是用的ES。
 
-Follow the instructions in the Jekyll Docs to complete the installation of Ruby, RubyGems, Jekyll, and Bundler. In addition, Git is also required to be installed.
+通常来讲，如果是要进行精确的查询，可以直接针对数据库进行，合理的构建index，可以在数据库层面进行快速准确查询。然后在某些场景下，当数据集合的列无法确定时，很难加index，这会导致在数据量增大时性能严重下降。例如当前项目是一个在线表单，采用Mongodb作为数据库。当对表单和数据建模时就存在这样的问题，数据存储的每一列数据是不固定的，依赖于表单中该列字段类型的定义。这样就无法对数据中的列构建index。当对这一列进行排序，过滤时，不得不遍历当前表单下的所有数据。
 
-Installation
-
-Creating a New Site
-
-There are two ways to create a new repository for this theme:
-
-
-  Using the Chirpy Starter - Easy to upgrade, isolates irrelevant project files so you can focus on writing.
-  Forking ...
+ES会对所有的字段构建自己的index和存储，这样不仅分散了数据库的访问压力，也避免了数据库缺失index的问题。这篇文章不是介绍如何从零开始使用ES，网上有很多的入门教...
     </summary>
   
 
@@ -198,23 +198,21 @@ There are two ways to create a new repository for this theme:
 
   
   <entry>
-    <title>Writing a New Post</title>
-    <link href="http://localhost:4000/posts/write-a-new-post/" rel="alternate" type="text/html" title="Writing a New Post" />
-    <published>2019-08-08T14:10:00+08:00</published>
+    <title>Rails CSRF token 探秘</title>
+    <link href="http://localhost:4000/posts/secret-of-rails-csrf-token.html/" rel="alternate" type="text/html" title="Rails CSRF token 探秘" />
+    <published>2014-09-26T00:00:00+08:00</published>
   
-    <updated>2019-08-08T14:10:00+08:00</updated>
+    <updated>2023-01-29T23:37:28+08:00</updated>
   
-    <id>http://localhost:4000/posts/write-a-new-post/</id>
-    <content src="http://localhost:4000/posts/write-a-new-post/" />
+    <id>http://localhost:4000/posts/secret-of-rails-csrf-token.html/</id>
+    <content src="http://localhost:4000/posts/secret-of-rails-csrf-token.html/" />
     <author>
-      <name>cotes</name>
+      <name>Oscar</name>
     </author>
 
   
     
-    <category term="Blogging" />
-    
-    <category term="Tutorial" />
+    <category term="技术" />
     
   
 
@@ -226,11 +224,15 @@ There are two ways to create a new repository for this theme:
 
 
 
-      This tutorial will guide you how to write a post in the Chirpy template, and it’s worth reading even if you’ve used Jekyll before, as many features require specific variables to be set.
+      CSRF(Cross-Site Request Forgery)是一种常见的攻击手段，Rails中下面的代码帮助我们的应用来阻止CSRF攻击。
 
-Naming and Path
+class ApplicationController &amp;lt; ActionController::Base
+  # Prevent CSRF attacks by raising an exception.
+  # For APIs, you may want to use :null_session instead.
+  protect_from_forgery with: :exception
+end
 
-Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of the root directory. Please note that the EXTENSION must be one of md and markdown. If you want to save time of cre...
+这段代码是Rails4自动生成的，这里使用了with: :exception设置了对在handle_unverified_request使用的策略是抛出异常ActionController::InvalidAuthenticityT...
     </summary>
   
 

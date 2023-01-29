@@ -1,17 +1,12 @@
 ---
 title: 软件发布实战 -- 状态检查
-category: WORK
+category: 工作
 tags:
-- release
-- integration
-- feedback
+- Release
+- Integration
+- Feedback
 - Health Check
 date: 2011-10-16
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
 ---
 当前项目的发布周期是两个星期,指的是总共6,7个项目一起发布。从第一天code cut，经历如下的过程：![deploy](deploy.png)
 总共三个阶段，每次发布上去以后各个项目都要进行回归测试，发现bug就需要打tag，重新经过QA环境。

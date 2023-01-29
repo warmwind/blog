@@ -38,8 +38,8 @@
 <meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="MapReduce: 一个i和1导致的悲剧" />
 <meta property="og:locale" content="zh_CN" />
-<meta name="description" content="听说MapReduce已经很久了，这两天才第一次真正的尝试一下。要说的是因为一个很简单的错误，折腾了好一会儿，刚好让我有了更多的理解。因祸得福吧。 要实现的是一个很简单的功能，统计每一天新增的数据的数量，以天为单位，数据库中的created_at字段存储是以秒为单位的。考虑到将来这样的数据可能会非常大，所以使用MapReduce就成了自然的选择。 READMORE 我使用的是mongodb,最开始的代码如下： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 def map &lt;&lt;-MAP function() { d = new Date(this.created_at.getFullYear(), this.created_at.getMonth(), this.created_at.getDate()); d.setSeconds(#{Time.zone.utc_offset}); emit(d, 1); } MAP end def reduce &lt;&lt;-REDUCE function(key, values) { var result = 0; for (i in values) { result += i; } return result; } REDUCE end 这是从网上一个地方找的例子。MapReduce的原理就是首先根据给定的条件做group操作，然后根据聚合后的每个小单元进一步操作。最后会得到一个hash的数组，{“_id” =&gt; key, “value” =&gt; value},其中的key就是map操作时emit操作的第一个参数， value是从reduce操作中的返回值。 这段代码看似正确，先在map中将数据库中的时间戳字段映射到每一天，在reduce中取出已经被map过的值，循环加一即可，因为这里只是关心数量，而没有其他的运算，甚至可以将那个for循环替换为 return values.length都可以。 事实证明，在小数据量时，这个结果是正确的，所以我的测试通过了，但是当运行大规模数据时，结果差了很多，几千条数据就有一个数量级的差距，而且毫无规律。 为什么呢？ 答案其实就在MongoDB MapReduce的文档中！简单的拷贝过来而不深入思考，这个问题很严重！ When you run a map/reduce, the reduce function will receive an array of emitted values and reduce them to a single value. Because the reduce function might be invoked more than once for the same key, the structure of the object returned by the reduce function must be identical to the structure of the map function’s emitted value. 也就是说reduce方法是会被多次调用的，所以Map中emit的object需要和Reduce中的返回值结构一致，这样当被多次调用的时候，结果才会被merge在一起。在加入一些调试信息可以发现，map和reduce都是会被多次调用的，而且并不是map完毕之后才调用reduce，两者是交互进行的。 回头再看前面那段代码，如果将1换成i其实就是正确的，可能误操作将i改成了1，并且自己想当然的给了一个解释才导致了这个小悲剧的发生。 思考，理解，不能想当然！ http://www.mongodb.org/display/DOCS/MapReduce" />
-<meta property="og:description" content="听说MapReduce已经很久了，这两天才第一次真正的尝试一下。要说的是因为一个很简单的错误，折腾了好一会儿，刚好让我有了更多的理解。因祸得福吧。 要实现的是一个很简单的功能，统计每一天新增的数据的数量，以天为单位，数据库中的created_at字段存储是以秒为单位的。考虑到将来这样的数据可能会非常大，所以使用MapReduce就成了自然的选择。 READMORE 我使用的是mongodb,最开始的代码如下： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 def map &lt;&lt;-MAP function() { d = new Date(this.created_at.getFullYear(), this.created_at.getMonth(), this.created_at.getDate()); d.setSeconds(#{Time.zone.utc_offset}); emit(d, 1); } MAP end def reduce &lt;&lt;-REDUCE function(key, values) { var result = 0; for (i in values) { result += i; } return result; } REDUCE end 这是从网上一个地方找的例子。MapReduce的原理就是首先根据给定的条件做group操作，然后根据聚合后的每个小单元进一步操作。最后会得到一个hash的数组，{“_id” =&gt; key, “value” =&gt; value},其中的key就是map操作时emit操作的第一个参数， value是从reduce操作中的返回值。 这段代码看似正确，先在map中将数据库中的时间戳字段映射到每一天，在reduce中取出已经被map过的值，循环加一即可，因为这里只是关心数量，而没有其他的运算，甚至可以将那个for循环替换为 return values.length都可以。 事实证明，在小数据量时，这个结果是正确的，所以我的测试通过了，但是当运行大规模数据时，结果差了很多，几千条数据就有一个数量级的差距，而且毫无规律。 为什么呢？ 答案其实就在MongoDB MapReduce的文档中！简单的拷贝过来而不深入思考，这个问题很严重！ When you run a map/reduce, the reduce function will receive an array of emitted values and reduce them to a single value. Because the reduce function might be invoked more than once for the same key, the structure of the object returned by the reduce function must be identical to the structure of the map function’s emitted value. 也就是说reduce方法是会被多次调用的，所以Map中emit的object需要和Reduce中的返回值结构一致，这样当被多次调用的时候，结果才会被merge在一起。在加入一些调试信息可以发现，map和reduce都是会被多次调用的，而且并不是map完毕之后才调用reduce，两者是交互进行的。 回头再看前面那段代码，如果将1换成i其实就是正确的，可能误操作将i改成了1，并且自己想当然的给了一个解释才导致了这个小悲剧的发生。 思考，理解，不能想当然！ http://www.mongodb.org/display/DOCS/MapReduce" />
+<meta name="description" content="听说MapReduce已经很久了，这两天才第一次真正的尝试一下。要说的是因为一个很简单的错误，折腾了好一会儿，刚好让我有了更多的理解。因祸得福吧。" />
+<meta property="og:description" content="听说MapReduce已经很久了，这两天才第一次真正的尝试一下。要说的是因为一个很简单的错误，折腾了好一会儿，刚好让我有了更多的理解。因祸得福吧。" />
 <link rel="canonical" href="http://localhost:4000/posts/mapreduce-loop-problem.html/" />
 <meta property="og:url" content="http://localhost:4000/posts/mapreduce-loop-problem.html/" />
 <meta property="og:site_name" content="姜鹏的博客" />
@@ -49,7 +49,7 @@
 <meta property="twitter:title" content="MapReduce: 一个i和1导致的悲剧" />
 <meta name="twitter:site" content="@peng_jiang" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2012-11-26T00:00:00+08:00","datePublished":"2012-11-26T00:00:00+08:00","description":"听说MapReduce已经很久了，这两天才第一次真正的尝试一下。要说的是因为一个很简单的错误，折腾了好一会儿，刚好让我有了更多的理解。因祸得福吧。 要实现的是一个很简单的功能，统计每一天新增的数据的数量，以天为单位，数据库中的created_at字段存储是以秒为单位的。考虑到将来这样的数据可能会非常大，所以使用MapReduce就成了自然的选择。 READMORE 我使用的是mongodb,最开始的代码如下： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 def map &lt;&lt;-MAP function() { d = new Date(this.created_at.getFullYear(), this.created_at.getMonth(), this.created_at.getDate()); d.setSeconds(#{Time.zone.utc_offset}); emit(d, 1); } MAP end def reduce &lt;&lt;-REDUCE function(key, values) { var result = 0; for (i in values) { result += i; } return result; } REDUCE end 这是从网上一个地方找的例子。MapReduce的原理就是首先根据给定的条件做group操作，然后根据聚合后的每个小单元进一步操作。最后会得到一个hash的数组，{“_id” =&gt; key, “value” =&gt; value},其中的key就是map操作时emit操作的第一个参数， value是从reduce操作中的返回值。 这段代码看似正确，先在map中将数据库中的时间戳字段映射到每一天，在reduce中取出已经被map过的值，循环加一即可，因为这里只是关心数量，而没有其他的运算，甚至可以将那个for循环替换为 return values.length都可以。 事实证明，在小数据量时，这个结果是正确的，所以我的测试通过了，但是当运行大规模数据时，结果差了很多，几千条数据就有一个数量级的差距，而且毫无规律。 为什么呢？ 答案其实就在MongoDB MapReduce的文档中！简单的拷贝过来而不深入思考，这个问题很严重！ When you run a map/reduce, the reduce function will receive an array of emitted values and reduce them to a single value. Because the reduce function might be invoked more than once for the same key, the structure of the object returned by the reduce function must be identical to the structure of the map function’s emitted value. 也就是说reduce方法是会被多次调用的，所以Map中emit的object需要和Reduce中的返回值结构一致，这样当被多次调用的时候，结果才会被merge在一起。在加入一些调试信息可以发现，map和reduce都是会被多次调用的，而且并不是map完毕之后才调用reduce，两者是交互进行的。 回头再看前面那段代码，如果将1换成i其实就是正确的，可能误操作将i改成了1，并且自己想当然的给了一个解释才导致了这个小悲剧的发生。 思考，理解，不能想当然！ http://www.mongodb.org/display/DOCS/MapReduce","headline":"MapReduce: 一个i和1导致的悲剧","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/mapreduce-loop-problem.html/"},"url":"http://localhost:4000/posts/mapreduce-loop-problem.html/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-01-29T23:37:28+08:00","datePublished":"2012-11-26T00:00:00+08:00","description":"听说MapReduce已经很久了，这两天才第一次真正的尝试一下。要说的是因为一个很简单的错误，折腾了好一会儿，刚好让我有了更多的理解。因祸得福吧。","headline":"MapReduce: 一个i和1导致的悲剧","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/mapreduce-loop-problem.html/"},"url":"http://localhost:4000/posts/mapreduce-loop-problem.html/"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -594,6 +594,26 @@
 
     <!-- lastmod date -->
     
+    <span>
+      更新于
+      <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+
+<em class=""
+    data-ts="1675006648"
+    data-df="YYYY/MM/DD"
+    data-toggle="tooltip" data-placement="bottom">
+  2023/01/29
+</em>
+
+    </span>
+    
 
   
 
@@ -726,7 +746,7 @@ function(key, values) {
   <div class="post-meta mb-3">
     <i class="far fa-folder-open fa-fw mr-1"></i>
     
-      <a href='/categories/programming/'>PROGRAMMING</a>
+      <a href='/categories/%E6%8A%80%E6%9C%AF/'>技术</a>
   </div>
   
 
@@ -834,6 +854,40 @@ function(key, values) {
 
 
 
+  <div id="access-lastmod" class="post">
+    <div class="panel-heading">最近更新</div>
+    <ul class="post-content pl-0 pb-1 ml-1 mt-2">
+      
+        
+        
+        
+      <li><a href="/posts/some-rails-helper-methods-those-are-confusing.html/">常用易混的四个Rails View Helper方法</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/alipay-generate-request-url.html/">支付宝集成——生成请求URL</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/alipay-verify-request.html/">支付宝集成——校验与应答</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/nginx-unicorn.html/">Nginx 与 Unicorn</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/tricks-on-upgrading-rails-from-3-2-to-4-0.html/">Tricks On Upgrading Rails From 3.2 to 4.0</a></li>
+      
+    </ul>
+  </div> <!-- #access-lastmod -->
+
+
+
       
 
 
@@ -850,11 +904,6 @@ function(key, values) {
 
 
 
-  
-    
-    
-    
-    
   
     
     
@@ -1089,6 +1138,81 @@ function(key, values) {
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -1113,6 +1237,10 @@ function(key, values) {
     
     
     
+      
+        
+        
+
   
     
     
@@ -1145,6 +1273,10 @@ function(key, values) {
     
     
     
+      
+        
+        
+
   
     
     
@@ -1165,10 +1297,7 @@ function(key, values) {
     
     
     
-  
-    
-    
-    
+      
     
   
     
@@ -1180,110 +1309,7 @@ function(key, values) {
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -1449,414 +1475,6 @@ function(key, values) {
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -1906,39 +1524,6 @@ function(key, values) {
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -1963,168 +1548,6 @@ function(key, values) {
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -2257,44 +1680,12 @@ function(key, values) {
     
     
     
-      
-    
-  
-    
-    
-    
-    
   
     
     
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -2388,7 +1779,35 @@ function(key, values) {
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -2421,6 +1840,321 @@ function(key, values) {
     
     
       
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -2444,34 +2178,34 @@ function(key, values) {
 
     
       
+      <a class="post-tag" href="/tags/rails/">Rails</a>
+    
+      
       <a class="post-tag" href="/tags/javascript/">Javascript</a>
     
       
       <a class="post-tag" href="/tags/box2d/">Box2D</a>
     
       
-      <a class="post-tag" href="/tags/release/">release</a>
-    
-      
-      <a class="post-tag" href="/tags/test/">test</a>
-    
-      
-      <a class="post-tag" href="/tags/alipay/">alipay</a>
-    
-      
-      <a class="post-tag" href="/tags/angry-birds/">Angry Birds</a>
-    
-      
       <a class="post-tag" href="/tags/coffeescript/">CoffeeScript</a>
     
       
-      <a class="post-tag" href="/tags/feedback/">feedback</a>
+      <a class="post-tag" href="/tags/physics-engine/">Physics Engine</a>
+    
+      
+      <a class="post-tag" href="/tags/release/">Release</a>
+    
+      
+      <a class="post-tag" href="/tags/test/">Test</a>
+    
+      
+      <a class="post-tag" href="/tags/elasticsearch/">Elasticsearch</a>
+    
+      
+      <a class="post-tag" href="/tags/feedback/">Feedback</a>
     
       
       <a class="post-tag" href="/tags/html5/">HTML5</a>
-    
-      
-      <a class="post-tag" href="/tags/integration/">integration</a>
     
 
     </div>
@@ -2516,71 +2250,6 @@ function(key, values) {
 
 
 
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 
   
@@ -3088,7 +2757,7 @@ function(key, values) {
       
       
       <div class="card">
-        <a href="/posts/secret-of-rails-csrf-token.html/">
+        <a href="/posts/some-rails-helper-methods-those-are-confusing.html/">
           <div class="card-body">
             <!--
   Date format snippet
@@ -3100,13 +2769,13 @@ function(key, values) {
 
 
 <em class="small"
-    data-ts="1411660800"
+    data-ts="1385827200"
     data-df="YYYY/MM/DD"
     >
-  2014/09/26
+  2013/12/01
 </em>
 
-            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Rails CSRF token 探秘</h3>
+            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>常用易混的四个Rails View Helper方法</h3>
             <div class="text-muted small">
               <p>
                 
@@ -3115,16 +2784,18 @@ function(key, values) {
 
 
 
-                CSRF(Cross-Site Request Forgery)是一种常见的攻击手段，Rails中下面的代码帮助我们的应用来阻止CSRF攻击。
+                Rails中有非常多强大的View Helper，今天其实想在这里简单总结其中4个与安全相关但又容易混淆的。
+
+它们分别是: h, html_safe, simple_format, sanitize。
+
+READMORE
+
+h
+
+我们经常需要在页面上动态展示文字，这些完全可能来自用户的输入。所以为了防止XSS，在页面渲染时，需要对文字进行转义。在Rails2时，经常见到如下的代码
 
 1
-2
-3
-4
-5
-class ApplicationController &amp;lt; ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For ...
+&amp;...
               </p>
             </div>
           </div>
@@ -3134,7 +2805,7 @@ class ApplicationController &amp;lt; ActionController::Base
       
       
       <div class="card">
-        <a href="/posts/elasticsearch-mapping.html/">
+        <a href="/posts/alipay-generate-request-url.html/">
           <div class="card-body">
             <!--
   Date format snippet
@@ -3146,13 +2817,13 @@ class ApplicationController &amp;lt; ActionController::Base
 
 
 <em class="small"
-    data-ts="1416758400"
+    data-ts="1388678400"
     data-df="YYYY/MM/DD"
     >
-  2014/11/24
+  2014/01/03
 </em>
 
-            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Elasticsearch--动态类型字段的mapping</h3>
+            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>支付宝集成——生成请求URL</h3>
             <div class="text-muted small">
               <p>
                 
@@ -3161,9 +2832,9 @@ class ApplicationController &amp;lt; ActionController::Base
 
 
 
-                ElasticSearch是一个基于Lucene构建的搜索引擎，通过RESTful的api可以进行数据的更新与搜索。目前github就是用的ES。
+                去年的这个时候，开始开发基于支付宝的收费模块，现在已经运行了快到一年。这期间从担保交易到即时到帐，再到支持手机支付，经历了用户真正的验证后，今天来总结一下支付宝集成中得注意事项。当然要先申请支付宝的商家服务，拿到PID和Key，并至少签约成即时到帐、双工或者担保交易的一种。
 
-通常来讲，如果是要进行精确的查询，可以直接针对数据库进行，合理的构建index，可以在数据库层面进行快速准确查询。然后在某些场景下，当数据集合的列无法确定时，很难加index，这会导致在数据量增大时性能严重下降。例如当前项目是一个在线表单，采用...
+以开发的角度，从发起到结束可以分为以下两个主要步骤：生成请求URL（网页版和手机版的生成方式是不同的），支付宝回调校...
               </p>
             </div>
           </div>
@@ -3173,7 +2844,7 @@ class ApplicationController &amp;lt; ActionController::Base
       
       
       <div class="card">
-        <a href="/posts/elasticsearch-update-strategy.html/">
+        <a href="/posts/alipay-verify-request.html/">
           <div class="card-body">
             <!--
   Date format snippet
@@ -3185,13 +2856,13 @@ class ApplicationController &amp;lt; ActionController::Base
 
 
 <em class="small"
-    data-ts="1416844800"
+    data-ts="1388764800"
     data-df="YYYY/MM/DD"
     >
-  2014/11/25
+  2014/01/04
 </em>
 
-            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Elasticsearch--更新策略</h3>
+            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>支付宝集成——校验与应答</h3>
             <div class="text-muted small">
               <p>
                 
@@ -3200,10 +2871,10 @@ class ApplicationController &amp;lt; ActionController::Base
 
 
 
-                前一篇文章介绍了如何在Elasticsearch上做动态映射，这篇文章会介绍下如何更有效的做ES的数据更新。
+                前一篇文章介绍了如何生成支付宝的请求URL，当顺利打开支付宝的登录页面后，这里的操作就与应用本身无关了，完全在支付宝内部完成。当用户的交易状态改变，比如付款成功时，支付宝会通过POST发送请求URL中设定的notify_url。由于通常都需要在回调中进行业务逻辑处理，因为，为了防止恶意或伪造请求，需要对该请求进行严格的校验。
 
-更新频率
-如果把ES看做另一个数据库，那么它总是会比系统原有的数据库滞后，因为数据会先存入原有数据库，再同步到ES。那么滞后的时间就是一个敏感的参数。根据业务的不同，差别很大。我了解到有的系统可以接受10分钟以上的延迟，不过我们作为一个数据平台，用户提交或修改数据后，是希望能立刻查...
+MD5校验
+按照请求URL中的规则，对参数再进行一次MD5运算，...
               </p>
             </div>
           </div>
@@ -3461,11 +3132,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
-    
       
         
         
@@ -3510,6 +3176,81 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -3534,6 +3275,10 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
+      
+        
+        
+
   
     
     
@@ -3566,6 +3311,10 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
+      
+        
+        
+
   
     
     
@@ -3586,10 +3335,7 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
+      
     
   
     
@@ -3601,110 +3347,7 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -3870,414 +3513,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -4327,39 +3562,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -4384,168 +3586,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -4678,44 +3718,12 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-      
-    
-  
-    
-    
-    
-    
   
     
     
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -4809,7 +3817,35 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -4842,6 +3878,321 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
       
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -4865,34 +4216,34 @@ class ApplicationController &amp;lt; ActionController::Base
 
     
       
+      <a class="post-tag" href="/tags/rails/">Rails</a>
+    
+      
       <a class="post-tag" href="/tags/javascript/">Javascript</a>
     
       
       <a class="post-tag" href="/tags/box2d/">Box2D</a>
     
       
-      <a class="post-tag" href="/tags/release/">release</a>
-    
-      
-      <a class="post-tag" href="/tags/test/">test</a>
-    
-      
-      <a class="post-tag" href="/tags/alipay/">alipay</a>
-    
-      
-      <a class="post-tag" href="/tags/angry-birds/">Angry Birds</a>
-    
-      
       <a class="post-tag" href="/tags/coffeescript/">CoffeeScript</a>
     
       
-      <a class="post-tag" href="/tags/feedback/">feedback</a>
+      <a class="post-tag" href="/tags/physics-engine/">Physics Engine</a>
+    
+      
+      <a class="post-tag" href="/tags/release/">Release</a>
+    
+      
+      <a class="post-tag" href="/tags/test/">Test</a>
+    
+      
+      <a class="post-tag" href="/tags/elasticsearch/">Elasticsearch</a>
+    
+      
+      <a class="post-tag" href="/tags/feedback/">Feedback</a>
     
       
       <a class="post-tag" href="/tags/html5/">HTML5</a>
-    
-      
-      <a class="post-tag" href="/tags/integration/">integration</a>
     
 
     </div>

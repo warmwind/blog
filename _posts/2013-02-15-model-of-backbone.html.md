@@ -1,17 +1,10 @@
 ---
 title: Backbone中的Model
-category: PROGRAMMING
+category: 技术
 tags:
 - Backbone
 - Javascript
-- Model
-- View
 date: 2013-02-15
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
 ---
 Backobone是一个JavaScript的前端框架，使具有复杂交互的页面实现能更加清晰。其中Model是核心的部分，它主要主要有下面几个方面：
 

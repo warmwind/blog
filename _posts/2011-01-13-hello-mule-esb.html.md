@@ -1,17 +1,9 @@
 ---
 title: Hello Mule ESB
-category: PROGRAMMING
+category: 技术
 tags:
-- j2ee
 - mule ESB
-- ssh
 date: 2011-01-13
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
-  _wp_old_slug: ''
 ---
 这些天在一个庞大的J2EE遗留系统中工作，其实很想体验真正企业级应用是如何实现的。不过每天忙于应付ERB、Service、Dao、Validator .xml 等文件，修复Bug，感受到的只是众多的Class和Config，以及由此导致的启动JBoss花费4分钟多（只publish三个EAR）和尝试用IntelliJ打开要等很久很久很久，最终放弃的痛苦。
 

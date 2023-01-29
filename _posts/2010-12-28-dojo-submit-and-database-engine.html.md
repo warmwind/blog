@@ -1,20 +1,12 @@
 ---
 title: Dojo submit and Database Engine
-category: PROGRAMMING
+category: 技术
 tags:
 - dojo
 - InnoDB
-- maven
 - MyISAM
 - mysql
-- ssh
 date: 2010-12-28
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
-  _wp_old_slug: ''
 ---
 今天给前面纯javascript写的Magic Grid增加一个排行的功能，也就是在玩家完成游戏后，可以输入姓名并提交，可以查看当前排名Top10的玩家名称和分数。
 

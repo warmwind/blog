@@ -1,15 +1,10 @@
 ---
 title: ! 'MapReduce: 一个i和1导致的悲剧'
-category: PROGRAMMING
+category: 技术
 tags:
 - MapReduce
 - MongoDB
 date: 2012-11-26
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
 ---
 听说MapReduce已经很久了，这两天才第一次真正的尝试一下。要说的是因为一个很简单的错误，折腾了好一会儿，刚好让我有了更多的理解。因祸得福吧。
 

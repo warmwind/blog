@@ -1,9 +1,8 @@
 ---
 title: 常用易混的四个Rails View Helper方法
 date: 2013-12-01
-tags: Rails, View Helper
-category: PROGRAMMING
-status: publish
+tags: Rails
+category: 技术
 ---
 
 Rails中有非常多强大的View Helper，今天其实想在这里简单总结其中4个与安全相关但又容易混淆的。

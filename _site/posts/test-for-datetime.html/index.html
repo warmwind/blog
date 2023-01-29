@@ -38,8 +38,8 @@
 <meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="Test For DateTime" />
 <meta property="og:locale" content="zh_CN" />
-<meta name="description" content="在代码中经常遇到在某个方法内部获取当前时间，并对时间进行一定处理。这往往会使测试遇到困难，因为在测试中无法准确获取产品代码内部的当前时间。例如下面的产品与测试代码， 1 2 3 4 5 6 7 8 9 10 11 12 13 public class Product{ public static Product CreateProduct(string name){ Product product = new Product(); product.name = name; product.timestamp = DateTime.Now; return product; } } [Test] public should_generate_a_product_with_given_name(){ Product product = Product.CreateProduct(&quot;book&quot;); Assert.AreEqual(&quot;book&quot;, product.Name) } 这个简单的方法，我们只可以验证name属性，而无法对timestamp做测试，如果在测试中也使用DateTime.Now，则很有可能导致这个测试random success，因为产品代码和测试代码所使用的Now已经不是同一时间，在毫秒级别h会有差异。 解决方案有两个： 不准确的验证timestamp的值，而只需要保证这个时间在允许的误差范围内，例如 1 Assert.IsTrue(DateTime.Now - product.timestamp &amp;lt; new TimeSpan(0, 0, 1) ); 将timestamp的值放在方法签名上作为参数传入。这时方法实现与测试代码将变为 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 public class Product{ public static Product CreateProduct(string name, DateTime timestamp){ Product product = new Product(); product.name = name; product.timestamp = timestamp; return product; } } [Test] public should_generate_a_product_with_given_name(){ DateTime timestamp = DateTime.Now; Product product = Product.CreateProduct(&quot;book&quot;, timestamp); Assert.AreEqual(&quot;book&quot;, product.Name); Assert.AreEqual(timestamp, product.Timestamp); } 在大部分的应用中，对时间没有非常严格的精度要求，所以从代码可测的角度讲，第二种显然更好一些，如果在被测方法内部对时间有更为复杂的处理，那么这种方案的优势会更明显。它让我们对时间可以进行任意设定，有非常灵活的控制。" />
-<meta property="og:description" content="在代码中经常遇到在某个方法内部获取当前时间，并对时间进行一定处理。这往往会使测试遇到困难，因为在测试中无法准确获取产品代码内部的当前时间。例如下面的产品与测试代码， 1 2 3 4 5 6 7 8 9 10 11 12 13 public class Product{ public static Product CreateProduct(string name){ Product product = new Product(); product.name = name; product.timestamp = DateTime.Now; return product; } } [Test] public should_generate_a_product_with_given_name(){ Product product = Product.CreateProduct(&quot;book&quot;); Assert.AreEqual(&quot;book&quot;, product.Name) } 这个简单的方法，我们只可以验证name属性，而无法对timestamp做测试，如果在测试中也使用DateTime.Now，则很有可能导致这个测试random success，因为产品代码和测试代码所使用的Now已经不是同一时间，在毫秒级别h会有差异。 解决方案有两个： 不准确的验证timestamp的值，而只需要保证这个时间在允许的误差范围内，例如 1 Assert.IsTrue(DateTime.Now - product.timestamp &amp;lt; new TimeSpan(0, 0, 1) ); 将timestamp的值放在方法签名上作为参数传入。这时方法实现与测试代码将变为 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 public class Product{ public static Product CreateProduct(string name, DateTime timestamp){ Product product = new Product(); product.name = name; product.timestamp = timestamp; return product; } } [Test] public should_generate_a_product_with_given_name(){ DateTime timestamp = DateTime.Now; Product product = Product.CreateProduct(&quot;book&quot;, timestamp); Assert.AreEqual(&quot;book&quot;, product.Name); Assert.AreEqual(timestamp, product.Timestamp); } 在大部分的应用中，对时间没有非常严格的精度要求，所以从代码可测的角度讲，第二种显然更好一些，如果在被测方法内部对时间有更为复杂的处理，那么这种方案的优势会更明显。它让我们对时间可以进行任意设定，有非常灵活的控制。" />
+<meta name="description" content="在代码中经常遇到在某个方法内部获取当前时间，并对时间进行一定处理。这往往会使测试遇到困难，因为在测试中无法准确获取产品代码内部的当前时间。例如下面的产品与测试代码，" />
+<meta property="og:description" content="在代码中经常遇到在某个方法内部获取当前时间，并对时间进行一定处理。这往往会使测试遇到困难，因为在测试中无法准确获取产品代码内部的当前时间。例如下面的产品与测试代码，" />
 <link rel="canonical" href="http://localhost:4000/posts/test-for-datetime.html/" />
 <meta property="og:url" content="http://localhost:4000/posts/test-for-datetime.html/" />
 <meta property="og:site_name" content="姜鹏的博客" />
@@ -49,7 +49,7 @@
 <meta property="twitter:title" content="Test For DateTime" />
 <meta name="twitter:site" content="@peng_jiang" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2010-12-08T00:00:00+08:00","datePublished":"2010-12-08T00:00:00+08:00","description":"在代码中经常遇到在某个方法内部获取当前时间，并对时间进行一定处理。这往往会使测试遇到困难，因为在测试中无法准确获取产品代码内部的当前时间。例如下面的产品与测试代码， 1 2 3 4 5 6 7 8 9 10 11 12 13 public class Product{ public static Product CreateProduct(string name){ Product product = new Product(); product.name = name; product.timestamp = DateTime.Now; return product; } } [Test] public should_generate_a_product_with_given_name(){ Product product = Product.CreateProduct(&quot;book&quot;); Assert.AreEqual(&quot;book&quot;, product.Name) } 这个简单的方法，我们只可以验证name属性，而无法对timestamp做测试，如果在测试中也使用DateTime.Now，则很有可能导致这个测试random success，因为产品代码和测试代码所使用的Now已经不是同一时间，在毫秒级别h会有差异。 解决方案有两个： 不准确的验证timestamp的值，而只需要保证这个时间在允许的误差范围内，例如 1 Assert.IsTrue(DateTime.Now - product.timestamp &amp;lt; new TimeSpan(0, 0, 1) ); 将timestamp的值放在方法签名上作为参数传入。这时方法实现与测试代码将变为 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 public class Product{ public static Product CreateProduct(string name, DateTime timestamp){ Product product = new Product(); product.name = name; product.timestamp = timestamp; return product; } } [Test] public should_generate_a_product_with_given_name(){ DateTime timestamp = DateTime.Now; Product product = Product.CreateProduct(&quot;book&quot;, timestamp); Assert.AreEqual(&quot;book&quot;, product.Name); Assert.AreEqual(timestamp, product.Timestamp); } 在大部分的应用中，对时间没有非常严格的精度要求，所以从代码可测的角度讲，第二种显然更好一些，如果在被测方法内部对时间有更为复杂的处理，那么这种方案的优势会更明显。它让我们对时间可以进行任意设定，有非常灵活的控制。","headline":"Test For DateTime","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/test-for-datetime.html/"},"url":"http://localhost:4000/posts/test-for-datetime.html/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-01-29T23:37:28+08:00","datePublished":"2010-12-08T00:00:00+08:00","description":"在代码中经常遇到在某个方法内部获取当前时间，并对时间进行一定处理。这往往会使测试遇到困难，因为在测试中无法准确获取产品代码内部的当前时间。例如下面的产品与测试代码，","headline":"Test For DateTime","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/test-for-datetime.html/"},"url":"http://localhost:4000/posts/test-for-datetime.html/"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -594,6 +594,26 @@
 
     <!-- lastmod date -->
     
+    <span>
+      更新于
+      <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+
+<em class=""
+    data-ts="1675006648"
+    data-df="YYYY/MM/DD"
+    data-toggle="tooltip" data-placement="bottom">
+  2023/01/29
+</em>
+
+    </span>
+    
 
   
 
@@ -739,7 +759,7 @@
   <div class="post-meta mb-3">
     <i class="far fa-folder-open fa-fw mr-1"></i>
     
-      <a href='/categories/programming/'>PROGRAMMING</a>
+      <a href='/categories/%E6%8A%80%E6%9C%AF/'>技术</a>
   </div>
   
 
@@ -752,7 +772,7 @@
           class="post-tag no-text-decoration" >DateTime</a>
       
       <a href="/tags/test/"
-          class="post-tag no-text-decoration" >test</a>
+          class="post-tag no-text-decoration" >Test</a>
       
   </div>
   
@@ -847,6 +867,40 @@
 
 
 
+  <div id="access-lastmod" class="post">
+    <div class="panel-heading">最近更新</div>
+    <ul class="post-content pl-0 pb-1 ml-1 mt-2">
+      
+        
+        
+        
+      <li><a href="/posts/some-rails-helper-methods-those-are-confusing.html/">常用易混的四个Rails View Helper方法</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/alipay-generate-request-url.html/">支付宝集成——生成请求URL</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/alipay-verify-request.html/">支付宝集成——校验与应答</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/nginx-unicorn.html/">Nginx 与 Unicorn</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/tricks-on-upgrading-rails-from-3-2-to-4-0.html/">Tricks On Upgrading Rails From 3.2 to 4.0</a></li>
+      
+    </ul>
+  </div> <!-- #access-lastmod -->
+
+
+
       
 
 
@@ -863,11 +917,6 @@
 
 
 
-  
-    
-    
-    
-    
   
     
     
@@ -1102,6 +1151,81 @@
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -1126,6 +1250,10 @@
     
     
     
+      
+        
+        
+
   
     
     
@@ -1158,6 +1286,10 @@
     
     
     
+      
+        
+        
+
   
     
     
@@ -1178,10 +1310,7 @@
     
     
     
-  
-    
-    
-    
+      
     
   
     
@@ -1193,110 +1322,7 @@
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -1462,414 +1488,6 @@
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -1919,39 +1537,6 @@
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -1976,168 +1561,6 @@
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -2270,44 +1693,12 @@
     
     
     
-      
-    
-  
-    
-    
-    
-    
   
     
     
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -2401,7 +1792,35 @@
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -2434,6 +1853,321 @@
     
     
       
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -2457,34 +2191,34 @@
 
     
       
+      <a class="post-tag" href="/tags/rails/">Rails</a>
+    
+      
       <a class="post-tag" href="/tags/javascript/">Javascript</a>
     
       
       <a class="post-tag" href="/tags/box2d/">Box2D</a>
     
       
-      <a class="post-tag" href="/tags/release/">release</a>
-    
-      
-      <a class="post-tag" href="/tags/test/">test</a>
-    
-      
-      <a class="post-tag" href="/tags/alipay/">alipay</a>
-    
-      
-      <a class="post-tag" href="/tags/angry-birds/">Angry Birds</a>
-    
-      
       <a class="post-tag" href="/tags/coffeescript/">CoffeeScript</a>
     
       
-      <a class="post-tag" href="/tags/feedback/">feedback</a>
+      <a class="post-tag" href="/tags/physics-engine/">Physics Engine</a>
+    
+      
+      <a class="post-tag" href="/tags/release/">Release</a>
+    
+      
+      <a class="post-tag" href="/tags/test/">Test</a>
+    
+      
+      <a class="post-tag" href="/tags/elasticsearch/">Elasticsearch</a>
+    
+      
+      <a class="post-tag" href="/tags/feedback/">Feedback</a>
     
       
       <a class="post-tag" href="/tags/html5/">HTML5</a>
-    
-      
-      <a class="post-tag" href="/tags/integration/">integration</a>
     
 
     </div>
@@ -2529,71 +2263,6 @@
 
 
 
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 
   
@@ -3203,7 +2872,7 @@ public void validate(Person person, List&amp;lt;String&amp;gt; errors) {
       
       
       <div class="card">
-        <a href="/posts/secret-of-rails-csrf-token.html/">
+        <a href="/posts/some-rails-helper-methods-those-are-confusing.html/">
           <div class="card-body">
             <!--
   Date format snippet
@@ -3215,13 +2884,13 @@ public void validate(Person person, List&amp;lt;String&amp;gt; errors) {
 
 
 <em class="small"
-    data-ts="1411660800"
+    data-ts="1385827200"
     data-df="YYYY/MM/DD"
     >
-  2014/09/26
+  2013/12/01
 </em>
 
-            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Rails CSRF token 探秘</h3>
+            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>常用易混的四个Rails View Helper方法</h3>
             <div class="text-muted small">
               <p>
                 
@@ -3230,16 +2899,18 @@ public void validate(Person person, List&amp;lt;String&amp;gt; errors) {
 
 
 
-                CSRF(Cross-Site Request Forgery)是一种常见的攻击手段，Rails中下面的代码帮助我们的应用来阻止CSRF攻击。
+                Rails中有非常多强大的View Helper，今天其实想在这里简单总结其中4个与安全相关但又容易混淆的。
+
+它们分别是: h, html_safe, simple_format, sanitize。
+
+READMORE
+
+h
+
+我们经常需要在页面上动态展示文字，这些完全可能来自用户的输入。所以为了防止XSS，在页面渲染时，需要对文字进行转义。在Rails2时，经常见到如下的代码
 
 1
-2
-3
-4
-5
-class ApplicationController &amp;lt; ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For ...
+&amp;...
               </p>
             </div>
           </div>
@@ -3497,11 +3168,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
-    
       
         
         
@@ -3546,6 +3212,81 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -3570,6 +3311,10 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
+      
+        
+        
+
   
     
     
@@ -3602,6 +3347,10 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
+      
+        
+        
+
   
     
     
@@ -3622,10 +3371,7 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
+      
     
   
     
@@ -3637,110 +3383,7 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -3906,414 +3549,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -4363,39 +3598,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -4420,168 +3622,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -4714,44 +3754,12 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-      
-    
-  
-    
-    
-    
-    
   
     
     
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -4845,7 +3853,35 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -4878,6 +3914,321 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
       
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -4901,34 +4252,34 @@ class ApplicationController &amp;lt; ActionController::Base
 
     
       
+      <a class="post-tag" href="/tags/rails/">Rails</a>
+    
+      
       <a class="post-tag" href="/tags/javascript/">Javascript</a>
     
       
       <a class="post-tag" href="/tags/box2d/">Box2D</a>
     
       
-      <a class="post-tag" href="/tags/release/">release</a>
-    
-      
-      <a class="post-tag" href="/tags/test/">test</a>
-    
-      
-      <a class="post-tag" href="/tags/alipay/">alipay</a>
-    
-      
-      <a class="post-tag" href="/tags/angry-birds/">Angry Birds</a>
-    
-      
       <a class="post-tag" href="/tags/coffeescript/">CoffeeScript</a>
     
       
-      <a class="post-tag" href="/tags/feedback/">feedback</a>
+      <a class="post-tag" href="/tags/physics-engine/">Physics Engine</a>
+    
+      
+      <a class="post-tag" href="/tags/release/">Release</a>
+    
+      
+      <a class="post-tag" href="/tags/test/">Test</a>
+    
+      
+      <a class="post-tag" href="/tags/elasticsearch/">Elasticsearch</a>
+    
+      
+      <a class="post-tag" href="/tags/feedback/">Feedback</a>
     
       
       <a class="post-tag" href="/tags/html5/">HTML5</a>
-    
-      
-      <a class="post-tag" href="/tags/integration/">integration</a>
     
 
     </div>

@@ -1,13 +1,8 @@
 ---
 title: 不要心存侥幸
-category: PROGRAMMING
-tags: deploy
+category: 技术
+tags: 部署
 date: 2013-05-30
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
 ---
 已经过去了整整12个小时，不过依然清晰的记得早上宕机的那漫长的十分钟，如此煎熬。
 

@@ -1,13 +1,8 @@
 ---
 title: Turbolinks导致的表单重复提交警告问题
-category: PROGRAMMING
-tags: Ajax,Javascript,PRG,Rails,Turbolinks
+category: 技术
+tags: [PRG, Rails, Turbolinks]
 date: 2013-02-28
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
 ---
 Turbolinks将在Rails4中会被默认引入，它类似于PJAX，但是会托管整个页面的body部分，在页面跳转时，不会重新加载整个页面，而是使用JavaScript重写页面并且更新浏览器中的地址，从而使页面访问的速度大大加快。  
 

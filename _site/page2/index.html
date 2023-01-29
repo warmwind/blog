@@ -45,7 +45,6 @@
 <meta property="og:site_name" content="姜鹏的博客" />
 <meta property="og:type" content="website" />
 <link rel="prev" href="http://localhost:4000/" />
-<link rel="next" href="http://localhost:4000/page3" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="姜鹏的博客" />
 <meta name="twitter:site" content="@peng_jiang" />
@@ -495,7 +494,7 @@
 
   <div class="post-preview">
     <h1>
-      <a href="/posts/tricks-on-upgrading-rails-from-3-2-to-4-0.html/">Tricks On Upgrading Rails From 3.2 to 4.0</a>
+      <a href="/posts/inside-ruby-object-model.html/">Inside Ruby: Object Model</a>
     </h1>
 
     <div class="post-content">
@@ -506,7 +505,10 @@
 
 
 
-        很久一段时间以来，我们使用的都是Rails3.2 + Mongoid3，虽然Rails4发布已经快一年的时间了，但由于mongoid3不能支持Rails4，所以升级就一推再推，不过终于在近期Mongoid发布4.0以后完成了这次期盼已经的升级。心情是兴奋地，不过过程还是曲折的，不少细节，只看升级文档，或者google，不看源码还是真心不好解决。本文不是升级指导，因已经有很多文章，本文将对这次...
+        今天来重新了解一下ruby的Object Model，之所以是重新，因为是从内部来看，而不是从外部的使用上。
+
+1. object
+object = instance variables + methods(包括一个指向所属class的方法)。使用object.instance_variables 和object.methods可以查看对应的信息, 区别在于前者存在于object本身，而me...
       </p>
     </div>
 
@@ -525,10 +527,10 @@
 
 
 <em class=""
-    data-ts="1408982400"
+    data-ts="1328112000"
     data-df="YYYY/MM/DD"
     >
-  2014/08/26
+  2012/02/02
 </em>
 
 
@@ -537,7 +539,7 @@
           <i class="far fa-folder-open fa-fw"></i>
           <span>
           
-            PROGRAMMING
+            技术
           </span>
         
 
@@ -553,7 +555,7 @@
 
   <div class="post-preview">
     <h1>
-      <a href="/posts/nginx-unicorn.html/">Nginx 与 Unicorn</a>
+      <a href="/posts/feature-toggle.html/">Feature Toggle</a>
     </h1>
 
     <div class="post-content">
@@ -564,7 +566,9 @@
 
 
 
-        Capistrano, Nginx 与 Unicorn的搭配作为Rails应用的部署方式是现在成熟与流行的模式，Deploying Rails app using Nginx, Unicorn, Postgres and Capistrano to Digital Ocean这篇文章详细介绍了如何来使用，本文希望稍微深入一些来看看Nginx与Unicorn之间是如何通信的，以及Unicorn...
+        每个迭代(两周)发布一次，所有功能必须完整可用。这对项目的计划，story的划分都提出了很高的要求。然而有的功能很难在一个迭代内完成，例如某个story在临近迭代结束的时候开始，或者某个系统的某个特性需要持续若干迭代的开发， 在整体完成之前不能出现在产品中。那么如何控制未完成的功能不出现在产品中而又不影响新的代码开发呢？这时就需要引入Feature Toggle。
+
+在Rails中Featu...
       </p>
     </div>
 
@@ -583,10 +587,10 @@
 
 
 <em class=""
-    data-ts="1394380800"
+    data-ts="1327766400"
     data-df="YYYY/MM/DD"
     >
-  2014/03/10
+  2012/01/29
 </em>
 
 
@@ -595,7 +599,7 @@
           <i class="far fa-folder-open fa-fw"></i>
           <span>
           
-            PROGRAMMING
+            技术
           </span>
         
 
@@ -611,7 +615,7 @@
 
   <div class="post-preview">
     <h1>
-      <a href="/posts/alipay-verify-request.html/">支付宝集成——校验与应答</a>
+      <a href="/posts/releae-in-action-communication.html/">软件发布实战 -- 沟通</a>
     </h1>
 
     <div class="post-content">
@@ -622,10 +626,11 @@
 
 
 
-        前一篇文章介绍了如何生成支付宝的请求URL，当顺利打开支付宝的登录页面后，这里的操作就与应用本身无关了，完全在支付宝内部完成。当用户的交易状态改变，比如付款成功时，支付宝会通过POST发送请求URL中设定的notify_url。由于通常都需要在回调中进行业务逻辑处理，因为，为了防止恶意或伪造请求，需要对该请求进行严格的校验。
+        沟通在任何一项团队活动中都非常重要, 下面的一个例子发生在我们的一次发布中.
 
-MD5校验
-按照请求URL中的规则，对参数再进行一次MD5运算，...
+这次我们对数据库进行了重构, 将原来的一个大表拆分成若干小表, 那么除了做表结构的迁移,还需要做数据迁移, 因为在产品环境中已经存在了一些数据.
+
+产品环境的数据还算比较干净, 针对这种理想状态数据的迁移, 我们使用存储过程很快实现. 但是在QA环境和Staging环境中, 由于有各种测试, 而且这些数据从几个...
       </p>
     </div>
 
@@ -644,10 +649,10 @@ MD5校验
 
 
 <em class=""
-    data-ts="1388764800"
+    data-ts="1320336000"
     data-df="YYYY/MM/DD"
     >
-  2014/01/04
+  2011/11/04
 </em>
 
 
@@ -656,7 +661,7 @@ MD5校验
           <i class="far fa-folder-open fa-fw"></i>
           <span>
           
-            PROGRAMMING
+            工作
           </span>
         
 
@@ -672,7 +677,7 @@ MD5校验
 
   <div class="post-preview">
     <h1>
-      <a href="/posts/alipay-generate-request-url.html/">支付宝集成——生成请求URL</a>
+      <a href="/posts/releae-in-action-integration.html/">软件发布实战 -- 集成</a>
     </h1>
 
     <div class="post-content">
@@ -683,9 +688,16 @@ MD5校验
 
 
 
-        去年的这个时候，开始开发基于支付宝的收费模块，现在已经运行了快到一年。这期间从担保交易到即时到帐，再到支持手机支付，经历了用户真正的验证后，今天来总结一下支付宝集成中得注意事项。当然要先申请支付宝的商家服务，拿到PID和Key，并至少签约成即时到帐、双工或者担保交易的一种。
+        作为一个程序员， 每天开心的新程序，让所有的测试通，最后打浏览器，输入“localhost/newapp”， 看到开发的功能展现在眼前, 那种愉悦和满足不言而喻。
 
-以开发的角度，从发起到结束可以分为以下两个主要步骤：生成请求URL（网页版和手机版的生成方式是不同的），支付宝回调校...
+但是有没有想过如何发布让其他人共享你的成果呢？
+
+当然！使用heroku,输入下面的命令就可以轻松的帮你完成。
+
+git push heroku master
+
+
+那如果同时要发布6 ，7个项目呢？项目之间可能共用数据库，共享若...
       </p>
     </div>
 
@@ -704,10 +716,10 @@ MD5校验
 
 
 <em class=""
-    data-ts="1388678400"
+    data-ts="1318694400"
     data-df="YYYY/MM/DD"
     >
-  2014/01/03
+  2011/10/16
 </em>
 
 
@@ -716,7 +728,7 @@ MD5校验
           <i class="far fa-folder-open fa-fw"></i>
           <span>
           
-            PROGRAMMING
+            工作
           </span>
         
 
@@ -732,7 +744,7 @@ MD5校验
 
   <div class="post-preview">
     <h1>
-      <a href="/posts/some-rails-helper-methods-those-are-confusing.html/">常用易混的四个Rails View Helper方法</a>
+      <a href="/posts/releae-in-action-healthcheck.html/">软件发布实战 -- 状态检查</a>
     </h1>
 
     <div class="post-content">
@@ -743,17 +755,12 @@ MD5校验
 
 
 
-        Rails中有非常多强大的View Helper，今天其实想在这里简单总结其中4个与安全相关但又容易混淆的。
+        当前项目的发布周期是两个星期,指的是总共6,7个项目一起发布。从第一天code cut，经历如下的过程：
+总共三个阶段，每次发布上去以后各个项目都要进行回归测试，发现bug就需要打tag，重新经过QA环境。
 
-它们分别是: h, html_safe, simple_format, sanitize。
+如果每次环境保持比较稳定，比如发布的操作系统，部署方式都没有改变，那基于已有稳定cloud环境保证的基础上，不会打太多tag。
 
-READMORE
-
-h
-
-我们经常需要在页面上动态展示文字，这些完全可能来自用户的输入。所以为了防止XSS，在页面渲染时，需要对文字进行转义。在Rails2时，经常见到如下的代码
-
-&amp;lt...
+但是我们就经历了上面两种方式的变化。系统从Debian...
       </p>
     </div>
 
@@ -772,10 +779,10 @@ h
 
 
 <em class=""
-    data-ts="1385827200"
+    data-ts="1318694400"
     data-df="YYYY/MM/DD"
     >
-  2013/12/01
+  2011/10/16
 </em>
 
 
@@ -784,7 +791,7 @@ h
           <i class="far fa-folder-open fa-fw"></i>
           <span>
           
-            PROGRAMMING
+            工作
           </span>
         
 
@@ -800,7 +807,7 @@ h
 
   <div class="post-preview">
     <h1>
-      <a href="/posts/build-phonegap-using-coffee-scss-haml.html/">Build Phonegap Application using CoffeeScipt Scss and Haml</a>
+      <a href="/posts/express-js.html/">Express Js</a>
     </h1>
 
     <div class="post-content">
@@ -811,11 +818,9 @@ h
 
 
 
-        Refer to phonegap-scaffold
+        Javascript通常运行于客户端浏览器，可以方便的操作HTML中的DOM元素，另外，提供也提供了一些事件响应机制，将表单验证等很多功能置于前台完成，降低前端与服务器端的交互次数，提高用户体验。在服务器端，有很多的框架可以选择，包括SSH，Spring MVC，ASP.Net MVC等，这些框架提供了良好的结构，可以创建强健的Web应用。
 
-PhoneGap is a tool that allows developer to build cross platform mobile native application using javascript, html and css.
-
-This is great, however, the raw js, html and ...
+然而，前端与后端的割裂在某种程度上限制了Web开...
       </p>
     </div>
 
@@ -834,10 +839,10 @@ This is great, however, the raw js, html and ...
 
 
 <em class=""
-    data-ts="1370275200"
+    data-ts="1309708800"
     data-df="YYYY/MM/DD"
     >
-  2013/06/04
+  2011/07/04
 </em>
 
 
@@ -846,7 +851,7 @@ This is great, however, the raw js, html and ...
           <i class="far fa-folder-open fa-fw"></i>
           <span>
           
-            PROGRAMMING
+            技术
           </span>
         
 
@@ -862,7 +867,7 @@ This is great, however, the raw js, html and ...
 
   <div class="post-preview">
     <h1>
-      <a href="/posts/hidden-checkbox-in-rails.html/">Rails中隐藏的check_box</a>
+      <a href="/posts/box2d-post-collision-detection.html/">Box2D-Post Collision Detection</a>
     </h1>
 
     <div class="post-content">
@@ -873,12 +878,17 @@ This is great, however, the raw js, html and ...
 
 
 
-        Rails中，我们经常会在form中使用check_box这个helpler方法，在controller中，可以通过params[:category]来获取category的值。然而，如果检查一下check_box这个helper方法生成的html代码，会有点不如想象那样直接可懂。
+        Demo
 
-例如下面一个简单的form中
+在检测到碰撞后，我们往往需要进行一些处理，比如在Angry Birds中当小鸟撞击到障碍或者击中猪后，会有碰撞的声音，破碎的效果等，这些都是在碰撞检测后进行处理的。
 
-&amp;lt;%= form_for(@post) do |f| %&amp;gt;
-  ...
+
+
+如上图，坦克发出的炮弹击中了空中飞行的物体，之后炮弹消失，物体旋转下落。
+
+实现的代码如下
+
+var contactListener = new Box2D.Dynamics.b2ContactListener...
       </p>
     </div>
 
@@ -897,10 +907,10 @@ This is great, however, the raw js, html and ...
 
 
 <em class=""
-    data-ts="1370102400"
+    data-ts="1306857600"
     data-df="YYYY/MM/DD"
     >
-  2013/06/02
+  2011/06/01
 </em>
 
 
@@ -909,7 +919,7 @@ This is great, however, the raw js, html and ...
           <i class="far fa-folder-open fa-fw"></i>
           <span>
           
-            PROGRAMMING
+            技术
           </span>
         
 
@@ -925,7 +935,7 @@ This is great, however, the raw js, html and ...
 
   <div class="post-preview">
     <h1>
-      <a href="/posts/be-vigilant-all-the-time.html/">不要心存侥幸</a>
+      <a href="/posts/box2d-collision-detection.html/">Box2D-Collision Detection</a>
     </h1>
 
     <div class="post-content">
@@ -936,11 +946,14 @@ This is great, however, the raw js, html and ...
 
 
 
-        已经过去了整整12个小时，不过依然清晰的记得早上宕机的那漫长的十分钟，如此煎熬。
+        Demo
 
-第一次经历产品宕机，突然之间，QQ，反馈表单，NewRelic，到处都是500的报告，产品经理也无法忍受突如其来的打击而情绪激动。而这一切都只是因为我一点点的大意。
+碰撞检测是物理引擎中非常重要的部分，一般分为两种：
 
-这是临时发现的一个IE7的样式问题，解决方案就是在layout中加入对IE7 fix的css文件。考虑到这会影响到部分用户的正常使用，我决定立...
+
+  Discrete Collision Detection: 离散碰撞检测。
+从实现的角度来说，就是在每TimeStep时刻计算所有当前物体的Contact，由于Box2D处理的都是刚体，这样如果在计算的结果中有overlap的刚体存在，那么这些物体之间必然存在碰撞关系。
+  CCD(Continuos Collision...
       </p>
     </div>
 
@@ -959,10 +972,10 @@ This is great, however, the raw js, html and ...
 
 
 <em class=""
-    data-ts="1369843200"
+    data-ts="1306857600"
     data-df="YYYY/MM/DD"
     >
-  2013/05/30
+  2011/06/01
 </em>
 
 
@@ -971,7 +984,7 @@ This is great, however, the raw js, html and ...
           <i class="far fa-folder-open fa-fw"></i>
           <span>
           
-            PROGRAMMING
+            技术
           </span>
         
 
@@ -987,7 +1000,7 @@ This is great, however, the raw js, html and ...
 
   <div class="post-preview">
     <h1>
-      <a href="/posts/turbolinks-make-form-resubmissioin.html/">Turbolinks导致的表单重复提交警告问题</a>
+      <a href="/posts/box2d-physics-engine.html/">Box2D--Physics Engine</a>
     </h1>
 
     <div class="post-content">
@@ -998,11 +1011,11 @@ This is great, however, the raw js, html and ...
 
 
 
-        Turbolinks将在Rails4中会被默认引入，它类似于PJAX，但是会托管整个页面的body部分，在页面跳转时，不会重新加载整个页面，而是使用JavaScript重写页面并且更新浏览器中的地址，从而使页面访问的速度大大加快。
+        Demo
 
-尽管Rails4还没有正式发布，但现在的项目已经在使用Turbolinks了，它不需要任何额外的配置，添加到Gemfile后即可。最近遇到了一个问题如下：
+Box2D是一个强大的物理引擎(Physics Engine)，有c++, java, js等多种版本。当前流行的Angry birds游戏就使用它作为物理引擎。Wikipedia中给出的定义是：
 
-几...
+  A physics engine is computer software that provides an approximate simulation of certain ...
       </p>
     </div>
 
@@ -1021,10 +1034,10 @@ This is great, however, the raw js, html and ...
 
 
 <em class=""
-    data-ts="1361980800"
+    data-ts="1302969600"
     data-df="YYYY/MM/DD"
     >
-  2013/02/28
+  2011/04/17
 </em>
 
 
@@ -1033,7 +1046,7 @@ This is great, however, the raw js, html and ...
           <i class="far fa-folder-open fa-fw"></i>
           <span>
           
-            PROGRAMMING
+            技术
           </span>
         
 
@@ -1049,7 +1062,7 @@ This is great, however, the raw js, html and ...
 
   <div class="post-preview">
     <h1>
-      <a href="/posts/model-of-backbone.html/">Backbone中的Model</a>
+      <a href="/posts/validation-refactor.html/">Validation Refactor -- Command Pattern</a>
     </h1>
 
     <div class="post-content">
@@ -1060,16 +1073,16 @@ This is great, however, the raw js, html and ...
 
 
 
-        Backobone是一个JavaScript的前端框架，使具有复杂交互的页面实现能更加清晰。其中Model是核心的部分，它主要主要有下面几个方面：
+        曾经遇到过几次如下的代码
 
-
-  控制着Backbone中View呈现的内容
-  与Backbone中Collection的交互
-  承载着校验，数据运算等功能
-  与服务端交互的桥梁
-
-
-Backbone代码一个很显著的特点就是看到满篇的this.model，对新手来说...
+public void validate(Person person, List&amp;lt;String&amp;gt; errors) {
+  if (!validateName(person.getName())) {
+    return;
+  }
+  if (!validatateAge(person.getAge())) {
+    return;
+  }
+  if...
       </p>
     </div>
 
@@ -1088,10 +1101,10 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
 
 
 <em class=""
-    data-ts="1360857600"
+    data-ts="1300291200"
     data-df="YYYY/MM/DD"
     >
-  2013/02/15
+  2011/03/17
 </em>
 
 
@@ -1100,7 +1113,516 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
           <i class="far fa-folder-open fa-fw"></i>
           <span>
           
-            PROGRAMMING
+            技术
+          </span>
+        
+
+      </div>
+
+      
+
+    </div> <!-- .post-meta -->
+
+  </div> <!-- .post-review -->
+
+
+
+  <div class="post-preview">
+    <h1>
+      <a href="/posts/on-the-way.html/">路漫漫</a>
+    </h1>
+
+    <div class="post-content">
+      <p>
+        
+
+
+
+
+
+        还有一个星期就将结束此次悉尼之行，不用再穿着衬衫皮鞋，有机会舒服的坐在自己宽敞的Office里，吃点水果，听听session，想起来感觉真好。
+
+从去年11月开始到现在，前后辗转两个公司，八周时间。不得不说，逝去的，是出国的兴奋，经历的，是时间的漫长和痛苦。周末出去玩一玩，吃点各国美食，已无法抵消工作中各种各样的打击、失落、压力、迷茫。
+
+存在感
+
+这个词可以用来衡量自己在团队中所处的位置，...
+      </p>
+    </div>
+
+    <div class="post-meta text-muted d-flex">
+      <div class="mr-auto">
+
+        <!-- posted date -->
+        <i class="far fa-calendar fa-fw"></i>
+        <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+
+<em class=""
+    data-ts="1295712000"
+    data-df="YYYY/MM/DD"
+    >
+  2011/01/23
+</em>
+
+
+        <!-- categories -->
+        
+          <i class="far fa-folder-open fa-fw"></i>
+          <span>
+          
+            工作
+          </span>
+        
+
+      </div>
+
+      
+
+    </div> <!-- .post-meta -->
+
+  </div> <!-- .post-review -->
+
+
+
+  <div class="post-preview">
+    <h1>
+      <a href="/posts/hello-mule-esb.html/">Hello Mule ESB</a>
+    </h1>
+
+    <div class="post-content">
+      <p>
+        
+
+
+
+
+
+        这些天在一个庞大的J2EE遗留系统中工作，其实很想体验真正企业级应用是如何实现的。不过每天忙于应付ERB、Service、Dao、Validator .xml 等文件，修复Bug，感受到的只是众多的Class和Config，以及由此导致的启动JBoss花费4分钟多（只publish三个EAR）和尝试用IntelliJ打开要等很久很久很久，最终放弃的痛苦。
+
+今天这样的心情有所不同，接触了一个...
+      </p>
+    </div>
+
+    <div class="post-meta text-muted d-flex">
+      <div class="mr-auto">
+
+        <!-- posted date -->
+        <i class="far fa-calendar fa-fw"></i>
+        <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+
+<em class=""
+    data-ts="1294848000"
+    data-df="YYYY/MM/DD"
+    >
+  2011/01/13
+</em>
+
+
+        <!-- categories -->
+        
+          <i class="far fa-folder-open fa-fw"></i>
+          <span>
+          
+            技术
+          </span>
+        
+
+      </div>
+
+      
+
+    </div> <!-- .post-meta -->
+
+  </div> <!-- .post-review -->
+
+
+
+  <div class="post-preview">
+    <h1>
+      <a href="/posts/web-framework-data-binding.html/">Web Framework大杂烩之Data Binding</a>
+    </h1>
+
+    <div class="post-content">
+      <p>
+        
+
+
+
+
+
+        昨天在使用Spring MVC做界面，一边做一边在想着前面使用ASP.NET MVC时是如何实现的。在花了一段时间把CRUD搞定之后，不禁感叹，做到这个程度，似乎也就是做了Rails中下面的一句话：
+
+rails generate scaffold
+
+
+于是，我觉得似乎有必要把接触过的这几个框架做个比较，至少从应用层面可以对Rails, Java和 .NET有个结构性的认识。
+
+既然是从做V...
+      </p>
+    </div>
+
+    <div class="post-meta text-muted d-flex">
+      <div class="mr-auto">
+
+        <!-- posted date -->
+        <i class="far fa-calendar fa-fw"></i>
+        <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+
+<em class=""
+    data-ts="1294675200"
+    data-df="YYYY/MM/DD"
+    >
+  2011/01/11
+</em>
+
+
+        <!-- categories -->
+        
+          <i class="far fa-folder-open fa-fw"></i>
+          <span>
+          
+            技术
+          </span>
+        
+
+      </div>
+
+      
+
+    </div> <!-- .post-meta -->
+
+  </div> <!-- .post-review -->
+
+
+
+  <div class="post-preview">
+    <h1>
+      <a href="/posts/dojo-submit-and-database-engine.html/">Dojo submit and Database Engine</a>
+    </h1>
+
+    <div class="post-content">
+      <p>
+        
+
+
+
+
+
+        今天给前面纯javascript写的Magic Grid增加一个排行的功能，也就是在玩家完成游戏后，可以输入姓名并提交，可以查看当前排名Top10的玩家名称和分数。
+
+功能上并不复杂，不过当前工作的项目是J2EE的，那么就使用相关的技术来实现这个小功能：SSH+MySql+Maven。
+
+整个过程中遇到了两个问题印象比较深刻。
+
+使用Ajax提交结果
+
+Struts常用的Ajax插件有下面几...
+      </p>
+    </div>
+
+    <div class="post-meta text-muted d-flex">
+      <div class="mr-auto">
+
+        <!-- posted date -->
+        <i class="far fa-calendar fa-fw"></i>
+        <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+
+<em class=""
+    data-ts="1293465600"
+    data-df="YYYY/MM/DD"
+    >
+  2010/12/28
+</em>
+
+
+        <!-- categories -->
+        
+          <i class="far fa-folder-open fa-fw"></i>
+          <span>
+          
+            技术
+          </span>
+        
+
+      </div>
+
+      
+
+    </div> <!-- .post-meta -->
+
+  </div> <!-- .post-review -->
+
+
+
+  <div class="post-preview">
+    <h1>
+      <a href="/posts/html5-competition-power-of-feedback.html/">HTML5大赛感 (二) : Power of Feedback</a>
+    </h1>
+
+    <div class="post-content">
+      <p>
+        
+
+
+
+
+
+        Demo
+
+Feedback是一种文化，也是一种力量。
+
+文化：
+
+接受Feedback，需要直面批评的勇气，即使这种批评是针对具体的事实。但是我们往往缺乏这样的勇气，甚至对提出的人在心里有某种想法。开始转变心态总是很难，但是接受了这种文化，就可以享受其中。毕竟，如果大家都是提出基于事实的真实感受，那么无论正面或负面都是可以从另一个角度看到自己，因为真实，所以可以不断从中汲取经验和教训，从而...
+      </p>
+    </div>
+
+    <div class="post-meta text-muted d-flex">
+      <div class="mr-auto">
+
+        <!-- posted date -->
+        <i class="far fa-calendar fa-fw"></i>
+        <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+
+<em class=""
+    data-ts="1292083200"
+    data-df="YYYY/MM/DD"
+    >
+  2010/12/12
+</em>
+
+
+        <!-- categories -->
+        
+          <i class="far fa-folder-open fa-fw"></i>
+          <span>
+          
+            工作
+          </span>
+        
+
+      </div>
+
+      
+
+    </div> <!-- .post-meta -->
+
+  </div> <!-- .post-review -->
+
+
+
+  <div class="post-preview">
+    <h1>
+      <a href="/posts/html5-competition-try.html/">HTML5大赛感 (一)：尝试</a>
+    </h1>
+
+    <div class="post-content">
+      <p>
+        
+
+
+
+
+
+        Demo
+
+对待事情的第一感觉有时会和事情本身不匹配 (Michael语录) 。
+
+比如一件看似不可能的任务，客观条件限制太多。应该如何面对呢？有些人分析所有的不利因素，在心里得出结论，“我不行，那不可能”。最终如大家料想，确实不可能。也有人在大家犹豫的时候已经放手尝试，结果机缘巧合，后续的一切似乎都在谨慎的配合，结果出奇的顺利，回头去想都让自己惊讶。
+
+这次的HTML5大赛，我几乎就成了前...
+      </p>
+    </div>
+
+    <div class="post-meta text-muted d-flex">
+      <div class="mr-auto">
+
+        <!-- posted date -->
+        <i class="far fa-calendar fa-fw"></i>
+        <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+
+<em class=""
+    data-ts="1291824000"
+    data-df="YYYY/MM/DD"
+    >
+  2010/12/09
+</em>
+
+
+        <!-- categories -->
+        
+          <i class="far fa-folder-open fa-fw"></i>
+          <span>
+          
+            工作
+          </span>
+        
+
+      </div>
+
+      
+
+    </div> <!-- .post-meta -->
+
+  </div> <!-- .post-review -->
+
+
+
+  <div class="post-preview">
+    <h1>
+      <a href="/posts/to-be-a-qualified-qa.html/">做一个合格的兼职QA</a>
+    </h1>
+
+    <div class="post-content">
+      <p>
+        
+
+
+
+
+
+        因进度需要，暂时支援一下QA。虽然每天的工作都会和QA接触，不过真正开始成为一个QA的时候，才发现要做的工作很多。
+
+QA与DEV显著的一点不同是更关注整体的功能，关注产品的配置与发布，将不同的story之间联系起来，从客户使用的角度来保证产品质量。暂且不说showcase，分析story（兼职BA），与客户沟通需求等，单就测试story就有很多需要注意和学习的地方。
+
+设计用例。
+
+与分析...
+      </p>
+    </div>
+
+    <div class="post-meta text-muted d-flex">
+      <div class="mr-auto">
+
+        <!-- posted date -->
+        <i class="far fa-calendar fa-fw"></i>
+        <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+
+<em class=""
+    data-ts="1291737600"
+    data-df="YYYY/MM/DD"
+    >
+  2010/12/08
+</em>
+
+
+        <!-- categories -->
+        
+          <i class="far fa-folder-open fa-fw"></i>
+          <span>
+          
+            工作
+          </span>
+        
+
+      </div>
+
+      
+
+    </div> <!-- .post-meta -->
+
+  </div> <!-- .post-review -->
+
+
+
+  <div class="post-preview">
+    <h1>
+      <a href="/posts/test-for-datetime.html/">Test For DateTime</a>
+    </h1>
+
+    <div class="post-content">
+      <p>
+        
+
+
+
+
+
+        在代码中经常遇到在某个方法内部获取当前时间，并对时间进行一定处理。这往往会使测试遇到困难，因为在测试中无法准确获取产品代码内部的当前时间。例如下面的产品与测试代码，
+
+public class Product{
+    public static Product CreateProduct(string name){
+        Product product = new Product...
+      </p>
+    </div>
+
+    <div class="post-meta text-muted d-flex">
+      <div class="mr-auto">
+
+        <!-- posted date -->
+        <i class="far fa-calendar fa-fw"></i>
+        <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+
+<em class=""
+    data-ts="1291737600"
+    data-df="YYYY/MM/DD"
+    >
+  2010/12/08
+</em>
+
+
+        <!-- categories -->
+        
+          <i class="far fa-folder-open fa-fw"></i>
+          <span>
+          
+            技术
           </span>
         
 
@@ -1171,71 +1693,17 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
 
   
 
-    
-    
-    
-    
-    
-
-    
-
-    
-      <!-- show number -->
-      <li class="page-item ">
-        <a class="page-link btn-box-shadow" href="/page3">3</a>
-      </li>
-    
-
-  
-
-    
-    
-    
-    
-    
-
-    
-
-    
-      <!-- hide number -->
-      
-        <li class="page-item disabled">
-          <span class="page-link btn-box-shadow">...</span>
-        </li>
-        
-      
-    
-
-  
-
-    
-    
-    
-    
-    
-
-    
-
-    
-      <!-- show number -->
-      <li class="page-item ">
-        <a class="page-link btn-box-shadow" href="/page5">5</a>
-      </li>
-    
-
-  
-
   <!-- mobile pagination -->
   <li class="page-index align-middle">
     <span>2</span>
-    <span class="text-muted">/ 5</span>
+    <span class="text-muted">/ 2</span>
   </li>
 
   <!-- right arrow -->
   
 
-  <li class="page-item ">
-    <a class="page-link btn-box-shadow" href="/page3" aria-label="next-page">
+  <li class="page-item disabled">
+    <a class="page-link btn-box-shadow" href="#" aria-label="next-page">
       <i class="fas fa-angle-right"></i>
     </a>
   </li>
@@ -1271,6 +1739,40 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
 
 
 
+  <div id="access-lastmod" class="post">
+    <div class="panel-heading">最近更新</div>
+    <ul class="post-content pl-0 pb-1 ml-1 mt-2">
+      
+        
+        
+        
+      <li><a href="/posts/some-rails-helper-methods-those-are-confusing.html/">常用易混的四个Rails View Helper方法</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/alipay-generate-request-url.html/">支付宝集成——生成请求URL</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/alipay-verify-request.html/">支付宝集成——校验与应答</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/nginx-unicorn.html/">Nginx 与 Unicorn</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/tricks-on-upgrading-rails-from-3-2-to-4-0.html/">Tricks On Upgrading Rails From 3.2 to 4.0</a></li>
+      
+    </ul>
+  </div> <!-- #access-lastmod -->
+
+
+
       
 
 
@@ -1287,11 +1789,6 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
 
 
 
-  
-    
-    
-    
-    
   
     
     
@@ -1526,6 +2023,81 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -1550,6 +2122,10 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
+      
+        
+        
+
   
     
     
@@ -1582,6 +2158,10 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
+      
+        
+        
+
   
     
     
@@ -1602,10 +2182,7 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
-  
-    
-    
-    
+      
     
   
     
@@ -1617,110 +2194,7 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -1886,414 +2360,6 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -2343,39 +2409,6 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -2400,168 +2433,6 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -2694,44 +2565,12 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
-      
-    
-  
-    
-    
-    
-    
   
     
     
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -2825,7 +2664,35 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -2858,6 +2725,321 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
       
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -2881,34 +3063,34 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
 
     
       
+      <a class="post-tag" href="/tags/rails/">Rails</a>
+    
+      
       <a class="post-tag" href="/tags/javascript/">Javascript</a>
     
       
       <a class="post-tag" href="/tags/box2d/">Box2D</a>
     
       
-      <a class="post-tag" href="/tags/release/">release</a>
-    
-      
-      <a class="post-tag" href="/tags/test/">test</a>
-    
-      
-      <a class="post-tag" href="/tags/alipay/">alipay</a>
-    
-      
-      <a class="post-tag" href="/tags/angry-birds/">Angry Birds</a>
-    
-      
       <a class="post-tag" href="/tags/coffeescript/">CoffeeScript</a>
     
       
-      <a class="post-tag" href="/tags/feedback/">feedback</a>
+      <a class="post-tag" href="/tags/physics-engine/">Physics Engine</a>
+    
+      
+      <a class="post-tag" href="/tags/release/">Release</a>
+    
+      
+      <a class="post-tag" href="/tags/test/">Test</a>
+    
+      
+      <a class="post-tag" href="/tags/elasticsearch/">Elasticsearch</a>
+    
+      
+      <a class="post-tag" href="/tags/feedback/">Feedback</a>
     
       
       <a class="post-tag" href="/tags/html5/">HTML5</a>
-    
-      
-      <a class="post-tag" href="/tags/integration/">integration</a>
     
 
     </div>
@@ -3139,11 +3321,6 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
-  
-    
-    
-    
-    
       
         
         
@@ -3188,6 +3365,81 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -3212,6 +3464,10 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
+      
+        
+        
+
   
     
     
@@ -3244,6 +3500,10 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
+      
+        
+        
+
   
     
     
@@ -3264,10 +3524,7 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
-  
-    
-    
-    
+      
     
   
     
@@ -3279,110 +3536,7 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -3548,414 +3702,6 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -4005,39 +3751,6 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -4062,168 +3775,6 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -4356,44 +3907,12 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
-      
-    
-  
-    
-    
-    
-    
   
     
     
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -4487,7 +4006,35 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -4520,6 +4067,321 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
     
     
       
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -4543,34 +4405,34 @@ Backbone代码一个很显著的特点就是看到满篇的this.model，对新�
 
     
       
+      <a class="post-tag" href="/tags/rails/">Rails</a>
+    
+      
       <a class="post-tag" href="/tags/javascript/">Javascript</a>
     
       
       <a class="post-tag" href="/tags/box2d/">Box2D</a>
     
       
-      <a class="post-tag" href="/tags/release/">release</a>
-    
-      
-      <a class="post-tag" href="/tags/test/">test</a>
-    
-      
-      <a class="post-tag" href="/tags/alipay/">alipay</a>
-    
-      
-      <a class="post-tag" href="/tags/angry-birds/">Angry Birds</a>
-    
-      
       <a class="post-tag" href="/tags/coffeescript/">CoffeeScript</a>
     
       
-      <a class="post-tag" href="/tags/feedback/">feedback</a>
+      <a class="post-tag" href="/tags/physics-engine/">Physics Engine</a>
+    
+      
+      <a class="post-tag" href="/tags/release/">Release</a>
+    
+      
+      <a class="post-tag" href="/tags/test/">Test</a>
+    
+      
+      <a class="post-tag" href="/tags/elasticsearch/">Elasticsearch</a>
+    
+      
+      <a class="post-tag" href="/tags/feedback/">Feedback</a>
     
       
       <a class="post-tag" href="/tags/html5/">HTML5</a>
-    
-      
-      <a class="post-tag" href="/tags/integration/">integration</a>
     
 
     </div>

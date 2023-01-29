@@ -38,8 +38,8 @@
 <meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="Feature Toggle" />
 <meta property="og:locale" content="zh_CN" />
-<meta name="description" content="每个迭代(两周)发布一次，所有功能必须完整可用。这对项目的计划，story的划分都提出了很高的要求。然而有的功能很难在一个迭代内完成，例如某个story在临近迭代结束的时候开始，或者某个系统的某个特性需要持续若干迭代的开发， 在整体完成之前不能出现在产品中。那么如何控制未完成的功能不出现在产品中而又不影响新的代码开发呢？这时就需要引入Feature Toggle。 在Rails中Feature Toggle可以分为三个部分： 定位配置文件：比如toggle的名称，开关属性，使用环境等，下面的文件中表示有个show_user_name的feature，只在qa和staging环境中打开 1 2 3 show_user_name: switch: on when: [qa,staging]&lt;/pre&gt; 实现解析配置文件的Ruby文件：这个文件最主要是在Object对象上实现一个方法，用于判断配置文件中定义的标志位的状态。 1 2 3 4 5 6 class Object def show_feature? feature_name feature_toggle.active? feature_name end ... end 使用：调用show_feature?方法，并传入toggle的名称，以此来控制是否执行相关代码。 从使用角度来说，并没有多大的难度，但下面两点必须要注意，否则会有很大的可能产生问题： Feature Toggle的应只针对尚未完成的功能，而不是作为选择功能的控制器。 功能完成之后，就立刻删除与该feature相关的所有控制代码。特别要摒弃的思想是保留已经完成的功能，但是把该功能关掉，以备将来使用。这完全可以从源码控制工具中轻松得到，而一旦保留在代码中，就需要增加额外的维护成本。 测试。 对使用Feature Toggle的每个功能都需要测试打开与关闭两种场景，因为两种条件下可能都会对其他功能产生影响。我们的项目中曾出现过一个功能完成之后，就一直关闭，很长时间以后在产品环境中打开，因为觉得那个功能对其他都没有影响，但是却导致了系统异常。 Feature Toggle是实现持续发布的重要手段，但当控制的条件较多时，就一定是什么地方出了问题，好用但不能滥用。 下面的文章有有更加深入的解释：http://martinfowler.com/bliki/FeatureToggle.html" />
-<meta property="og:description" content="每个迭代(两周)发布一次，所有功能必须完整可用。这对项目的计划，story的划分都提出了很高的要求。然而有的功能很难在一个迭代内完成，例如某个story在临近迭代结束的时候开始，或者某个系统的某个特性需要持续若干迭代的开发， 在整体完成之前不能出现在产品中。那么如何控制未完成的功能不出现在产品中而又不影响新的代码开发呢？这时就需要引入Feature Toggle。 在Rails中Feature Toggle可以分为三个部分： 定位配置文件：比如toggle的名称，开关属性，使用环境等，下面的文件中表示有个show_user_name的feature，只在qa和staging环境中打开 1 2 3 show_user_name: switch: on when: [qa,staging]&lt;/pre&gt; 实现解析配置文件的Ruby文件：这个文件最主要是在Object对象上实现一个方法，用于判断配置文件中定义的标志位的状态。 1 2 3 4 5 6 class Object def show_feature? feature_name feature_toggle.active? feature_name end ... end 使用：调用show_feature?方法，并传入toggle的名称，以此来控制是否执行相关代码。 从使用角度来说，并没有多大的难度，但下面两点必须要注意，否则会有很大的可能产生问题： Feature Toggle的应只针对尚未完成的功能，而不是作为选择功能的控制器。 功能完成之后，就立刻删除与该feature相关的所有控制代码。特别要摒弃的思想是保留已经完成的功能，但是把该功能关掉，以备将来使用。这完全可以从源码控制工具中轻松得到，而一旦保留在代码中，就需要增加额外的维护成本。 测试。 对使用Feature Toggle的每个功能都需要测试打开与关闭两种场景，因为两种条件下可能都会对其他功能产生影响。我们的项目中曾出现过一个功能完成之后，就一直关闭，很长时间以后在产品环境中打开，因为觉得那个功能对其他都没有影响，但是却导致了系统异常。 Feature Toggle是实现持续发布的重要手段，但当控制的条件较多时，就一定是什么地方出了问题，好用但不能滥用。 下面的文章有有更加深入的解释：http://martinfowler.com/bliki/FeatureToggle.html" />
+<meta name="description" content="每个迭代(两周)发布一次，所有功能必须完整可用。这对项目的计划，story的划分都提出了很高的要求。然而有的功能很难在一个迭代内完成，例如某个story在临近迭代结束的时候开始，或者某个系统的某个特性需要持续若干迭代的开发， 在整体完成之前不能出现在产品中。那么如何控制未完成的功能不出现在产品中而又不影响新的代码开发呢？这时就需要引入Feature Toggle。" />
+<meta property="og:description" content="每个迭代(两周)发布一次，所有功能必须完整可用。这对项目的计划，story的划分都提出了很高的要求。然而有的功能很难在一个迭代内完成，例如某个story在临近迭代结束的时候开始，或者某个系统的某个特性需要持续若干迭代的开发， 在整体完成之前不能出现在产品中。那么如何控制未完成的功能不出现在产品中而又不影响新的代码开发呢？这时就需要引入Feature Toggle。" />
 <link rel="canonical" href="http://localhost:4000/posts/feature-toggle.html/" />
 <meta property="og:url" content="http://localhost:4000/posts/feature-toggle.html/" />
 <meta property="og:site_name" content="姜鹏的博客" />
@@ -49,7 +49,7 @@
 <meta property="twitter:title" content="Feature Toggle" />
 <meta name="twitter:site" content="@peng_jiang" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2012-01-29T00:00:00+08:00","datePublished":"2012-01-29T00:00:00+08:00","description":"每个迭代(两周)发布一次，所有功能必须完整可用。这对项目的计划，story的划分都提出了很高的要求。然而有的功能很难在一个迭代内完成，例如某个story在临近迭代结束的时候开始，或者某个系统的某个特性需要持续若干迭代的开发， 在整体完成之前不能出现在产品中。那么如何控制未完成的功能不出现在产品中而又不影响新的代码开发呢？这时就需要引入Feature Toggle。 在Rails中Feature Toggle可以分为三个部分： 定位配置文件：比如toggle的名称，开关属性，使用环境等，下面的文件中表示有个show_user_name的feature，只在qa和staging环境中打开 1 2 3 show_user_name: switch: on when: [qa,staging]&lt;/pre&gt; 实现解析配置文件的Ruby文件：这个文件最主要是在Object对象上实现一个方法，用于判断配置文件中定义的标志位的状态。 1 2 3 4 5 6 class Object def show_feature? feature_name feature_toggle.active? feature_name end ... end 使用：调用show_feature?方法，并传入toggle的名称，以此来控制是否执行相关代码。 从使用角度来说，并没有多大的难度，但下面两点必须要注意，否则会有很大的可能产生问题： Feature Toggle的应只针对尚未完成的功能，而不是作为选择功能的控制器。 功能完成之后，就立刻删除与该feature相关的所有控制代码。特别要摒弃的思想是保留已经完成的功能，但是把该功能关掉，以备将来使用。这完全可以从源码控制工具中轻松得到，而一旦保留在代码中，就需要增加额外的维护成本。 测试。 对使用Feature Toggle的每个功能都需要测试打开与关闭两种场景，因为两种条件下可能都会对其他功能产生影响。我们的项目中曾出现过一个功能完成之后，就一直关闭，很长时间以后在产品环境中打开，因为觉得那个功能对其他都没有影响，但是却导致了系统异常。 Feature Toggle是实现持续发布的重要手段，但当控制的条件较多时，就一定是什么地方出了问题，好用但不能滥用。 下面的文章有有更加深入的解释：http://martinfowler.com/bliki/FeatureToggle.html","headline":"Feature Toggle","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/feature-toggle.html/"},"url":"http://localhost:4000/posts/feature-toggle.html/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-01-29T23:37:28+08:00","datePublished":"2012-01-29T00:00:00+08:00","description":"每个迭代(两周)发布一次，所有功能必须完整可用。这对项目的计划，story的划分都提出了很高的要求。然而有的功能很难在一个迭代内完成，例如某个story在临近迭代结束的时候开始，或者某个系统的某个特性需要持续若干迭代的开发， 在整体完成之前不能出现在产品中。那么如何控制未完成的功能不出现在产品中而又不影响新的代码开发呢？这时就需要引入Feature Toggle。","headline":"Feature Toggle","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/feature-toggle.html/"},"url":"http://localhost:4000/posts/feature-toggle.html/"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -594,6 +594,26 @@
 
     <!-- lastmod date -->
     
+    <span>
+      更新于
+      <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+
+<em class=""
+    data-ts="1675006648"
+    data-df="YYYY/MM/DD"
+    data-toggle="tooltip" data-placement="bottom">
+  2023/01/29
+</em>
+
+    </span>
+    
 
   
 
@@ -709,11 +729,19 @@
   <div class="post-meta mb-3">
     <i class="far fa-folder-open fa-fw mr-1"></i>
     
-      <a href='/categories/programming/'>PROGRAMMING</a>
+      <a href='/categories/%E6%8A%80%E6%9C%AF/'>技术</a>
   </div>
   
 
   <!-- tags -->
+  
+  <div class="post-tags">
+    <i class="fa fa-tags fa-fw mr-1"></i>
+      
+      <a href="/tags/feature-toggle/"
+          class="post-tag no-text-decoration" >Feature Toggle</a>
+      
+  </div>
   
 
   <div class="post-tail-bottom
@@ -806,6 +834,40 @@
 
 
 
+  <div id="access-lastmod" class="post">
+    <div class="panel-heading">最近更新</div>
+    <ul class="post-content pl-0 pb-1 ml-1 mt-2">
+      
+        
+        
+        
+      <li><a href="/posts/some-rails-helper-methods-those-are-confusing.html/">常用易混的四个Rails View Helper方法</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/alipay-generate-request-url.html/">支付宝集成——生成请求URL</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/alipay-verify-request.html/">支付宝集成——校验与应答</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/nginx-unicorn.html/">Nginx 与 Unicorn</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/tricks-on-upgrading-rails-from-3-2-to-4-0.html/">Tricks On Upgrading Rails From 3.2 to 4.0</a></li>
+      
+    </ul>
+  </div> <!-- #access-lastmod -->
+
+
+
       
 
 
@@ -822,11 +884,6 @@
 
 
 
-  
-    
-    
-    
-    
   
     
     
@@ -1061,6 +1118,81 @@
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -1085,6 +1217,10 @@
     
     
     
+      
+        
+        
+
   
     
     
@@ -1117,6 +1253,10 @@
     
     
     
+      
+        
+        
+
   
     
     
@@ -1137,10 +1277,7 @@
     
     
     
-  
-    
-    
-    
+      
     
   
     
@@ -1152,110 +1289,7 @@
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -1421,414 +1455,6 @@
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -1878,39 +1504,6 @@
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -1935,168 +1528,6 @@
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -2229,44 +1660,12 @@
     
     
     
-      
-    
-  
-    
-    
-    
-    
   
     
     
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -2360,7 +1759,35 @@
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -2393,6 +1820,321 @@
     
     
       
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -2416,34 +2158,34 @@
 
     
       
+      <a class="post-tag" href="/tags/rails/">Rails</a>
+    
+      
       <a class="post-tag" href="/tags/javascript/">Javascript</a>
     
       
       <a class="post-tag" href="/tags/box2d/">Box2D</a>
     
       
-      <a class="post-tag" href="/tags/release/">release</a>
-    
-      
-      <a class="post-tag" href="/tags/test/">test</a>
-    
-      
-      <a class="post-tag" href="/tags/alipay/">alipay</a>
-    
-      
-      <a class="post-tag" href="/tags/angry-birds/">Angry Birds</a>
-    
-      
       <a class="post-tag" href="/tags/coffeescript/">CoffeeScript</a>
     
       
-      <a class="post-tag" href="/tags/feedback/">feedback</a>
+      <a class="post-tag" href="/tags/physics-engine/">Physics Engine</a>
+    
+      
+      <a class="post-tag" href="/tags/release/">Release</a>
+    
+      
+      <a class="post-tag" href="/tags/test/">Test</a>
+    
+      
+      <a class="post-tag" href="/tags/elasticsearch/">Elasticsearch</a>
+    
+      
+      <a class="post-tag" href="/tags/feedback/">Feedback</a>
     
       
       <a class="post-tag" href="/tags/html5/">HTML5</a>
-    
-      
-      <a class="post-tag" href="/tags/integration/">integration</a>
     
 
     </div>
@@ -2488,71 +2230,6 @@
 
 
 
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 
   
@@ -3060,7 +2737,7 @@
       
       
       <div class="card">
-        <a href="/posts/secret-of-rails-csrf-token.html/">
+        <a href="/posts/some-rails-helper-methods-those-are-confusing.html/">
           <div class="card-body">
             <!--
   Date format snippet
@@ -3072,13 +2749,13 @@
 
 
 <em class="small"
-    data-ts="1411660800"
+    data-ts="1385827200"
     data-df="YYYY/MM/DD"
     >
-  2014/09/26
+  2013/12/01
 </em>
 
-            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Rails CSRF token 探秘</h3>
+            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>常用易混的四个Rails View Helper方法</h3>
             <div class="text-muted small">
               <p>
                 
@@ -3087,16 +2764,18 @@
 
 
 
-                CSRF(Cross-Site Request Forgery)是一种常见的攻击手段，Rails中下面的代码帮助我们的应用来阻止CSRF攻击。
+                Rails中有非常多强大的View Helper，今天其实想在这里简单总结其中4个与安全相关但又容易混淆的。
+
+它们分别是: h, html_safe, simple_format, sanitize。
+
+READMORE
+
+h
+
+我们经常需要在页面上动态展示文字，这些完全可能来自用户的输入。所以为了防止XSS，在页面渲染时，需要对文字进行转义。在Rails2时，经常见到如下的代码
 
 1
-2
-3
-4
-5
-class ApplicationController &amp;lt; ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For ...
+&amp;...
               </p>
             </div>
           </div>
@@ -3106,7 +2785,7 @@ class ApplicationController &amp;lt; ActionController::Base
       
       
       <div class="card">
-        <a href="/posts/elasticsearch-mapping.html/">
+        <a href="/posts/alipay-generate-request-url.html/">
           <div class="card-body">
             <!--
   Date format snippet
@@ -3118,13 +2797,13 @@ class ApplicationController &amp;lt; ActionController::Base
 
 
 <em class="small"
-    data-ts="1416758400"
+    data-ts="1388678400"
     data-df="YYYY/MM/DD"
     >
-  2014/11/24
+  2014/01/03
 </em>
 
-            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Elasticsearch--动态类型字段的mapping</h3>
+            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>支付宝集成——生成请求URL</h3>
             <div class="text-muted small">
               <p>
                 
@@ -3133,9 +2812,9 @@ class ApplicationController &amp;lt; ActionController::Base
 
 
 
-                ElasticSearch是一个基于Lucene构建的搜索引擎，通过RESTful的api可以进行数据的更新与搜索。目前github就是用的ES。
+                去年的这个时候，开始开发基于支付宝的收费模块，现在已经运行了快到一年。这期间从担保交易到即时到帐，再到支持手机支付，经历了用户真正的验证后，今天来总结一下支付宝集成中得注意事项。当然要先申请支付宝的商家服务，拿到PID和Key，并至少签约成即时到帐、双工或者担保交易的一种。
 
-通常来讲，如果是要进行精确的查询，可以直接针对数据库进行，合理的构建index，可以在数据库层面进行快速准确查询。然后在某些场景下，当数据集合的列无法确定时，很难加index，这会导致在数据量增大时性能严重下降。例如当前项目是一个在线表单，采用...
+以开发的角度，从发起到结束可以分为以下两个主要步骤：生成请求URL（网页版和手机版的生成方式是不同的），支付宝回调校...
               </p>
             </div>
           </div>
@@ -3145,7 +2824,7 @@ class ApplicationController &amp;lt; ActionController::Base
       
       
       <div class="card">
-        <a href="/posts/elasticsearch-update-strategy.html/">
+        <a href="/posts/alipay-verify-request.html/">
           <div class="card-body">
             <!--
   Date format snippet
@@ -3157,13 +2836,13 @@ class ApplicationController &amp;lt; ActionController::Base
 
 
 <em class="small"
-    data-ts="1416844800"
+    data-ts="1388764800"
     data-df="YYYY/MM/DD"
     >
-  2014/11/25
+  2014/01/04
 </em>
 
-            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Elasticsearch--更新策略</h3>
+            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>支付宝集成——校验与应答</h3>
             <div class="text-muted small">
               <p>
                 
@@ -3172,10 +2851,10 @@ class ApplicationController &amp;lt; ActionController::Base
 
 
 
-                前一篇文章介绍了如何在Elasticsearch上做动态映射，这篇文章会介绍下如何更有效的做ES的数据更新。
+                前一篇文章介绍了如何生成支付宝的请求URL，当顺利打开支付宝的登录页面后，这里的操作就与应用本身无关了，完全在支付宝内部完成。当用户的交易状态改变，比如付款成功时，支付宝会通过POST发送请求URL中设定的notify_url。由于通常都需要在回调中进行业务逻辑处理，因为，为了防止恶意或伪造请求，需要对该请求进行严格的校验。
 
-更新频率
-如果把ES看做另一个数据库，那么它总是会比系统原有的数据库滞后，因为数据会先存入原有数据库，再同步到ES。那么滞后的时间就是一个敏感的参数。根据业务的不同，差别很大。我了解到有的系统可以接受10分钟以上的延迟，不过我们作为一个数据平台，用户提交或修改数据后，是希望能立刻查...
+MD5校验
+按照请求URL中的规则，对参数再进行一次MD5运算，...
               </p>
             </div>
           </div>
@@ -3433,11 +3112,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
-    
       
         
         
@@ -3482,6 +3156,81 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -3506,6 +3255,10 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
+      
+        
+        
+
   
     
     
@@ -3538,6 +3291,10 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
+      
+        
+        
+
   
     
     
@@ -3558,10 +3315,7 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
+      
     
   
     
@@ -3573,110 +3327,7 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -3842,414 +3493,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -4299,39 +3542,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -4356,168 +3566,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -4650,44 +3698,12 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-      
-    
-  
-    
-    
-    
-    
   
     
     
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -4781,7 +3797,35 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -4814,6 +3858,321 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
       
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -4837,34 +4196,34 @@ class ApplicationController &amp;lt; ActionController::Base
 
     
       
+      <a class="post-tag" href="/tags/rails/">Rails</a>
+    
+      
       <a class="post-tag" href="/tags/javascript/">Javascript</a>
     
       
       <a class="post-tag" href="/tags/box2d/">Box2D</a>
     
       
-      <a class="post-tag" href="/tags/release/">release</a>
-    
-      
-      <a class="post-tag" href="/tags/test/">test</a>
-    
-      
-      <a class="post-tag" href="/tags/alipay/">alipay</a>
-    
-      
-      <a class="post-tag" href="/tags/angry-birds/">Angry Birds</a>
-    
-      
       <a class="post-tag" href="/tags/coffeescript/">CoffeeScript</a>
     
       
-      <a class="post-tag" href="/tags/feedback/">feedback</a>
+      <a class="post-tag" href="/tags/physics-engine/">Physics Engine</a>
+    
+      
+      <a class="post-tag" href="/tags/release/">Release</a>
+    
+      
+      <a class="post-tag" href="/tags/test/">Test</a>
+    
+      
+      <a class="post-tag" href="/tags/elasticsearch/">Elasticsearch</a>
+    
+      
+      <a class="post-tag" href="/tags/feedback/">Feedback</a>
     
       
       <a class="post-tag" href="/tags/html5/">HTML5</a>
-    
-      
-      <a class="post-tag" href="/tags/integration/">integration</a>
     
 
     </div>

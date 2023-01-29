@@ -1,19 +1,10 @@
 ---
 title: Box2D-Collision Detection
-category: PROGRAMMING
+category: 技术
 tags:
-- Angry Birds
 - Box2D
-- CCD
-- Physical Engine
-- TOI
-- Tunneling
+- Physics Engine
 date: 2011-06-01
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
 ---
 [Demo](/apps.html#angry_tank)
 

@@ -1,16 +1,11 @@
 ---
 title: Box2D-Post Collision Detection
-category: PROGRAMMING
+category: 技术
 tags:
 - Box2D
 - Collision Detection
-- Physical Engine
+- Physics Engine
 date: 2011-06-01
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
 ---
 [Demo](/apps.html#angry_tank)
 

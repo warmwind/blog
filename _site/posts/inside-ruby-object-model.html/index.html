@@ -38,8 +38,8 @@
 <meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="Inside Ruby: Object Model" />
 <meta property="og:locale" content="zh_CN" />
-<meta name="description" content="今天来重新了解一下ruby的Object Model，之所以是重新，因为是从内部来看，而不是从外部的使用上。 1. object object = instance variables + methods(包括一个指向所属class的方法)。使用object.instance_variables 和object.methods可以查看对应的信息, 区别在于前者存在于object本身，而method存在于object的class中，这些method在class中被称作instance method，这也是为什么同一个class不同object可以共享方法，但是不能共享instance variable。 2. class class也是一个object，是Class的实例，拥有instance methods和指向父类的方法superclass。Class是Module的子类，所以一个class也是一个module。 3. module module与class没有根本差别，因为class本身就是module的子类，但是引入module与class的目的是不同的。通常来说，class用来实例化和继承，而module用来mix in或者作为namespace。 READMORE 下面的代码片段展示了部分上述内容 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 class MyClass def my_method @v = &#39;instance variable&#39; end end obj = MyClass.new obj.instance_variables # =&gt; [] obj.my_method obj.instance_variables # =&gt; [:@v] obj.methods == MyClass.instance_methods # =&gt; true MyClass.class # =&gt; Class Class.superclass # =&gt; Module Module.superclass # =&gt; Object MyClass.superclass # =&gt; Object 4. include 先看下面的代码 1 2 3 4 5 6 7 8 9 10 11 module A; end module B; end class BaseClass; end class MyClass &lt; BaseClass include A include B end MyClass.ancestors # =&gt; [MyClass, B, A, BaseClass, Object, Kernel, BasicObject] MyClass.superclass # =&gt; BaseClass 在面向对象的语言中，当我们调用方法的时候，首先会在当前类中寻找，如果找不到，则会去父类中，然后是父类的父类。Ruby中提供了一个superclass方法，顾名思义是返回父类，但是Ruby并不是按照superclass的返回结果层层向上寻找方法。与Java和C#一样，Ruby不允许多继承，但是Module的引入使得它有所不同，不同在于，Ruby是按照ancestors的返回结果来寻找，这个ancestor tree中包含了class和module。 所以，Ruby查找方法的顺序为：当前类 -&gt; include的module的逆序，-&gt; 继承的父类。原因在于 ，Ruby中，当在一个class中include一个module时，它会创建一个匿名类，包装那个module，并且将这个匿名类插入祖先树中，仅仅在当前类之上。而superclass对此一无所知。 《Metaprogramming Ruby》一书对这些有非常详细的解释，推荐参考。" />
-<meta property="og:description" content="今天来重新了解一下ruby的Object Model，之所以是重新，因为是从内部来看，而不是从外部的使用上。 1. object object = instance variables + methods(包括一个指向所属class的方法)。使用object.instance_variables 和object.methods可以查看对应的信息, 区别在于前者存在于object本身，而method存在于object的class中，这些method在class中被称作instance method，这也是为什么同一个class不同object可以共享方法，但是不能共享instance variable。 2. class class也是一个object，是Class的实例，拥有instance methods和指向父类的方法superclass。Class是Module的子类，所以一个class也是一个module。 3. module module与class没有根本差别，因为class本身就是module的子类，但是引入module与class的目的是不同的。通常来说，class用来实例化和继承，而module用来mix in或者作为namespace。 READMORE 下面的代码片段展示了部分上述内容 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 class MyClass def my_method @v = &#39;instance variable&#39; end end obj = MyClass.new obj.instance_variables # =&gt; [] obj.my_method obj.instance_variables # =&gt; [:@v] obj.methods == MyClass.instance_methods # =&gt; true MyClass.class # =&gt; Class Class.superclass # =&gt; Module Module.superclass # =&gt; Object MyClass.superclass # =&gt; Object 4. include 先看下面的代码 1 2 3 4 5 6 7 8 9 10 11 module A; end module B; end class BaseClass; end class MyClass &lt; BaseClass include A include B end MyClass.ancestors # =&gt; [MyClass, B, A, BaseClass, Object, Kernel, BasicObject] MyClass.superclass # =&gt; BaseClass 在面向对象的语言中，当我们调用方法的时候，首先会在当前类中寻找，如果找不到，则会去父类中，然后是父类的父类。Ruby中提供了一个superclass方法，顾名思义是返回父类，但是Ruby并不是按照superclass的返回结果层层向上寻找方法。与Java和C#一样，Ruby不允许多继承，但是Module的引入使得它有所不同，不同在于，Ruby是按照ancestors的返回结果来寻找，这个ancestor tree中包含了class和module。 所以，Ruby查找方法的顺序为：当前类 -&gt; include的module的逆序，-&gt; 继承的父类。原因在于 ，Ruby中，当在一个class中include一个module时，它会创建一个匿名类，包装那个module，并且将这个匿名类插入祖先树中，仅仅在当前类之上。而superclass对此一无所知。 《Metaprogramming Ruby》一书对这些有非常详细的解释，推荐参考。" />
+<meta name="description" content="今天来重新了解一下ruby的Object Model，之所以是重新，因为是从内部来看，而不是从外部的使用上。" />
+<meta property="og:description" content="今天来重新了解一下ruby的Object Model，之所以是重新，因为是从内部来看，而不是从外部的使用上。" />
 <link rel="canonical" href="http://localhost:4000/posts/inside-ruby-object-model.html/" />
 <meta property="og:url" content="http://localhost:4000/posts/inside-ruby-object-model.html/" />
 <meta property="og:site_name" content="姜鹏的博客" />
@@ -49,7 +49,7 @@
 <meta property="twitter:title" content="Inside Ruby: Object Model" />
 <meta name="twitter:site" content="@peng_jiang" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2012-02-02T00:00:00+08:00","datePublished":"2012-02-02T00:00:00+08:00","description":"今天来重新了解一下ruby的Object Model，之所以是重新，因为是从内部来看，而不是从外部的使用上。 1. object object = instance variables + methods(包括一个指向所属class的方法)。使用object.instance_variables 和object.methods可以查看对应的信息, 区别在于前者存在于object本身，而method存在于object的class中，这些method在class中被称作instance method，这也是为什么同一个class不同object可以共享方法，但是不能共享instance variable。 2. class class也是一个object，是Class的实例，拥有instance methods和指向父类的方法superclass。Class是Module的子类，所以一个class也是一个module。 3. module module与class没有根本差别，因为class本身就是module的子类，但是引入module与class的目的是不同的。通常来说，class用来实例化和继承，而module用来mix in或者作为namespace。 READMORE 下面的代码片段展示了部分上述内容 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 class MyClass def my_method @v = &#39;instance variable&#39; end end obj = MyClass.new obj.instance_variables # =&gt; [] obj.my_method obj.instance_variables # =&gt; [:@v] obj.methods == MyClass.instance_methods # =&gt; true MyClass.class # =&gt; Class Class.superclass # =&gt; Module Module.superclass # =&gt; Object MyClass.superclass # =&gt; Object 4. include 先看下面的代码 1 2 3 4 5 6 7 8 9 10 11 module A; end module B; end class BaseClass; end class MyClass &lt; BaseClass include A include B end MyClass.ancestors # =&gt; [MyClass, B, A, BaseClass, Object, Kernel, BasicObject] MyClass.superclass # =&gt; BaseClass 在面向对象的语言中，当我们调用方法的时候，首先会在当前类中寻找，如果找不到，则会去父类中，然后是父类的父类。Ruby中提供了一个superclass方法，顾名思义是返回父类，但是Ruby并不是按照superclass的返回结果层层向上寻找方法。与Java和C#一样，Ruby不允许多继承，但是Module的引入使得它有所不同，不同在于，Ruby是按照ancestors的返回结果来寻找，这个ancestor tree中包含了class和module。 所以，Ruby查找方法的顺序为：当前类 -&gt; include的module的逆序，-&gt; 继承的父类。原因在于 ，Ruby中，当在一个class中include一个module时，它会创建一个匿名类，包装那个module，并且将这个匿名类插入祖先树中，仅仅在当前类之上。而superclass对此一无所知。 《Metaprogramming Ruby》一书对这些有非常详细的解释，推荐参考。","headline":"Inside Ruby: Object Model","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/inside-ruby-object-model.html/"},"url":"http://localhost:4000/posts/inside-ruby-object-model.html/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-01-29T23:37:28+08:00","datePublished":"2012-02-02T00:00:00+08:00","description":"今天来重新了解一下ruby的Object Model，之所以是重新，因为是从内部来看，而不是从外部的使用上。","headline":"Inside Ruby: Object Model","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/inside-ruby-object-model.html/"},"url":"http://localhost:4000/posts/inside-ruby-object-model.html/"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -594,6 +594,26 @@
 
     <!-- lastmod date -->
     
+    <span>
+      更新于
+      <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+
+<em class=""
+    data-ts="1675006648"
+    data-df="YYYY/MM/DD"
+    data-toggle="tooltip" data-placement="bottom">
+  2023/01/29
+</em>
+
+    </span>
+    
 
   
 
@@ -737,7 +757,7 @@ READMORE
   <div class="post-meta mb-3">
     <i class="far fa-folder-open fa-fw mr-1"></i>
     
-      <a href='/categories/programming/'>PROGRAMMING</a>
+      <a href='/categories/%E6%8A%80%E6%9C%AF/'>技术</a>
   </div>
   
 
@@ -845,6 +865,40 @@ READMORE
 
 
 
+  <div id="access-lastmod" class="post">
+    <div class="panel-heading">最近更新</div>
+    <ul class="post-content pl-0 pb-1 ml-1 mt-2">
+      
+        
+        
+        
+      <li><a href="/posts/some-rails-helper-methods-those-are-confusing.html/">常用易混的四个Rails View Helper方法</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/alipay-generate-request-url.html/">支付宝集成——生成请求URL</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/alipay-verify-request.html/">支付宝集成——校验与应答</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/nginx-unicorn.html/">Nginx 与 Unicorn</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/tricks-on-upgrading-rails-from-3-2-to-4-0.html/">Tricks On Upgrading Rails From 3.2 to 4.0</a></li>
+      
+    </ul>
+  </div> <!-- #access-lastmod -->
+
+
+
       
 
 
@@ -861,11 +915,6 @@ READMORE
 
 
 
-  
-    
-    
-    
-    
   
     
     
@@ -1100,6 +1149,81 @@ READMORE
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -1124,6 +1248,10 @@ READMORE
     
     
     
+      
+        
+        
+
   
     
     
@@ -1156,6 +1284,10 @@ READMORE
     
     
     
+      
+        
+        
+
   
     
     
@@ -1176,10 +1308,7 @@ READMORE
     
     
     
-  
-    
-    
-    
+      
     
   
     
@@ -1191,110 +1320,7 @@ READMORE
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -1460,414 +1486,6 @@ READMORE
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -1917,39 +1535,6 @@ READMORE
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -1974,168 +1559,6 @@ READMORE
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -2268,44 +1691,12 @@ READMORE
     
     
     
-      
-    
-  
-    
-    
-    
-    
   
     
     
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -2399,7 +1790,35 @@ READMORE
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -2432,6 +1851,321 @@ READMORE
     
     
       
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -2455,34 +2189,34 @@ READMORE
 
     
       
+      <a class="post-tag" href="/tags/rails/">Rails</a>
+    
+      
       <a class="post-tag" href="/tags/javascript/">Javascript</a>
     
       
       <a class="post-tag" href="/tags/box2d/">Box2D</a>
     
       
-      <a class="post-tag" href="/tags/release/">release</a>
-    
-      
-      <a class="post-tag" href="/tags/test/">test</a>
-    
-      
-      <a class="post-tag" href="/tags/alipay/">alipay</a>
-    
-      
-      <a class="post-tag" href="/tags/angry-birds/">Angry Birds</a>
-    
-      
       <a class="post-tag" href="/tags/coffeescript/">CoffeeScript</a>
     
       
-      <a class="post-tag" href="/tags/feedback/">feedback</a>
+      <a class="post-tag" href="/tags/physics-engine/">Physics Engine</a>
+    
+      
+      <a class="post-tag" href="/tags/release/">Release</a>
+    
+      
+      <a class="post-tag" href="/tags/test/">Test</a>
+    
+      
+      <a class="post-tag" href="/tags/elasticsearch/">Elasticsearch</a>
+    
+      
+      <a class="post-tag" href="/tags/feedback/">Feedback</a>
     
       
       <a class="post-tag" href="/tags/html5/">HTML5</a>
-    
-      
-      <a class="post-tag" href="/tags/integration/">integration</a>
     
 
     </div>
@@ -2527,71 +2261,6 @@ READMORE
 
 
 
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 
   
@@ -3145,7 +2814,7 @@ READMORE
       
       
       <div class="card">
-        <a href="/posts/secret-of-rails-csrf-token.html/">
+        <a href="/posts/some-rails-helper-methods-those-are-confusing.html/">
           <div class="card-body">
             <!--
   Date format snippet
@@ -3157,13 +2826,13 @@ READMORE
 
 
 <em class="small"
-    data-ts="1411660800"
+    data-ts="1385827200"
     data-df="YYYY/MM/DD"
     >
-  2014/09/26
+  2013/12/01
 </em>
 
-            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Rails CSRF token 探秘</h3>
+            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>常用易混的四个Rails View Helper方法</h3>
             <div class="text-muted small">
               <p>
                 
@@ -3172,16 +2841,18 @@ READMORE
 
 
 
-                CSRF(Cross-Site Request Forgery)是一种常见的攻击手段，Rails中下面的代码帮助我们的应用来阻止CSRF攻击。
+                Rails中有非常多强大的View Helper，今天其实想在这里简单总结其中4个与安全相关但又容易混淆的。
+
+它们分别是: h, html_safe, simple_format, sanitize。
+
+READMORE
+
+h
+
+我们经常需要在页面上动态展示文字，这些完全可能来自用户的输入。所以为了防止XSS，在页面渲染时，需要对文字进行转义。在Rails2时，经常见到如下的代码
 
 1
-2
-3
-4
-5
-class ApplicationController &amp;lt; ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For ...
+&amp;...
               </p>
             </div>
           </div>
@@ -3191,7 +2862,7 @@ class ApplicationController &amp;lt; ActionController::Base
       
       
       <div class="card">
-        <a href="/posts/elasticsearch-mapping.html/">
+        <a href="/posts/alipay-generate-request-url.html/">
           <div class="card-body">
             <!--
   Date format snippet
@@ -3203,13 +2874,13 @@ class ApplicationController &amp;lt; ActionController::Base
 
 
 <em class="small"
-    data-ts="1416758400"
+    data-ts="1388678400"
     data-df="YYYY/MM/DD"
     >
-  2014/11/24
+  2014/01/03
 </em>
 
-            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Elasticsearch--动态类型字段的mapping</h3>
+            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>支付宝集成——生成请求URL</h3>
             <div class="text-muted small">
               <p>
                 
@@ -3218,9 +2889,9 @@ class ApplicationController &amp;lt; ActionController::Base
 
 
 
-                ElasticSearch是一个基于Lucene构建的搜索引擎，通过RESTful的api可以进行数据的更新与搜索。目前github就是用的ES。
+                去年的这个时候，开始开发基于支付宝的收费模块，现在已经运行了快到一年。这期间从担保交易到即时到帐，再到支持手机支付，经历了用户真正的验证后，今天来总结一下支付宝集成中得注意事项。当然要先申请支付宝的商家服务，拿到PID和Key，并至少签约成即时到帐、双工或者担保交易的一种。
 
-通常来讲，如果是要进行精确的查询，可以直接针对数据库进行，合理的构建index，可以在数据库层面进行快速准确查询。然后在某些场景下，当数据集合的列无法确定时，很难加index，这会导致在数据量增大时性能严重下降。例如当前项目是一个在线表单，采用...
+以开发的角度，从发起到结束可以分为以下两个主要步骤：生成请求URL（网页版和手机版的生成方式是不同的），支付宝回调校...
               </p>
             </div>
           </div>
@@ -3478,11 +3149,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
-    
       
         
         
@@ -3527,6 +3193,81 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -3551,6 +3292,10 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
+      
+        
+        
+
   
     
     
@@ -3583,6 +3328,10 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
+      
+        
+        
+
   
     
     
@@ -3603,10 +3352,7 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
+      
     
   
     
@@ -3618,110 +3364,7 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -3887,414 +3530,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -4344,39 +3579,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -4401,168 +3603,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -4695,44 +3735,12 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-      
-    
-  
-    
-    
-    
-    
   
     
     
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -4826,7 +3834,35 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -4859,6 +3895,321 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
       
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -4882,34 +4233,34 @@ class ApplicationController &amp;lt; ActionController::Base
 
     
       
+      <a class="post-tag" href="/tags/rails/">Rails</a>
+    
+      
       <a class="post-tag" href="/tags/javascript/">Javascript</a>
     
       
       <a class="post-tag" href="/tags/box2d/">Box2D</a>
     
       
-      <a class="post-tag" href="/tags/release/">release</a>
-    
-      
-      <a class="post-tag" href="/tags/test/">test</a>
-    
-      
-      <a class="post-tag" href="/tags/alipay/">alipay</a>
-    
-      
-      <a class="post-tag" href="/tags/angry-birds/">Angry Birds</a>
-    
-      
       <a class="post-tag" href="/tags/coffeescript/">CoffeeScript</a>
     
       
-      <a class="post-tag" href="/tags/feedback/">feedback</a>
+      <a class="post-tag" href="/tags/physics-engine/">Physics Engine</a>
+    
+      
+      <a class="post-tag" href="/tags/release/">Release</a>
+    
+      
+      <a class="post-tag" href="/tags/test/">Test</a>
+    
+      
+      <a class="post-tag" href="/tags/elasticsearch/">Elasticsearch</a>
+    
+      
+      <a class="post-tag" href="/tags/feedback/">Feedback</a>
     
       
       <a class="post-tag" href="/tags/html5/">HTML5</a>
-    
-      
-      <a class="post-tag" href="/tags/integration/">integration</a>
     
 
     </div>

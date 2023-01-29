@@ -38,8 +38,8 @@
 <meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="Box2D–Physics Engine" />
 <meta property="og:locale" content="zh_CN" />
-<meta name="description" content="Demo Box2D是一个强大的物理引擎(Physics Engine)，有c++, java, js等多种版本。当前流行的Angry birds游戏就使用它作为物理引擎。Wikipedia中给出的定义是： A physics engine is computer software that provides an approximate simulation of certain simple physical systems, such as rigid body dynamics(including collision detection), soft body dynamics, and fluid dynamics, of use in the domains of computer graphics, video games and film. Their main uses are in video games (typically as middleware), in which case the simulations are in real-time. The term is sometimes used more generally to describe any software system for simulating physical phenomena, such as high-performance scientific simulation. 近期为了给Tankcraft做spike，实现了一个简单的坦克，包括的功能有： 左右键控制坦克前后移动 上下键调整炮筒的角度 空格键发射炮弹，根据炮筒角度不同炮弹运行的抛物线也不一样 当运行到有坡度的地面时，坦克整体布局不发生改变 其中关键技术点包括： Body: 在Box2D中，整个界面成为一个World，World中可以创建多个不同的Body，Body可以具有质量，摩擦力，位置，形状等等属性。例如上图中坦克的底座，操作舱，轮子，炮筒，炮弹，斜坡，四周方框都是Body。Body共有三种： staticBody：不能有任何移动和变化。例如，四周方框和斜坡 dynamicBody: 可以任意移动变化。除过方框和斜坡外的其余部分都是这种类型 kinematicBody：通常用于给定初始速度后可以移动的物体 Body Joint: 多个Body之间可能毫无关系，也可能紧密结合，Body Joint就是用来处理不同Body之间关系的一个对象。共有9种Joint： Distance Joint Friction Joint Gear Joint Line Joint Mouse Joint Prismatic Joint Pulley Joint Revolute Joint Weld Joint 有一篇blog对joint讲解的非常详细：，这里不再详述每种joint的适用场景。只简单列举用到的两种： Weld Joint: 这应该是最简单最直接的一种连接，就是将两个Body绑定在某个点上。例如操作舱和坦克底部，它们彼此绑定而且没有相对移动。 1 2 3 4 joint = new b2WeldJointDef; var car_body_position = car_body.GetPosition() joint.Initialize(car_body, car_head, new b2Vec2(car_body_position.x - 50/30, car_body_position.y)); world.CreateJoint(joint) Revolute Joint：这种方式是用来处理两个Body之间旋转的一种连接，例如车轮和底座之间，以及炮筒与操作舱之间。 1 2 3 4 5 6 7 var joint = new b2RevoluteJointDef; var joint_point = new b2Vec2(car_head.GetWorldCenter().x + 25/30, car_head.GetWorldCenter().y) joint.Initialize(gun, car_head, joint_point); joint.enableLimit = true; joint.referenceAngle = 20 * Math.PI / 180 gun_joint = world.CreateJoint(joint) 这里定义了在Joint时两个Body的初始角度差。另外要特别注意的就是，定义的joint_point是car_head的最后端，而gun的Position一定要根据car_head的Position设置正确，保证gun的最左端与joint_point重合，否则无法实现合理的绕joint_point旋转的效果！ ApplyImpulse: 这个用来给发出的炮弹初始速度以及角度。由于炮弹必须要沿着炮筒的方向，所以需要理解这个方法的参数含义，并且考虑几个关键点坐标来计算。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 var bulletDef = new b2BodyDef; bulletDef.type = b2Body.b2_dynamicBody; fixDef.shape = new b2CircleShape( 4/30 ); fixDef.friction = 4 fixDef.density = 2 fixDef.filter.groupIndex = 1; var gun_joint_position = gun_joint.GetAnchorA() bulletDef.position = new b2Vec2(2 * gun.GetPosition().x - gun_joint_position.x, 2 * gun.GetPosition().y - gun_joint_position.y); var bullet=world.CreateBody(bulletDef); bullet.CreateFixture(fixDef); bullet.ApplyImpulse(new b2Vec2(gun.GetPosition().x - gun_joint_position.x, gun.GetPosition().y - gun_joint_position.y), gun_joint_position) 以下是一些有用的链接： http://www.box2dflash.org/docs/2.1a/reference http://www.box2d.org/manual.html http://blog.allanbishop.com/box2d1a-tutorial-part-2-joints http://www.box2d.org/index.html" />
-<meta property="og:description" content="Demo Box2D是一个强大的物理引擎(Physics Engine)，有c++, java, js等多种版本。当前流行的Angry birds游戏就使用它作为物理引擎。Wikipedia中给出的定义是： A physics engine is computer software that provides an approximate simulation of certain simple physical systems, such as rigid body dynamics(including collision detection), soft body dynamics, and fluid dynamics, of use in the domains of computer graphics, video games and film. Their main uses are in video games (typically as middleware), in which case the simulations are in real-time. The term is sometimes used more generally to describe any software system for simulating physical phenomena, such as high-performance scientific simulation. 近期为了给Tankcraft做spike，实现了一个简单的坦克，包括的功能有： 左右键控制坦克前后移动 上下键调整炮筒的角度 空格键发射炮弹，根据炮筒角度不同炮弹运行的抛物线也不一样 当运行到有坡度的地面时，坦克整体布局不发生改变 其中关键技术点包括： Body: 在Box2D中，整个界面成为一个World，World中可以创建多个不同的Body，Body可以具有质量，摩擦力，位置，形状等等属性。例如上图中坦克的底座，操作舱，轮子，炮筒，炮弹，斜坡，四周方框都是Body。Body共有三种： staticBody：不能有任何移动和变化。例如，四周方框和斜坡 dynamicBody: 可以任意移动变化。除过方框和斜坡外的其余部分都是这种类型 kinematicBody：通常用于给定初始速度后可以移动的物体 Body Joint: 多个Body之间可能毫无关系，也可能紧密结合，Body Joint就是用来处理不同Body之间关系的一个对象。共有9种Joint： Distance Joint Friction Joint Gear Joint Line Joint Mouse Joint Prismatic Joint Pulley Joint Revolute Joint Weld Joint 有一篇blog对joint讲解的非常详细：，这里不再详述每种joint的适用场景。只简单列举用到的两种： Weld Joint: 这应该是最简单最直接的一种连接，就是将两个Body绑定在某个点上。例如操作舱和坦克底部，它们彼此绑定而且没有相对移动。 1 2 3 4 joint = new b2WeldJointDef; var car_body_position = car_body.GetPosition() joint.Initialize(car_body, car_head, new b2Vec2(car_body_position.x - 50/30, car_body_position.y)); world.CreateJoint(joint) Revolute Joint：这种方式是用来处理两个Body之间旋转的一种连接，例如车轮和底座之间，以及炮筒与操作舱之间。 1 2 3 4 5 6 7 var joint = new b2RevoluteJointDef; var joint_point = new b2Vec2(car_head.GetWorldCenter().x + 25/30, car_head.GetWorldCenter().y) joint.Initialize(gun, car_head, joint_point); joint.enableLimit = true; joint.referenceAngle = 20 * Math.PI / 180 gun_joint = world.CreateJoint(joint) 这里定义了在Joint时两个Body的初始角度差。另外要特别注意的就是，定义的joint_point是car_head的最后端，而gun的Position一定要根据car_head的Position设置正确，保证gun的最左端与joint_point重合，否则无法实现合理的绕joint_point旋转的效果！ ApplyImpulse: 这个用来给发出的炮弹初始速度以及角度。由于炮弹必须要沿着炮筒的方向，所以需要理解这个方法的参数含义，并且考虑几个关键点坐标来计算。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 var bulletDef = new b2BodyDef; bulletDef.type = b2Body.b2_dynamicBody; fixDef.shape = new b2CircleShape( 4/30 ); fixDef.friction = 4 fixDef.density = 2 fixDef.filter.groupIndex = 1; var gun_joint_position = gun_joint.GetAnchorA() bulletDef.position = new b2Vec2(2 * gun.GetPosition().x - gun_joint_position.x, 2 * gun.GetPosition().y - gun_joint_position.y); var bullet=world.CreateBody(bulletDef); bullet.CreateFixture(fixDef); bullet.ApplyImpulse(new b2Vec2(gun.GetPosition().x - gun_joint_position.x, gun.GetPosition().y - gun_joint_position.y), gun_joint_position) 以下是一些有用的链接： http://www.box2dflash.org/docs/2.1a/reference http://www.box2d.org/manual.html http://blog.allanbishop.com/box2d1a-tutorial-part-2-joints http://www.box2d.org/index.html" />
+<meta name="description" content="Demo" />
+<meta property="og:description" content="Demo" />
 <link rel="canonical" href="http://localhost:4000/posts/box2d-physics-engine.html/" />
 <meta property="og:url" content="http://localhost:4000/posts/box2d-physics-engine.html/" />
 <meta property="og:site_name" content="姜鹏的博客" />
@@ -49,7 +49,7 @@
 <meta property="twitter:title" content="Box2D–Physics Engine" />
 <meta name="twitter:site" content="@peng_jiang" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-04-17T00:00:00+08:00","datePublished":"2011-04-17T00:00:00+08:00","description":"Demo Box2D是一个强大的物理引擎(Physics Engine)，有c++, java, js等多种版本。当前流行的Angry birds游戏就使用它作为物理引擎。Wikipedia中给出的定义是： A physics engine is computer software that provides an approximate simulation of certain simple physical systems, such as rigid body dynamics(including collision detection), soft body dynamics, and fluid dynamics, of use in the domains of computer graphics, video games and film. Their main uses are in video games (typically as middleware), in which case the simulations are in real-time. The term is sometimes used more generally to describe any software system for simulating physical phenomena, such as high-performance scientific simulation. 近期为了给Tankcraft做spike，实现了一个简单的坦克，包括的功能有： 左右键控制坦克前后移动 上下键调整炮筒的角度 空格键发射炮弹，根据炮筒角度不同炮弹运行的抛物线也不一样 当运行到有坡度的地面时，坦克整体布局不发生改变 其中关键技术点包括： Body: 在Box2D中，整个界面成为一个World，World中可以创建多个不同的Body，Body可以具有质量，摩擦力，位置，形状等等属性。例如上图中坦克的底座，操作舱，轮子，炮筒，炮弹，斜坡，四周方框都是Body。Body共有三种： staticBody：不能有任何移动和变化。例如，四周方框和斜坡 dynamicBody: 可以任意移动变化。除过方框和斜坡外的其余部分都是这种类型 kinematicBody：通常用于给定初始速度后可以移动的物体 Body Joint: 多个Body之间可能毫无关系，也可能紧密结合，Body Joint就是用来处理不同\bBody之间关系的一个对象。共有9种Joint： Distance Joint Friction Joint Gear Joint Line Joint Mouse Joint Prismatic Joint Pulley Joint Revolute Joint Weld Joint 有一篇blog对joint讲解的非常详细：，这里不再详述每种joint的适用场景。只简单列举用到的两种： Weld Joint: 这应该是最简单最直接的一种连接，就是将两个Body绑定在某个点上。例如操作舱和坦克底部，它们彼此绑定而且没有相对移动。 1 2 3 4 joint = new b2WeldJointDef; var car_body_position = car_body.GetPosition() joint.Initialize(car_body, car_head, new b2Vec2(car_body_position.x - 50/30, car_body_position.y)); world.CreateJoint(joint) Revolute Joint：这种方式是用来处理两个Body之间旋转的一种连接，例如车轮和底座之间，以及炮筒与操作舱之间。 1 2 3 4 5 6 7 var joint = new b2RevoluteJointDef; var joint_point = new b2Vec2(car_head.GetWorldCenter().x + 25/30, car_head.GetWorldCenter().y) joint.Initialize(gun, car_head, joint_point); joint.enableLimit = true; joint.referenceAngle = 20 * Math.PI / 180 gun_joint = world.CreateJoint(joint) 这里定义了在Joint时两个Body的初始角度差。另外要特别注意的就是，定义的joint_point是car_head的最后端，而gun的Position一定要根据car_head的Position设置正确，保证gun的最左端与joint_point重合，否则无法实现合理的绕joint_point旋转的效果！ ApplyImpulse: 这个用来给发出的炮弹初始速度以及角度。由于炮弹必须要沿着炮筒的方向，所以需要理解这个方法的参数含义，并且考虑几个关键点坐标来计算。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 var bulletDef = new b2BodyDef; bulletDef.type = b2Body.b2_dynamicBody; fixDef.shape = new b2CircleShape( 4/30 ); fixDef.friction = 4 fixDef.density = 2 fixDef.filter.groupIndex = 1; var gun_joint_position = gun_joint.GetAnchorA() bulletDef.position = new b2Vec2(2 * gun.GetPosition().x - gun_joint_position.x, 2 * gun.GetPosition().y - gun_joint_position.y); var bullet=world.CreateBody(bulletDef); bullet.CreateFixture(fixDef); bullet.ApplyImpulse(new b2Vec2(gun.GetPosition().x - gun_joint_position.x, gun.GetPosition().y - gun_joint_position.y), gun_joint_position) 以下是一些有用的链接： http://www.box2dflash.org/docs/2.1a/reference http://www.box2d.org/manual.html http://blog.allanbishop.com/box2d1a-tutorial-part-2-joints http://www.box2d.org/index.html","headline":"Box2D–Physics Engine","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/box2d-physics-engine.html/"},"url":"http://localhost:4000/posts/box2d-physics-engine.html/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-01-29T23:37:28+08:00","datePublished":"2011-04-17T00:00:00+08:00","description":"Demo","headline":"Box2D–Physics Engine","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/box2d-physics-engine.html/"},"url":"http://localhost:4000/posts/box2d-physics-engine.html/"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -679,6 +679,26 @@
 
     <!-- lastmod date -->
     
+    <span>
+      更新于
+      <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+
+<em class=""
+    data-ts="1675006648"
+    data-df="YYYY/MM/DD"
+    data-toggle="tooltip" data-placement="bottom">
+  2023/01/29
+</em>
+
+    </span>
+    
 
   
 
@@ -873,7 +893,7 @@
   <div class="post-meta mb-3">
     <i class="far fa-folder-open fa-fw mr-1"></i>
     
-      <a href='/categories/programming/'>PROGRAMMING</a>
+      <a href='/categories/%E6%8A%80%E6%9C%AF/'>技术</a>
   </div>
   
 
@@ -881,9 +901,6 @@
   
   <div class="post-tags">
     <i class="fa fa-tags fa-fw mr-1"></i>
-      
-      <a href="/tags/angry-birds/"
-          class="post-tag no-text-decoration" >Angry Birds</a>
       
       <a href="/tags/box2d/"
           class="post-tag no-text-decoration" >Box2D</a>
@@ -984,6 +1001,40 @@
 
 
 
+  <div id="access-lastmod" class="post">
+    <div class="panel-heading">最近更新</div>
+    <ul class="post-content pl-0 pb-1 ml-1 mt-2">
+      
+        
+        
+        
+      <li><a href="/posts/some-rails-helper-methods-those-are-confusing.html/">常用易混的四个Rails View Helper方法</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/alipay-generate-request-url.html/">支付宝集成——生成请求URL</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/alipay-verify-request.html/">支付宝集成——校验与应答</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/nginx-unicorn.html/">Nginx 与 Unicorn</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/tricks-on-upgrading-rails-from-3-2-to-4-0.html/">Tricks On Upgrading Rails From 3.2 to 4.0</a></li>
+      
+    </ul>
+  </div> <!-- #access-lastmod -->
+
+
+
       
 
 
@@ -1000,11 +1051,6 @@
 
 
 
-  
-    
-    
-    
-    
   
     
     
@@ -1239,6 +1285,81 @@
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -1263,6 +1384,10 @@
     
     
     
+      
+        
+        
+
   
     
     
@@ -1295,6 +1420,10 @@
     
     
     
+      
+        
+        
+
   
     
     
@@ -1315,10 +1444,7 @@
     
     
     
-  
-    
-    
-    
+      
     
   
     
@@ -1330,110 +1456,7 @@
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -1599,414 +1622,6 @@
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -2056,39 +1671,6 @@
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -2113,168 +1695,6 @@
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -2407,44 +1827,12 @@
     
     
     
-      
-    
-  
-    
-    
-    
-    
   
     
     
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -2538,7 +1926,35 @@
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -2571,6 +1987,321 @@
     
     
       
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -2594,34 +2325,34 @@
 
     
       
+      <a class="post-tag" href="/tags/rails/">Rails</a>
+    
+      
       <a class="post-tag" href="/tags/javascript/">Javascript</a>
     
       
       <a class="post-tag" href="/tags/box2d/">Box2D</a>
     
       
-      <a class="post-tag" href="/tags/release/">release</a>
-    
-      
-      <a class="post-tag" href="/tags/test/">test</a>
-    
-      
-      <a class="post-tag" href="/tags/alipay/">alipay</a>
-    
-      
-      <a class="post-tag" href="/tags/angry-birds/">Angry Birds</a>
-    
-      
       <a class="post-tag" href="/tags/coffeescript/">CoffeeScript</a>
     
       
-      <a class="post-tag" href="/tags/feedback/">feedback</a>
+      <a class="post-tag" href="/tags/physics-engine/">Physics Engine</a>
+    
+      
+      <a class="post-tag" href="/tags/release/">Release</a>
+    
+      
+      <a class="post-tag" href="/tags/test/">Test</a>
+    
+      
+      <a class="post-tag" href="/tags/elasticsearch/">Elasticsearch</a>
+    
+      
+      <a class="post-tag" href="/tags/feedback/">Feedback</a>
     
       
       <a class="post-tag" href="/tags/html5/">HTML5</a>
-    
-      
-      <a class="post-tag" href="/tags/integration/">integration</a>
     
 
     </div>
@@ -2666,71 +2397,6 @@
 
 
 
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 
   
@@ -3341,7 +3007,7 @@ var contactListener = new Box2D...
       
       
       <div class="card">
-        <a href="/posts/secret-of-rails-csrf-token.html/">
+        <a href="/posts/some-rails-helper-methods-those-are-confusing.html/">
           <div class="card-body">
             <!--
   Date format snippet
@@ -3353,13 +3019,13 @@ var contactListener = new Box2D...
 
 
 <em class="small"
-    data-ts="1411660800"
+    data-ts="1385827200"
     data-df="YYYY/MM/DD"
     >
-  2014/09/26
+  2013/12/01
 </em>
 
-            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Rails CSRF token 探秘</h3>
+            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>常用易混的四个Rails View Helper方法</h3>
             <div class="text-muted small">
               <p>
                 
@@ -3368,16 +3034,18 @@ var contactListener = new Box2D...
 
 
 
-                CSRF(Cross-Site Request Forgery)是一种常见的攻击手段，Rails中下面的代码帮助我们的应用来阻止CSRF攻击。
+                Rails中有非常多强大的View Helper，今天其实想在这里简单总结其中4个与安全相关但又容易混淆的。
+
+它们分别是: h, html_safe, simple_format, sanitize。
+
+READMORE
+
+h
+
+我们经常需要在页面上动态展示文字，这些完全可能来自用户的输入。所以为了防止XSS，在页面渲染时，需要对文字进行转义。在Rails2时，经常见到如下的代码
 
 1
-2
-3
-4
-5
-class ApplicationController &amp;lt; ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For ...
+&amp;...
               </p>
             </div>
           </div>
@@ -3635,11 +3303,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
-    
       
         
         
@@ -3684,6 +3347,81 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -3708,6 +3446,10 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
+      
+        
+        
+
   
     
     
@@ -3740,6 +3482,10 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
+      
+        
+        
+
   
     
     
@@ -3760,10 +3506,7 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
+      
     
   
     
@@ -3775,110 +3518,7 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -4044,414 +3684,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -4501,39 +3733,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -4558,168 +3757,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -4852,44 +3889,12 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-      
-    
-  
-    
-    
-    
-    
   
     
     
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -4983,7 +3988,35 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -5016,6 +4049,321 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
       
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -5039,34 +4387,34 @@ class ApplicationController &amp;lt; ActionController::Base
 
     
       
+      <a class="post-tag" href="/tags/rails/">Rails</a>
+    
+      
       <a class="post-tag" href="/tags/javascript/">Javascript</a>
     
       
       <a class="post-tag" href="/tags/box2d/">Box2D</a>
     
       
-      <a class="post-tag" href="/tags/release/">release</a>
-    
-      
-      <a class="post-tag" href="/tags/test/">test</a>
-    
-      
-      <a class="post-tag" href="/tags/alipay/">alipay</a>
-    
-      
-      <a class="post-tag" href="/tags/angry-birds/">Angry Birds</a>
-    
-      
       <a class="post-tag" href="/tags/coffeescript/">CoffeeScript</a>
     
       
-      <a class="post-tag" href="/tags/feedback/">feedback</a>
+      <a class="post-tag" href="/tags/physics-engine/">Physics Engine</a>
+    
+      
+      <a class="post-tag" href="/tags/release/">Release</a>
+    
+      
+      <a class="post-tag" href="/tags/test/">Test</a>
+    
+      
+      <a class="post-tag" href="/tags/elasticsearch/">Elasticsearch</a>
+    
+      
+      <a class="post-tag" href="/tags/feedback/">Feedback</a>
     
       
       <a class="post-tag" href="/tags/html5/">HTML5</a>
-    
-      
-      <a class="post-tag" href="/tags/integration/">integration</a>
     
 
     </div>

@@ -1,15 +1,10 @@
 ---
 title: 软件发布实战 -- 沟通
-category: WORK
+category: 工作
 tags:
-- release
-- migration
+- Release
+- Migration
 date: 2011-11-04
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
 ---
 沟通在任何一项团队活动中都非常重要, 下面的一个例子发生在我们的一次发布中.
 

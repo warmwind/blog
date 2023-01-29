@@ -1,16 +1,11 @@
 ---
 title: Validation Refactor -- Command Pattern
-category: PROGRAMMING
+category: 技术
 tags:
 - Command Pattern
-- refactor
-- test
+- Refactor
+- Test
 date: 2011-03-17
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
 ---
 曾经遇到过几次如下的代码
 

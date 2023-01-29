@@ -1,10 +1,8 @@
 ---
 title: Rails CSRF token 探秘
 date: 2014-09-26
-tags: Rails,CSRF,Ajax
-category: PROGRAMMING
-status: publish
-published: true
+tags: [Rails, CSRF, Ajax]
+category: 技术
 ---
 
 [CSRF](http://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf)(Cross-Site Request Forgery)是一种常见的攻击手段，Rails中下面的代码帮助我们的应用来阻止CSRF攻击。

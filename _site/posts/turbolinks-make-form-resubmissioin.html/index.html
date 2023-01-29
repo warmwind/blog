@@ -38,8 +38,8 @@
 <meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="Turbolinks导致的表单重复提交警告问题" />
 <meta property="og:locale" content="zh_CN" />
-<meta name="description" content="Turbolinks将在Rails4中会被默认引入，它类似于PJAX，但是会托管整个页面的body部分，在页面跳转时，不会重新加载整个页面，而是使用JavaScript重写页面并且更新浏览器中的地址，从而使页面访问的速度大大加快。 尽管Rails4还没有正式发布，但现在的项目已经在使用Turbolinks了，它不需要任何额外的配置，添加到Gemfile后即可。最近遇到了一个问题如下： 几乎所有的应用都会有表单的验证、错误显示、提交并重定向等，比如下面的rails controller中的create action，当post成功存储以后，重定向到post列表页面，如果存储失败，render当前新建页面，由于post实例变量的存在，new页面被render时会自动填入用户已经输入的信息以及validation的错误信息。 READMORE 1 2 3 4 5 6 7 8 def create @post = Post.new(params[:post]) if @post.save redirect_to @post else render action: &quot;new&quot; end end 这里的重定向遵循了PRG模式(post-redirect-get)，这样当用户点击后退或者刷新页面都不会出现表单重复提交的警告。 但是加入Turbolinks之后，当表单提交成功，然后刷新页面，仍然会出现表单重复提交的警告。 Turbolinks的文档中提到的如果想禁止它，可以在container的标签上加入data-no-turbolink。不过这样尝试仍然不工作。从表现来看，浏览器页面在表单提交后整个刷新，是一个302redirect，但是似乎post请求的状态始终还在。 找不到根本的原因，所以有了下面的解决方案： 1 2 3 4 5 6 7 8 def create @post = Post.new(params[:post]) if @post.save render :json =&gt;; {:redirect_url =&gt; posts_path} else render :partial =&gt; &quot;form&quot;, :status =&gt; 400 end end 1 2 3 4 5 6 $(document).on &quot;ajax:complete&quot;, &quot;.post form&quot;, (event, xhr, status) -&gt; if status == &quot;success&quot; res = $.parseJSON xhr.responseText Turbolinks.visit res.redirect_url else $(&#39;.entry-show.entry&#39;).html xhr.responseText 如上面的代码， 使用Ajax提交表单，在rails中也就是将原有的表单增加一个:method=&gt;true的属性。 在controller中对象保存成功之后返回Json或者text，里面包含需要转向的url。 在Ajax的success回调中使用Turbolinks.visit path方法“转向”到成功的地址。实际上是JavaScript重新页面，速度很快 如果保存失败，比如校验不通过等，需要重新render界面，并回显相关信息。这时不能直接像成功后的回调那样使用visit方法，这将丢失原来的信息。如果将所有的参数手动传入呢，当然也不可取。 我这里采取的方法，是原有的表单提取为partial，并在controller中保存失败后render。而在Ajax的回调中失败时，将返回的partial写入页面，替换原来的表单。因为这个partial是在controller中渲染好的，所以保存了所有的输入和验证信息。 通过使用Ajax提交表单，成功解决了Turbolinks引入的表单重复提交警告的问题，而且加速了页面的显示。" />
-<meta property="og:description" content="Turbolinks将在Rails4中会被默认引入，它类似于PJAX，但是会托管整个页面的body部分，在页面跳转时，不会重新加载整个页面，而是使用JavaScript重写页面并且更新浏览器中的地址，从而使页面访问的速度大大加快。 尽管Rails4还没有正式发布，但现在的项目已经在使用Turbolinks了，它不需要任何额外的配置，添加到Gemfile后即可。最近遇到了一个问题如下： 几乎所有的应用都会有表单的验证、错误显示、提交并重定向等，比如下面的rails controller中的create action，当post成功存储以后，重定向到post列表页面，如果存储失败，render当前新建页面，由于post实例变量的存在，new页面被render时会自动填入用户已经输入的信息以及validation的错误信息。 READMORE 1 2 3 4 5 6 7 8 def create @post = Post.new(params[:post]) if @post.save redirect_to @post else render action: &quot;new&quot; end end 这里的重定向遵循了PRG模式(post-redirect-get)，这样当用户点击后退或者刷新页面都不会出现表单重复提交的警告。 但是加入Turbolinks之后，当表单提交成功，然后刷新页面，仍然会出现表单重复提交的警告。 Turbolinks的文档中提到的如果想禁止它，可以在container的标签上加入data-no-turbolink。不过这样尝试仍然不工作。从表现来看，浏览器页面在表单提交后整个刷新，是一个302redirect，但是似乎post请求的状态始终还在。 找不到根本的原因，所以有了下面的解决方案： 1 2 3 4 5 6 7 8 def create @post = Post.new(params[:post]) if @post.save render :json =&gt;; {:redirect_url =&gt; posts_path} else render :partial =&gt; &quot;form&quot;, :status =&gt; 400 end end 1 2 3 4 5 6 $(document).on &quot;ajax:complete&quot;, &quot;.post form&quot;, (event, xhr, status) -&gt; if status == &quot;success&quot; res = $.parseJSON xhr.responseText Turbolinks.visit res.redirect_url else $(&#39;.entry-show.entry&#39;).html xhr.responseText 如上面的代码， 使用Ajax提交表单，在rails中也就是将原有的表单增加一个:method=&gt;true的属性。 在controller中对象保存成功之后返回Json或者text，里面包含需要转向的url。 在Ajax的success回调中使用Turbolinks.visit path方法“转向”到成功的地址。实际上是JavaScript重新页面，速度很快 如果保存失败，比如校验不通过等，需要重新render界面，并回显相关信息。这时不能直接像成功后的回调那样使用visit方法，这将丢失原来的信息。如果将所有的参数手动传入呢，当然也不可取。 我这里采取的方法，是原有的表单提取为partial，并在controller中保存失败后render。而在Ajax的回调中失败时，将返回的partial写入页面，替换原来的表单。因为这个partial是在controller中渲染好的，所以保存了所有的输入和验证信息。 通过使用Ajax提交表单，成功解决了Turbolinks引入的表单重复提交警告的问题，而且加速了页面的显示。" />
+<meta name="description" content="Turbolinks将在Rails4中会被默认引入，它类似于PJAX，但是会托管整个页面的body部分，在页面跳转时，不会重新加载整个页面，而是使用JavaScript重写页面并且更新浏览器中的地址，从而使页面访问的速度大大加快。" />
+<meta property="og:description" content="Turbolinks将在Rails4中会被默认引入，它类似于PJAX，但是会托管整个页面的body部分，在页面跳转时，不会重新加载整个页面，而是使用JavaScript重写页面并且更新浏览器中的地址，从而使页面访问的速度大大加快。" />
 <link rel="canonical" href="http://localhost:4000/posts/turbolinks-make-form-resubmissioin.html/" />
 <meta property="og:url" content="http://localhost:4000/posts/turbolinks-make-form-resubmissioin.html/" />
 <meta property="og:site_name" content="姜鹏的博客" />
@@ -49,7 +49,7 @@
 <meta property="twitter:title" content="Turbolinks导致的表单重复提交警告问题" />
 <meta name="twitter:site" content="@peng_jiang" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2013-02-28T00:00:00+08:00","datePublished":"2013-02-28T00:00:00+08:00","description":"Turbolinks将在Rails4中会被默认引入，它类似于PJAX，但是会托管整个页面的body部分，在页面跳转时，不会重新加载整个页面，而是使用JavaScript重写页面并且更新浏览器中的地址，从而使页面访问的速度大大加快。 尽管Rails4还没有正式发布，但现在的项目已经在使用Turbolinks了，它不需要任何额外的配置，添加到Gemfile后即可。最近遇到了一个问题如下： 几乎所有的应用都会有表单的验证、错误显示、提交并重定向等，比如下面的rails controller中的create action，当post成功存储以后，重定向到post列表页面，如果存储失败，render当前新建页面，由于post实例变量的存在，new页面被render时会自动填入用户已经输入的信息以及validation的错误信息。 READMORE 1 2 3 4 5 6 7 8 def create @post = Post.new(params[:post]) if @post.save redirect_to @post else render action: &quot;new&quot; end end 这里的重定向遵循了PRG模式(post-redirect-get)，这样当用户点击后退或者刷新页面都不会出现表单重复提交的警告。 但是加入Turbolinks之后，当表单提交成功，然后刷新页面，仍然会出现表单重复提交的警告。 Turbolinks的文档中提到的如果想禁止它，可以在container的标签上加入data-no-turbolink。不过这样尝试仍然不工作。从表现来看，浏览器页面在表单提交后整个刷新，是一个302redirect，但是似乎post请求的状态始终还在。 找不到根本的原因，所以有了下面的解决方案： 1 2 3 4 5 6 7 8 def create @post = Post.new(params[:post]) if @post.save render :json =&gt;; {:redirect_url =&gt; posts_path} else render :partial =&gt; &quot;form&quot;, :status =&gt; 400 end end 1 2 3 4 5 6 $(document).on &quot;ajax:complete&quot;, &quot;.post form&quot;, (event, xhr, status) -&gt; if status == &quot;success&quot; res = $.parseJSON xhr.responseText Turbolinks.visit res.redirect_url else $(&#39;.entry-show.entry&#39;).html xhr.responseText 如上面的代码， 使用Ajax提交表单，在rails中也就是将原有的表单增加一个:method=&gt;true的属性。 在controller中对象保存成功之后返回Json或者text，里面包含需要转向的url。 在Ajax的success回调中使用Turbolinks.visit path方法“转向”到成功的地址。实际上是JavaScript重新页面，速度很快 如果保存失败，比如校验不通过等，需要重新render界面，并回显相关信息。这时不能直接像成功后的回调那样使用visit方法，这将丢失原来的信息。如果将所有的参数手动传入呢，当然也不可取。 我这里采取的方法，是原有的表单提取为partial，并在controller中保存失败后render。而在Ajax的回调中失败时，将返回的partial写入页面，替换原来的表单。因为这个partial是在controller中渲染好的，所以保存了所有的输入和验证信息。 通过使用Ajax提交表单，成功解决了Turbolinks引入的表单重复提交警告的问题，而且加速了页面的显示。","headline":"Turbolinks导致的表单重复提交警告问题","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/turbolinks-make-form-resubmissioin.html/"},"url":"http://localhost:4000/posts/turbolinks-make-form-resubmissioin.html/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-01-29T23:37:28+08:00","datePublished":"2013-02-28T00:00:00+08:00","description":"Turbolinks将在Rails4中会被默认引入，它类似于PJAX，但是会托管整个页面的body部分，在页面跳转时，不会重新加载整个页面，而是使用JavaScript重写页面并且更新浏览器中的地址，从而使页面访问的速度大大加快。","headline":"Turbolinks导致的表单重复提交警告问题","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/turbolinks-make-form-resubmissioin.html/"},"url":"http://localhost:4000/posts/turbolinks-make-form-resubmissioin.html/"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -594,6 +594,26 @@
 
     <!-- lastmod date -->
     
+    <span>
+      更新于
+      <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+
+<em class=""
+    data-ts="1675006648"
+    data-df="YYYY/MM/DD"
+    data-toggle="tooltip" data-placement="bottom">
+  2023/01/29
+</em>
+
+    </span>
+    
 
   
 
@@ -738,7 +758,7 @@ READMORE</p>
   <div class="post-meta mb-3">
     <i class="far fa-folder-open fa-fw mr-1"></i>
     
-      <a href='/categories/programming/'>PROGRAMMING</a>
+      <a href='/categories/%E6%8A%80%E6%9C%AF/'>技术</a>
   </div>
   
 
@@ -747,8 +767,14 @@ READMORE</p>
   <div class="post-tags">
     <i class="fa fa-tags fa-fw mr-1"></i>
       
-      <a href="/tags/ajax-javascript-prg-rails-turbolinks/"
-          class="post-tag no-text-decoration" >Ajax,Javascript,PRG,Rails,Turbolinks</a>
+      <a href="/tags/prg/"
+          class="post-tag no-text-decoration" >PRG</a>
+      
+      <a href="/tags/rails/"
+          class="post-tag no-text-decoration" >Rails</a>
+      
+      <a href="/tags/turbolinks/"
+          class="post-tag no-text-decoration" >Turbolinks</a>
       
   </div>
   
@@ -843,6 +869,40 @@ READMORE</p>
 
 
 
+  <div id="access-lastmod" class="post">
+    <div class="panel-heading">最近更新</div>
+    <ul class="post-content pl-0 pb-1 ml-1 mt-2">
+      
+        
+        
+        
+      <li><a href="/posts/some-rails-helper-methods-those-are-confusing.html/">常用易混的四个Rails View Helper方法</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/alipay-generate-request-url.html/">支付宝集成——生成请求URL</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/alipay-verify-request.html/">支付宝集成——校验与应答</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/nginx-unicorn.html/">Nginx 与 Unicorn</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/tricks-on-upgrading-rails-from-3-2-to-4-0.html/">Tricks On Upgrading Rails From 3.2 to 4.0</a></li>
+      
+    </ul>
+  </div> <!-- #access-lastmod -->
+
+
+
       
 
 
@@ -859,11 +919,6 @@ READMORE</p>
 
 
 
-  
-    
-    
-    
-    
   
     
     
@@ -1098,6 +1153,81 @@ READMORE</p>
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -1122,6 +1252,10 @@ READMORE</p>
     
     
     
+      
+        
+        
+
   
     
     
@@ -1154,6 +1288,10 @@ READMORE</p>
     
     
     
+      
+        
+        
+
   
     
     
@@ -1174,10 +1312,7 @@ READMORE</p>
     
     
     
-  
-    
-    
-    
+      
     
   
     
@@ -1189,110 +1324,7 @@ READMORE</p>
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -1458,414 +1490,6 @@ READMORE</p>
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -1915,39 +1539,6 @@ READMORE</p>
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -1972,168 +1563,6 @@ READMORE</p>
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -2266,44 +1695,12 @@ READMORE</p>
     
     
     
-      
-    
-  
-    
-    
-    
-    
   
     
     
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -2397,7 +1794,35 @@ READMORE</p>
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -2430,6 +1855,321 @@ READMORE</p>
     
     
       
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -2453,34 +2193,34 @@ READMORE</p>
 
     
       
+      <a class="post-tag" href="/tags/rails/">Rails</a>
+    
+      
       <a class="post-tag" href="/tags/javascript/">Javascript</a>
     
       
       <a class="post-tag" href="/tags/box2d/">Box2D</a>
     
       
-      <a class="post-tag" href="/tags/release/">release</a>
-    
-      
-      <a class="post-tag" href="/tags/test/">test</a>
-    
-      
-      <a class="post-tag" href="/tags/alipay/">alipay</a>
-    
-      
-      <a class="post-tag" href="/tags/angry-birds/">Angry Birds</a>
-    
-      
       <a class="post-tag" href="/tags/coffeescript/">CoffeeScript</a>
     
       
-      <a class="post-tag" href="/tags/feedback/">feedback</a>
+      <a class="post-tag" href="/tags/physics-engine/">Physics Engine</a>
+    
+      
+      <a class="post-tag" href="/tags/release/">Release</a>
+    
+      
+      <a class="post-tag" href="/tags/test/">Test</a>
+    
+      
+      <a class="post-tag" href="/tags/elasticsearch/">Elasticsearch</a>
+    
+      
+      <a class="post-tag" href="/tags/feedback/">Feedback</a>
     
       
       <a class="post-tag" href="/tags/html5/">HTML5</a>
-    
-      
-      <a class="post-tag" href="/tags/integration/">integration</a>
     
 
     </div>
@@ -2525,71 +2265,6 @@ READMORE</p>
 
 
 
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 
   
@@ -3097,7 +2772,7 @@ READMORE</p>
       
       
       <div class="card">
-        <a href="/posts/secret-of-rails-csrf-token.html/">
+        <a href="/posts/turbolinks-request-twice.html/">
           <div class="card-body">
             <!--
   Date format snippet
@@ -3109,13 +2784,13 @@ READMORE</p>
 
 
 <em class="small"
-    data-ts="1411660800"
+    data-ts="1421856000"
     data-df="YYYY/MM/DD"
     >
-  2014/09/26
+  2015/01/22
 </em>
 
-            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Rails CSRF token 探秘</h3>
+            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>为什么Turbolinks发送了两次请求</h3>
             <div class="text-muted small">
               <p>
                 
@@ -3124,95 +2799,100 @@ READMORE</p>
 
 
 
-                CSRF(Cross-Site Request Forgery)是一种常见的攻击手段，Rails中下面的代码帮助我们的应用来阻止CSRF攻击。
+                前面有一篇文章介绍过使用Turbolinks遇到的一个问题，最近又发现了另一个问题。
+
+开发时，tail后台的log会发现某些情况下，同一个请求会触发两次，不过因为都是get请求，而且同一个地址请求后的响应式相同的，所以前台不能完全察觉到。不够下面的场景跟预期就不一致了。
+
+假设需要一个功能可以在后台管理页面禁止用户账户，被禁止的账户在随后的所有访问当会重定向到禁止页面。
+
+从实现上来讲，当...
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+      
+      
+      <div class="card">
+        <a href="/posts/from-delivery-to-product.html/">
+          <div class="card-body">
+            <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+
+<em class="small"
+    data-ts="1360684800"
+    data-df="YYYY/MM/DD"
+    >
+  2013/02/13
+</em>
+
+            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>从交付到产品</h3>
+            <div class="text-muted small">
+              <p>
+                
+
+
+
+
+
+                这是一个七人的小团队产品组，正式加入刚好有一个月了。说长不长，不过可总结的倒是有一些。之所以会有些感慨，因为相对于前面所有的项目，这是比较特别的一个。
+
+在公司将近三年的时间里，前前后后经历了四个项目,.Net, Java, Rails, Android，完全不同的技术栈。第一个.Net项目，跟着胡凯学习如何写程序，学习什么是敏捷工作。第二个Java项目，在米高的指导下学习如何代表一个团队与...
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+      
+      
+      <div class="card">
+        <a href="/posts/some-rails-helper-methods-those-are-confusing.html/">
+          <div class="card-body">
+            <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+
+<em class="small"
+    data-ts="1385827200"
+    data-df="YYYY/MM/DD"
+    >
+  2013/12/01
+</em>
+
+            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>常用易混的四个Rails View Helper方法</h3>
+            <div class="text-muted small">
+              <p>
+                
+
+
+
+
+
+                Rails中有非常多强大的View Helper，今天其实想在这里简单总结其中4个与安全相关但又容易混淆的。
+
+它们分别是: h, html_safe, simple_format, sanitize。
+
+READMORE
+
+h
+
+我们经常需要在页面上动态展示文字，这些完全可能来自用户的输入。所以为了防止XSS，在页面渲染时，需要对文字进行转义。在Rails2时，经常见到如下的代码
 
 1
-2
-3
-4
-5
-class ApplicationController &amp;lt; ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For ...
-              </p>
-            </div>
-          </div>
-        </a>
-      </div>
-    
-      
-      
-      <div class="card">
-        <a href="/posts/elasticsearch-mapping.html/">
-          <div class="card-body">
-            <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-
-<em class="small"
-    data-ts="1416758400"
-    data-df="YYYY/MM/DD"
-    >
-  2014/11/24
-</em>
-
-            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Elasticsearch--动态类型字段的mapping</h3>
-            <div class="text-muted small">
-              <p>
-                
-
-
-
-
-
-                ElasticSearch是一个基于Lucene构建的搜索引擎，通过RESTful的api可以进行数据的更新与搜索。目前github就是用的ES。
-
-通常来讲，如果是要进行精确的查询，可以直接针对数据库进行，合理的构建index，可以在数据库层面进行快速准确查询。然后在某些场景下，当数据集合的列无法确定时，很难加index，这会导致在数据量增大时性能严重下降。例如当前项目是一个在线表单，采用...
-              </p>
-            </div>
-          </div>
-        </a>
-      </div>
-    
-      
-      
-      <div class="card">
-        <a href="/posts/elasticsearch-update-strategy.html/">
-          <div class="card-body">
-            <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-
-<em class="small"
-    data-ts="1416844800"
-    data-df="YYYY/MM/DD"
-    >
-  2014/11/25
-</em>
-
-            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Elasticsearch--更新策略</h3>
-            <div class="text-muted small">
-              <p>
-                
-
-
-
-
-
-                前一篇文章介绍了如何在Elasticsearch上做动态映射，这篇文章会介绍下如何更有效的做ES的数据更新。
-
-更新频率
-如果把ES看做另一个数据库，那么它总是会比系统原有的数据库滞后，因为数据会先存入原有数据库，再同步到ES。那么滞后的时间就是一个敏感的参数。根据业务的不同，差别很大。我了解到有的系统可以接受10分钟以上的延迟，不过我们作为一个数据平台，用户提交或修改数据后，是希望能立刻查...
+&amp;...
               </p>
             </div>
           </div>
@@ -3470,11 +3150,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
-    
       
         
         
@@ -3519,6 +3194,81 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -3543,6 +3293,10 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
+      
+        
+        
+
   
     
     
@@ -3575,6 +3329,10 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
+      
+        
+        
+
   
     
     
@@ -3595,10 +3353,7 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
+      
     
   
     
@@ -3610,110 +3365,7 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -3879,414 +3531,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -4336,39 +3580,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -4393,168 +3604,6 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -4687,44 +3736,12 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-      
-    
-  
-    
-    
-    
-    
   
     
     
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -4818,7 +3835,35 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -4851,6 +3896,321 @@ class ApplicationController &amp;lt; ActionController::Base
     
     
       
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -4874,34 +4234,34 @@ class ApplicationController &amp;lt; ActionController::Base
 
     
       
+      <a class="post-tag" href="/tags/rails/">Rails</a>
+    
+      
       <a class="post-tag" href="/tags/javascript/">Javascript</a>
     
       
       <a class="post-tag" href="/tags/box2d/">Box2D</a>
     
       
-      <a class="post-tag" href="/tags/release/">release</a>
-    
-      
-      <a class="post-tag" href="/tags/test/">test</a>
-    
-      
-      <a class="post-tag" href="/tags/alipay/">alipay</a>
-    
-      
-      <a class="post-tag" href="/tags/angry-birds/">Angry Birds</a>
-    
-      
       <a class="post-tag" href="/tags/coffeescript/">CoffeeScript</a>
     
       
-      <a class="post-tag" href="/tags/feedback/">feedback</a>
+      <a class="post-tag" href="/tags/physics-engine/">Physics Engine</a>
+    
+      
+      <a class="post-tag" href="/tags/release/">Release</a>
+    
+      
+      <a class="post-tag" href="/tags/test/">Test</a>
+    
+      
+      <a class="post-tag" href="/tags/elasticsearch/">Elasticsearch</a>
+    
+      
+      <a class="post-tag" href="/tags/feedback/">Feedback</a>
     
       
       <a class="post-tag" href="/tags/html5/">HTML5</a>
-    
-      
-      <a class="post-tag" href="/tags/integration/">integration</a>
     
 
     </div>
