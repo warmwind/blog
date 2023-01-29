@@ -1,9 +1,9 @@
 
 
 {
-  "name": "Chirpy",
-  "short_name": "Chirpy",
-  "description": "A minimal, responsive, and powerful Jekyll theme for presenting professional writing.",
+  "name": "姜鹏的博客",
+  "short_name": "姜鹏的博客",
+  "description": "分享金数据、浩客的故事，创业、管理、技术",
   "icons": [
     {
       "src": "/assets/img/favicons/android-chrome-192x192.png",
