@@ -40,8 +40,8 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="description" content="Capistrano, Nginx 与 Unicorn的搭配作为Rails应用的部署方式是现在成熟与流行的模式，Deploying Rails app using Nginx, Unicorn, Postgres and Capistrano to Digital Ocean这篇文章详细介绍了如何来使用，本文希望稍微深入一些来看看Nginx与Unicorn之间是如何通信的，以及Unicorn如何实现部署时做到了零宕机。" />
 <meta property="og:description" content="Capistrano, Nginx 与 Unicorn的搭配作为Rails应用的部署方式是现在成熟与流行的模式，Deploying Rails app using Nginx, Unicorn, Postgres and Capistrano to Digital Ocean这篇文章详细介绍了如何来使用，本文希望稍微深入一些来看看Nginx与Unicorn之间是如何通信的，以及Unicorn如何实现部署时做到了零宕机。" />
-<link rel="canonical" href="http://localhost:4000/posts/nginx-unicorn.html/" />
-<meta property="og:url" content="http://localhost:4000/posts/nginx-unicorn.html/" />
+<link rel="canonical" href="http://www.oscarjiang.site/posts/nginx-unicorn.html/" />
+<meta property="og:url" content="http://www.oscarjiang.site/posts/nginx-unicorn.html/" />
 <meta property="og:site_name" content="姜鹏的博客" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2014-03-10T00:00:00+08:00" />
@@ -49,7 +49,7 @@
 <meta property="twitter:title" content="Nginx 与 Unicorn" />
 <meta name="twitter:site" content="@peng_jiang" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-01-29T23:37:28+08:00","datePublished":"2014-03-10T00:00:00+08:00","description":"Capistrano, Nginx 与 Unicorn的搭配作为Rails应用的部署方式是现在成熟与流行的模式，Deploying Rails app using Nginx, Unicorn, Postgres and Capistrano to Digital Ocean这篇文章详细介绍了如何来使用，本文希望稍微深入一些来看看Nginx与Unicorn之间是如何通信的，以及Unicorn如何实现部署时做到了零宕机。","headline":"Nginx 与 Unicorn","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/nginx-unicorn.html/"},"url":"http://localhost:4000/posts/nginx-unicorn.html/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-01-29T23:37:28+08:00","datePublished":"2014-03-10T00:00:00+08:00","description":"Capistrano, Nginx 与 Unicorn的搭配作为Rails应用的部署方式是现在成熟与流行的模式，Deploying Rails app using Nginx, Unicorn, Postgres and Capistrano to Digital Ocean这篇文章详细介绍了如何来使用，本文希望稍微深入一些来看看Nginx与Unicorn之间是如何通信的，以及Unicorn如何实现部署时做到了零宕机。","headline":"Nginx 与 Unicorn","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.oscarjiang.site/posts/nginx-unicorn.html/"},"url":"http://www.oscarjiang.site/posts/nginx-unicorn.html/"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -871,19 +871,19 @@ nginx在处理request时是有一定顺序的，例如下面的定义中，nginx
 
     
       
-        <a href="https://twitter.com/intent/tweet?text=Nginx%20%E4%B8%8E%20Unicorn%20-%20%E5%A7%9C%E9%B9%8F%E7%9A%84%E5%8D%9A%E5%AE%A2&url=http%3A%2F%2Flocalhost%3A4000%2Fposts%2Fnginx-unicorn.html%2F" data-toggle="tooltip" data-placement="top"
+        <a href="https://twitter.com/intent/tweet?text=Nginx%20%E4%B8%8E%20Unicorn%20-%20%E5%A7%9C%E9%B9%8F%E7%9A%84%E5%8D%9A%E5%AE%A2&url=http%3A%2F%2Fwww.oscarjiang.site%2Fposts%2Fnginx-unicorn.html%2F" data-toggle="tooltip" data-placement="top"
           title="Twitter" target="_blank" rel="noopener" aria-label="Twitter">
           <i class="fa-fw fab fa-twitter"></i>
         </a>
     
       
-        <a href="https://www.facebook.com/sharer/sharer.php?title=Nginx%20%E4%B8%8E%20Unicorn%20-%20%E5%A7%9C%E9%B9%8F%E7%9A%84%E5%8D%9A%E5%AE%A2&u=http%3A%2F%2Flocalhost%3A4000%2Fposts%2Fnginx-unicorn.html%2F" data-toggle="tooltip" data-placement="top"
+        <a href="https://www.facebook.com/sharer/sharer.php?title=Nginx%20%E4%B8%8E%20Unicorn%20-%20%E5%A7%9C%E9%B9%8F%E7%9A%84%E5%8D%9A%E5%AE%A2&u=http%3A%2F%2Fwww.oscarjiang.site%2Fposts%2Fnginx-unicorn.html%2F" data-toggle="tooltip" data-placement="top"
           title="Facebook" target="_blank" rel="noopener" aria-label="Facebook">
           <i class="fa-fw fab fa-facebook-square"></i>
         </a>
     
       
-        <a href="https://t.me/share/url?url=http%3A%2F%2Flocalhost%3A4000%2Fposts%2Fnginx-unicorn.html%2F&text=Nginx%20%E4%B8%8E%20Unicorn%20-%20%E5%A7%9C%E9%B9%8F%E7%9A%84%E5%8D%9A%E5%AE%A2" data-toggle="tooltip" data-placement="top"
+        <a href="https://t.me/share/url?url=http%3A%2F%2Fwww.oscarjiang.site%2Fposts%2Fnginx-unicorn.html%2F&text=Nginx%20%E4%B8%8E%20Unicorn%20-%20%E5%A7%9C%E9%B9%8F%E7%9A%84%E5%8D%9A%E5%AE%A2" data-toggle="tooltip" data-placement="top"
           title="Telegram" target="_blank" rel="noopener" aria-label="Telegram">
           <i class="fa-fw fab fa-telegram"></i>
         </a>
