@@ -1,5 +1,0 @@
-User-agent: *
-
-Disallow: /norobots/
-
-Sitemap: http://www.oscarjiang.site/sitemap.xml
