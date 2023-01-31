@@ -79,13 +79,21 @@ const miscJs = () => {
   );
 };
 
+const angryTankJs = () => {
+	return concatJs([
+		`${JS_SRC}/angry-tank/*.js`
+	  ], 'angry-tank'
+	);
+  };
+
+
 // GA pageviews report
 const pvreportJs = () => {
   return concatJs(`${JS_SRC}/utils/pageviews.js`, 'pvreport');
 };
 
 const buildJs = parallel(
-  commonsJs, homeJs, postJs, categoriesJs, pageJs, miscJs, pvreportJs);
+  commonsJs, homeJs, postJs, categoriesJs, pageJs, miscJs, pvreportJs, angryTankJs);
 
 exports.build = series(buildJs, minifyJs);
 
@@ -94,7 +102,8 @@ exports.liveRebuild = () => {
 
   watch([
       `${ JS_SRC }/commons/*.js`,
-      `${ JS_SRC }/utils/*.js`
+      `${ JS_SRC }/utils/*.js`,
+      `${ JS_SRC }/angry-tank/*.js`,
     ],
     buildJs
   );

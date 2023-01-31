@@ -168,7 +168,10 @@ defaults:
       path: assets/js/dist
     values:
       swcache: true
-
+  - scope:
+      path: _includes/angry_tank
+    values:
+      apps: true
 sass:
   style: compressed
 
@@ -191,6 +194,7 @@ exclude:
   - gulpfile.js
   - node_modules
   - package*.json
+  - yarn.lock
 
 jekyll-archives:
   enabled: [categories, tags]
