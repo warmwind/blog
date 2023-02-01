@@ -37,6 +37,16 @@
 - Page Views Reporting
 - SEO & Performance Optimization
 
+## For My Own
+
+### Deployment
+
+Run the following command to build posts to docs folder and github pages will reload automatically.
+
+```console
+$ JEKYLL_ENV=production jekyll build
+```
+
 ## Quick Start
 
 Before starting, please follow the instructions in the [Jekyll Docs](https://jekyllrb.com/docs/installation/) to complete the installation of `Ruby`, `RubyGems`, `Jekyll`, and `Bundler`. In addition, [Git](https://git-scm.com/) is also required to be installed.
