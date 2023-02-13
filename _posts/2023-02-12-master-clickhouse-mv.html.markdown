@@ -1,5 +1,6 @@
 ---
 title: 二十四分钟精通ClickHouse Materialized View
+marp: true
 date: 2023-02-12
 tags: 
 - ClickHouse
@@ -8,6 +9,8 @@ category: 技术
 ---
 
 [ClickHouse](https://clickhouse.com/)是一个非常出色列数据库，对大数据量的实时分析有极佳的性能。本文用来介绍其MV（Materialized View，物化视图）的内部机制，帮助大家理解后更准确的使用。
+
+**文末takeway很重要!**
 
 # MV是一个trigger
 
@@ -76,14 +79,12 @@ GROUP BY id, d;
 **使用 `TO`, ALWAYS**
     
 - 显示创建table方便运维，因为本身就是一张普通表，并且使其可见
-- `polulate` 实际不可用
-- 他会针对所有的数据运行，数据越打，持续时间越长，甚至会超时或内存不足。这在7x24小时运行的系统中基本不会采用
-- 在执行过程中插入到source table的数据不会被插入到MV中
+- `polulate` 实际不可用, 它会针对所有的数据运行，数据量越大，持续时间越长，甚至会超时或内存不足。这在7x24小时运行的系统中基本不会采用
         
     
 ## 常见错误    
 ### 认为MV中的聚合计算是针对source table所有数据
-一个错误就是就是在插入数据时进行 `max` `min` `avg` 等由当前数据集决定的计算，例如
+一个错误就是在插入数据时进行 `max` `min` `avg` 等由当前数据集决定的计算，例如
     
 ```sql
 CREATE MATERIALIZED VIEW mv1
@@ -104,11 +105,12 @@ FROM
 GROUP BY hour
 ```
 上面的sql希望从source table中通过group 每分钟的计数创建每小时计数的MV，包括每小时内计数总和和以及最大的每分钟计数。
+
 如果使用 `populate` 那么初始化的max_by_hour是对的，但是后续的数据的计算会有问题，因为：
 
 **MV的计算是针对插入的block，而不是source table所有数据**
 
-当执行如下的两个sql，一次插入一条时，max_by_hour值为1，每次插入量条时，值为2
+当执行如下的两个sql，每次插入一条时，max_by_hour值为1，每次插入量条时，值为2
 ```sql
 -- sql1
 insert into source values (now()), (now());
@@ -121,17 +123,17 @@ insert into source values (now());
 
 ## 认为source table的数据操作会影响MV中的数据
 
-MV对source table的修改是完全未知的，因为MV的数据读取不是从source table中，因此一下几种情况都是正确的：
+MV对source table的修改是完全未知的，因为MV的数据读取不是从source table中，因此以下两种情况都是正确的：
 
 - source table中数据删改，MV中数据不会变化
 - source table和MV可以存储不同时长的数据。例如source table中存储最近半年的数据，但是MV中存储10年以内的聚合数据
 
 # MV with Replicated Engines
-正如前面所说MV的storage table就是普通的table，因此也可以像普通table一样使用Replicated Engine。
+正如前面所说，MV的storage table就是普通的table，因此也可以像普通table一样使用Replicated Engine。
 
 ## 创建方式
 
-- 不使用 `TO` 创建时，要设置engine，这会创建在inner table
+- 不使用 `TO` 创建时，要设置engine，这会在inner table上创建replica
 - 使用 `TO` 创建时，engine要设置在dest table中
 
 ## Replica机制
@@ -149,9 +151,9 @@ MV对source table的修改是完全未知的，因为MV的数据读取不是从s
 
 ![Untitled](/assets/img/master-clickhouse-mv/mv-replicated2.png)
 
-**Replication与数据的insert没有关系，它使用的数据插入part的 文件，而不是query的log。**
+**Replication与数据的insert没有关系，它使用数据插入part的文件，而不是query的log。**
 
-一般完整的使用replicated的MV如下图
+一般完整使用replicated的MV如下图
 
 ![Untitled](/assets/img/master-clickhouse-mv/mv-replicated3.png)
 
@@ -210,7 +212,7 @@ GROUP BY a, b
 MV通常不会在首次创建source table就创建，而是随着业务需求变化而创建。 这时创建MV既需要读取历史数据，也需要能处理线上正在不断写入的数据（针对7x24小时运行的系统）。
 
 1. 创建MV，在where条件中设置date列大于将来某个日期（一般mv都会包含一个date字段）。
-2. 上线并等到到该日期到达后，MV中将开始写入数据
+2. 上线并等到该日期到达后，MV中将开始写入数据
 3. 插入该日期之前的数据
 4. 在第3步运行完成后， 此MV的数据将完整可用
 
