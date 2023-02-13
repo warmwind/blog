@@ -1,14 +1,12 @@
 ---
-title: 二十四分钟精通ClickHouse Materialized View
 marp: true
-date: 2023-02-12
-tags: 
-- ClickHouse
-- Materialized View
-category: 技术
 ---
 
+# 二十四分钟精通ClickHouse Materialized View
+
 [ClickHouse](https://clickhouse.com/)是一个非常出色列数据库，对大数据量的实时分析有极佳的性能。本文用来介绍其MV（Materialized View，物化视图）的内部机制，帮助大家理解后更准确的使用。
+
+---
 
 # MV是一个trigger
 
@@ -17,19 +15,24 @@ category: 技术
 * MV不会读取source table读取
 * 调用一次insert时，MV select可能会被trigger多次
 
-如下图，展示了数据写入时的情况
-![Untitled](/assets/img/master-clickhouse-mv/mv-insert1.png)
+---
 
-既然MV不从source table中读取，那极端情况如下图，当使用Null或者Kafka这样的Engine时，source table不会写入数据，但MV是可以存在的。
+# 数据写入
+![height:300px](../assets/img/master-clickhouse-mv/mv-insert1.png)
+
+---
+
+极端情况, source table不会写入数据，但MV是可以存在的。
 ![Untitled](/assets/img/master-clickhouse-mv/mv-insert2.png)
 
+<!-- 
 
-# MV使用普通table存储数据
+## MV使用普通table存储数据
 MV会将数据持久化存储，其存储的方式是采用一个普通的table，这种方式允许我们针对MV进行查询或者修改时，可以像普通表一样来进行操作，无需更多额外的知识。
 
-## 两种方式创建MV：
+#### 两种方式创建MV：
 
-### 直接创建
+###### 直接创建
 使用如下的sql创建时，会隐式生成一个table，名称为 `.innner.mv1`
 ```sql
 CREATE MATERIALIZED VIEW mv1
@@ -42,7 +45,7 @@ GROUP BY id, d;
 ```
 ![Untitled](/assets/img/master-clickhouse-mv/mv-implicit-table.png)
 
-### 使用TO创建
+###### 使用TO创建
 使用如下的sql创建时，首先显示的创建名称为 `dest`的table，然后创建MV时通过 `TO` 指向该table。此时不会再创建隐式的inner table。
     
 ```sql
@@ -61,18 +64,18 @@ GROUP BY id, d;
   
 ![Untitled](/assets/img/master-clickhouse-mv/mv-explicit-table.png)
 
-## 区别
+#### 区别
     
-### Implicit table
+###### Implicit table
   - optimize_move_to_prewhere 在查询MV时不可用
   - 可以使用populate在创建时插入数据
   - drop mv时，会自动drop inner table
     
-### Explicit table
+###### Explicit table
   - 不能使用populate创建，需要使用insert手动插入（见下文）
   - drop mv时，dest table不会被删除
     
-## 如何使用
+#### 如何使用
     
 **使用 `TO`, ALWAYS**
     
@@ -82,8 +85,8 @@ GROUP BY id, d;
 - 在执行过程中插入到source table的数据不会被插入到MV中
         
     
-## 常见错误    
-### 认为MV中的聚合计算是针对source table所有数据
+#### 常见错误    
+###### 认为MV中的聚合计算是针对source table所有数据
 一个错误就是就是在插入数据时进行 `max` `min` `avg` 等由当前数据集决定的计算，例如
     
 ```sql
@@ -119,23 +122,22 @@ insert into source values (now());
 insert into source values (now());
 
 ```
-
-## 认为source table的数据操作会影响MV中的数据
+#### 认为source table的数据操作会影响MV中的数据
 
 MV对source table的修改是完全未知的，因为MV的数据读取不是从source table中，因此一下几种情况都是正确的：
 
 - source table中数据删改，MV中数据不会变化
 - source table和MV可以存储不同时长的数据。例如source table中存储最近半年的数据，但是MV中存储10年以内的聚合数据
 
-# MV with Replicated Engines
+## MV with Replicated Engines
 正如前面所说MV的storage table就是普通的table，因此也可以像普通table一样使用Replicated Engine。
 
-## 创建方式
+#### 创建方式
 
 - 不使用 `TO` 创建时，要设置engine，这会创建在inner table
 - 使用 `TO` 创建时，engine要设置在dest table中
 
-## Replica机制
+#### Replica机制
 
 ![Untitled](/assets/img/master-clickhouse-mv/mv-replicated1.png)
 其中要点包括：
@@ -156,9 +158,9 @@ MV对source table的修改是完全未知的，因为MV的数据读取不是从s
 
 ![Untitled](/assets/img/master-clickhouse-mv/mv-replicated3.png)
 
-# 更新MV
+## 更新MV
 
-## Implicit table (.inner.mv1)
+#### Implicit table (.inner.mv1)
 
 1. 停止数据写入
 2. detach table mv1
@@ -180,7 +182,7 @@ FROM source
 GROUP BY a, b
 ```
 
-## Explicit table (TO dest)
+#### Explicit table (TO dest)
 
 1. 停止数据写入
 2. alter table dest
@@ -201,12 +203,12 @@ SELECT a, b, sum(amount) AS s
 GROUP BY a, b
 ```
 
-## 说明
+#### 说明
 
 1. 如果不停止写入，那么mv1 被detach或者删除后的数据将丢失
 2. 使用explicit table会直观很多，修改可见的dest table，drop mv1后重新创建即可
 
-# 不停机同步数据到MV
+## 不停机同步数据到MV
 
 MV通常不会在首次创建source table就创建，而是随着业务需求变化而创建。 这时创建MV既需要读取历史数据，也需要能处理线上正在不断写入的数据（针对7x24小时运行的系统）。
 
@@ -234,7 +236,7 @@ FROM source
 WHERE d < '2023-02-14' -- piece by piece by 1 month (or .. day) GROUP BY a, d;
 ```
 
-# TAKEAWAY
+## TAKEAWAY
 
 - MV只是一个trigger，将数据存储到一个普通表
 - ALWAYS 使用 `TO` 创建MV
@@ -244,4 +246,4 @@ WHERE d < '2023-02-14' -- piece by piece by 1 month (or .. day) GROUP BY a, d;
 
 参考：
 * [https://den-crane.github.io/Everything_you_should_know_about_materialized_views_commented.pdf](https://den-crane.github.io/Everything_you_should_know_about_materialized_views_commented.pdf)
-* [https://clickhouse.com/docs/zh/sql-reference/statements/create/view/](https://clickhouse.com/docs/zh/sql-reference/statements/create/view/)
+* [https://clickhouse.com/docs/zh/sql-reference/statements/create/view/](https://clickhouse.com/docs/zh/sql-reference/statements/create/view/) -->
