@@ -18,13 +18,9 @@ marp: true
 ---
 
 # 数据写入
-![height:300px](../assets/img/master-clickhouse-mv/mv-insert1.png)
-
----
-
-极端情况, source table不会写入数据，但MV是可以存在的。
-![Untitled](/assets/img/master-clickhouse-mv/mv-insert2.png)
-
+|  | |
+|--|--|
+|![height:300px](../assets/img/master-clickhouse-mv/mv-insert1.png) | ![height:300px](/assets/img/master-clickhouse-mv/mv-insert2.png) |
 <!-- 
 
 ## MV使用普通table存储数据
