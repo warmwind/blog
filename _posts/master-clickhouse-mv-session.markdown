@@ -144,10 +144,11 @@ MV的storage table就是普通的table，因此也可以像普通table一样使�
 - 不使用 `TO` 创建时，要设置engine，这会创建在inner table
 - 使用 `TO` 创建时，engine要设置在dest table中
 
-#### Replica机制
+---
 
-![Untitled](/assets/img/master-clickhouse-mv/mv-replicated1.png)
-其中要点包括：
+# Replica机制
+
+![height:300px](../assets/img/master-clickhouse-mv/mv-replicated1.png)
 1. 数据写入发生在运行query的node中，写入其中的source table
 2. 插入的数据块会发送给其他node中对应的replicated table（例如从replica1发送到replica2）。 replica2**不会**从replica1直接读取
 3. 在node内，MV从写入source table的数据中获取数据
@@ -155,19 +156,23 @@ MV的storage table就是普通的table，因此也可以像普通table一样使�
 5. 每一个数据块是原子的、可去重的（通过checksum）
 6. 只有原始数据会进行发送，而不是merge之后的数据，以减少网络使用
 
-所以极端情况下，下图的情况是不可能发生的。写入一个node的source table，但是想replicate 到另一个node的replica source table所创建的MV中。
+---
 
-![Untitled](/assets/img/master-clickhouse-mv/mv-replicated2.png)
+
+![height:300px](../assets/img/master-clickhouse-mv/mv-replicated2.png)
 
 **Replication与数据的insert没有关系，它使用的数据插入part的 文件，而不是query的log。**
 
-一般完整的使用replicated的MV如下图
+---
+# 完整replicated的MV
 
-![Untitled](/assets/img/master-clickhouse-mv/mv-replicated3.png)
+![height:300px](../assets/img/master-clickhouse-mv/mv-replicated3.png)
 
-## 更新MV
+--
 
-#### Implicit table (.inner.mv1)
+# 更新MV
+
+## Implicit table (.inner.mv1)
 
 1. 停止数据写入
 2. detach table mv1
@@ -189,7 +194,9 @@ FROM source
 GROUP BY a, b
 ```
 
-#### Explicit table (TO dest)
+---
+
+## Explicit table (TO dest)
 
 1. 停止数据写入
 2. alter table dest
@@ -210,14 +217,9 @@ SELECT a, b, sum(amount) AS s
 GROUP BY a, b
 ```
 
-#### 说明
+---
 
-1. 如果不停止写入，那么mv1 被detach或者删除后的数据将丢失
-2. 使用explicit table会直观很多，修改可见的dest table，drop mv1后重新创建即可
-
-## 不停机同步数据到MV
-
-MV通常不会在首次创建source table就创建，而是随着业务需求变化而创建。 这时创建MV既需要读取历史数据，也需要能处理线上正在不断写入的数据（针对7x24小时运行的系统）。
+# 不停机同步数据到MV
 
 1. 创建MV，在where条件中设置date列大于将来某个日期（一般mv都会包含一个date字段）。
 2. 上线并等到到该日期到达后，MV中将开始写入数据
@@ -243,7 +245,8 @@ FROM source
 WHERE d < '2023-02-14' -- piece by piece by 1 month (or .. day) GROUP BY a, d;
 ```
 
-## TAKEAWAY
+---
+# 🔥TAKEAWAY
 
 - MV只是一个trigger，将数据存储到一个普通表
 - ALWAYS 使用 `TO` 创建MV
