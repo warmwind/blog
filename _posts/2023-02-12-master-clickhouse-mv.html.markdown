@@ -1,10 +1,10 @@
 ---
 title: 二十四分钟精通ClickHouse Materialized View
-marp: true
 date: 2023-02-12
 tags: 
 - ClickHouse
 - Materialized View
+- 技术
 category: 技术
 ---
 
