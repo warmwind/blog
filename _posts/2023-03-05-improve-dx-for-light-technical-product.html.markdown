@@ -18,7 +18,7 @@ category: 创业
 - 可快速体验的的demo
 - 展示设计理念与内部原理
 
-特别想强调下最后一点，要善于利用开发人员理性，将其带入产品内部，这会最大化产品的最佳事件与价值。
+特别想强调下最后一点，要善于利用开发人员理性，将其带入产品内部，这会最大化产品的最佳实践与价值。
 
 以OLAP数据库CH（ClickHouse）为例，其关于[index](https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design)的设计理念详细介绍了数据从插入到生成索引到存储方式的内部过程，如下图，
 
@@ -30,7 +30,7 @@ category: 创业
 
 **💡让产品本身，成为非技术用户与技术人员沟通的工具**
 
-下面以[浩客](https://howxm.com)为例来简单介绍我们在以下几个方面的思考和实践。
+下面简单介绍在[浩客](https://howxm.com)我们的一些思考和实践。
 
 ### 明确双方职责，消除彼此顾虑
 ![Untitled](/assets/img/dx-for-light-tech-product/dx-howxm1.png)
@@ -63,5 +63,9 @@ category: 创业
 
 上面是浩客的Chrome插件[HowXM Tools](https://chrome.google.com/webstore/detail/howxm-tools/anhinnebdhplihakagdjmdpfdhnbnhhk)，它允许业务人员在自己系统没有集成SDK的情况下，体验真实的投放效果，完全无需研发介入。
 
+* 明确双方职责，消除彼此顾虑
+* 让产品代替业务人员与自己团队的开发进行技术沟通
+* 让产品代替业务人员与我方开发进行技术沟通
+* 研发无需投入即可让完成业务初步测试
 
-以上是几个比较典型的思考，轻技术型产品，用户仍然是非技术业务人员，但需要技术给予辅助。提升DX，关键是让产品本身成为业务人员构技术人员沟通的工具，让产品「蜕变」为低门槛非技术型产品，Developer的整体体验在此过程将自然得到提升。
+以上是几个比较典型的思考，轻技术型产品，用户仍然是非技术业务人员，但需要技术给予辅助。提升DX，关键是让产品本身成为业务人员与技术人员沟通的工具，让产品「蜕变」为低门槛非技术型产品，Developer的整体体验在此过程将自然得到提升。
