@@ -16,6 +16,8 @@ order: 5
 
 [记住电影](https://moviewikia.com?utm_source=oscar&utm_medium=blog)
 
+- [断魂小丑 3 Terrifier 3 (2024)](https://www.moviewikia.com/t/1034541/terrifier-3?utm_source=oscar&utm_medium=blog)
+
 ## 公众号
 
 ![wechat](/assets/img/wechat.jpg){: width="250" height="250" .left }
