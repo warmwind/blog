@@ -28,7 +28,7 @@
     }
 
     a {
-      @apply wrap-break-word text-foreground decoration-dashed underline-offset-4 hover:text-accent focus-visible:no-underline;
+      @apply wrap-break-word text-foreground underline-offset-4 hover:text-accent hover:underline hover:decoration-solid focus-visible:no-underline;
     }
 
     ul {
@@ -67,7 +67,7 @@
     }
 
     code {
-      @apply rounded bg-muted/75 p-1 wrap-break-word text-foreground before:content-none after:content-none;
+      @apply rounded bg-muted p-1 wrap-break-word text-foreground before:content-none after:content-none;
     }
 
     .astro-code code {
@@ -75,7 +75,7 @@
     }
 
     blockquote {
-      @apply border-s-accent/80 wrap-break-word opacity-80;
+      @apply border-s-accent/90 wrap-break-word opacity-85;
     }
 
     details {

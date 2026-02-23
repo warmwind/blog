@@ -3,7 +3,7 @@ export const SITE = {
   author: "Oscar",
   profile: "https://www.oscarjiang.site/about/",
   desc: "创业、管理、技术",
-  title: "姜鹏的博客",
+  title: "This is Oscar",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
   postPerIndex: 4,

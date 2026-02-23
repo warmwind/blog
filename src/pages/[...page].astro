@@ -1,0 +1,90 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Card from "@/components/Card.astro";
+import Pagination from "@/components/Pagination.astro";
+import getSortedPosts from "@/utils/getSortedPosts";
+import IconRss from "@/assets/icons/IconRss.svg";
+import { SITE } from "@/config";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return paginate(getSortedPosts(posts), { pageSize: SITE.postPerPage });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+
+const allPosts = page.data;
+const featuredPosts = allPosts.filter(({ data }) => data.featured);
+const regularPosts = allPosts.filter(({ data }) => !data.featured);
+---
+
+<Layout>
+  <Header />
+  <main id="main-content" data-layout="index" class="app-layout pt-8">
+    {
+      featuredPosts.length > 0 && (
+        <section
+          id="featured"
+          class:list={[
+            "pb-4",
+            { "border-b border-border/50": regularPosts.length > 0 },
+          ]}
+        >
+          <h2 class="text-xl font-semibold tracking-wide">置顶文章</h2>
+          <ul>
+            {featuredPosts.map(data => (
+              <Card variant="h3" {...data} />
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      regularPosts.length > 0 && (
+        <section id="recent-posts" class="pb-4">
+          <h2 class="text-xl font-semibold tracking-wide">
+            文章
+            <a
+              target="_blank"
+              href="/rss.xml"
+              class="ml-2 inline-block align-middle"
+              aria-label="rss feed"
+              title="RSS Feed"
+            >
+              <IconRss
+                width={16}
+                height={16}
+                class="stroke-accent stroke-3 rtl:-rotate-90"
+              />
+              <span class="sr-only">RSS Feed</span>
+            </a>
+          </h2>
+          <ul>
+            {regularPosts.map(data => (
+              <Card variant="h3" {...data} />
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </main>
+
+  <Pagination {page} />
+
+  <Footer noMarginTop={page.lastPage > 1} />
+</Layout>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const indexLayout = (document.querySelector("#main-content") as HTMLElement)
+      ?.dataset?.layout;
+    if (indexLayout) {
+      sessionStorage.setItem("backUrl", "/");
+    }
+  });
+</script>

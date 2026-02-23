@@ -11,7 +11,7 @@ const backUrl = SITE.showBackButton ? `${Astro.url.pathname}` : "/";
 
 <Layout title={`搜索 | ${SITE.title}`}>
   <Header />
-  <Main pageTitle="搜索" pageDesc="搜索文章...">
+  <Main>
     <div id="pagefind-search" transition:persist data-backurl={backUrl}></div>
   </Main>
   <Footer />
