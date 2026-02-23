@@ -1,3 +1,25 @@
+# Astro
+dist/
+.astro/
+
+# Node
+node_modules/
+
+# IDE
 .idea
+.vscode
+
+# OS
+.DS_Store
+
+# Jekyll (legacy, kept for reference)
 ._site
-node_modules
+.jekyll-cache
+
+# Build artifacts
+public/pagefind/
+
+# Environment
+.env
+.env.*
+!.env.example
