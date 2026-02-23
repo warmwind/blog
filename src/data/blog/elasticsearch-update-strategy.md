@@ -3,10 +3,6 @@ title: Elasticsearch--更新策略
 pubDatetime: 2014-11-25T00:00:00+08:00
 description: Elasticsearch--更新策略
 slug: elasticsearch-update-strategy
-category: 技术
-tags:
-  - Elasticsearch
-  - Rails
 ---
 [前一篇](/blogs/2014/11/24/elasticsearch-mapping.html)文章介绍了如何在Elasticsearch上做动态映射，这篇文章会介绍下如何更有效的做ES的数据更新。
 

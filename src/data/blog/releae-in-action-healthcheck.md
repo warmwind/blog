@@ -3,12 +3,6 @@ title: 软件发布实战 -- 状态检查
 pubDatetime: 2011-10-16T00:00:00+08:00
 description: 软件发布实战 -- 状态检查
 slug: releae-in-action-healthcheck
-category: 工作
-tags:
-  - Release
-  - Integration
-  - Feedback
-  - Health Check
 ---
 当前项目的发布周期是两个星期,指的是总共6,7个项目一起发布。从第一天code cut，经历如下的过程：<!-- Image not available: deploy.png -->
 总共三个阶段，每次发布上去以后各个项目都要进行回归测试，发现bug就需要打tag，重新经过QA环境。

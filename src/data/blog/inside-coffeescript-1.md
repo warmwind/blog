@@ -3,10 +3,6 @@ title: Inside CoffeeScript：语法强大
 pubDatetime: 2012-05-26T00:00:00+08:00
 description: Inside CoffeeScript：语法强大
 slug: inside-coffeescript-1
-category: 技术
-tags:
-  - CoffeeScript
-  - Javascript
 ---
 第一次听说CoffeeScript是Rails 3.1将它作为默认的支持，第二次深入的理解是Nodejs的兴起，CoffeeScript用它独特的语法样式，使我这个面向对象出身的程序员在写JavaScript时找到了似曾相识的感觉。当然如果对它的理解仅仅停留在语法的简化，那么只能说对[JS(The World's Most Misunderstood Programming Language)](http://javascript.crockford.com/javascript.html)本身并不熟悉。
 

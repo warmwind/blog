@@ -3,10 +3,6 @@ title: 如何提升轻技术产品的DX（Developer Experience）
 pubDatetime: 2023-03-05T00:00:00+08:00
 description: 如何提升轻技术产品的DX（Developer Experience）
 slug: improve-dx-for-light-technical-product
-category: 创业
-tags:
-  - DX
-  - 创业
 ---
 
 > 开发者体验（Developer Experience，DX）指的是软件开发人员在使用某个产品或服务创建软件应用程序时的整体体验，也可理解为UX of Developer。

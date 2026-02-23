@@ -3,9 +3,6 @@ title: HTML5大赛感 (一)：尝试
 pubDatetime: 2010-12-09T00:00:00+08:00
 description: HTML5大赛感 (一)：尝试
 slug: html5-competition-try
-category: 工作
-tags:
-  - HTML5
 ---
 [Demo](/apps.html#magic_grid)
 

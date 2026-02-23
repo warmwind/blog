@@ -3,10 +3,6 @@ title: Test For DateTime
 pubDatetime: 2010-12-08T00:00:00+08:00
 description: Test For DateTime
 slug: test-for-datetime
-category: 技术
-tags:
-  - DateTime
-  - Test
 ---
 在代码中经常遇到在某个方法内部获取当前时间，并对时间进行一定处理。这往往会使测试遇到困难，因为在测试中无法准确获取产品代码内部的当前时间。例如下面的产品与测试代码，
 

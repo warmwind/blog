@@ -3,11 +3,6 @@ title: 二十四分钟精通ClickHouse Materialized View
 pubDatetime: 2023-02-12T00:00:00+08:00
 description: 二十四分钟精通ClickHouse Materialized View
 slug: master-clickhouse-mv
-category: 技术
-tags:
-  - ClickHouse
-  - Materialized View
-  - 技术
 ---
 
 [ClickHouse](https://clickhouse.com/)是一个非常出色列数据库，对大数据量的实时分析有极佳的性能。本文用来介绍其MV（Materialized View，物化视图）的内部机制，帮助大家理解后更准确的使用。

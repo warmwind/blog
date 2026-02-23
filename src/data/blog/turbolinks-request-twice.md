@@ -3,10 +3,6 @@ title: 为什么Turbolinks发送了两次请求
 pubDatetime: 2015-01-22T00:00:00+08:00
 description: 为什么Turbolinks发送了两次请求
 slug: turbolinks-request-twice
-category: 技术
-tags:
-  - Turbolinks
-  - Rails
 ---
 前面有一篇文章介绍过使用[Turbolinks](/blogs/2013/02/28/turbolinks-make-form-resubmissioin.html)遇到的一个问题，最近又发现了另一个问题。
 

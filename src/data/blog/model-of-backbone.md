@@ -3,10 +3,6 @@ title: Backbone中的Model
 pubDatetime: 2013-02-15T00:00:00+08:00
 description: Backbone中的Model
 slug: model-of-backbone
-category: 技术
-tags:
-  - Backbone
-  - Javascript
 ---
 Backobone是一个JavaScript的前端框架，使具有复杂交互的页面实现能更加清晰。其中Model是核心的部分，它主要主要有下面几个方面：
 

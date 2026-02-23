@@ -3,10 +3,6 @@ title: Box2D-Collision Detection
 pubDatetime: 2011-06-01T00:00:00+08:00
 description: Box2D-Collision Detection
 slug: box2d-collision-detection
-category: 技术
-tags:
-  - Box2D
-  - Physics Engine
 ---
 [Demo](/apps.html#angry_tank)
 

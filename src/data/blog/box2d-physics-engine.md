@@ -3,10 +3,6 @@ title: Box2D--Physics Engine
 pubDatetime: 2011-04-17T00:00:00+08:00
 description: Box2D--Physics Engine
 slug: box2d-physics-engine
-category: 技术
-tags:
-  - Box2D
-  - Physics Engine
 ---
 [Demo](/apps.html#angry_tank)
 

@@ -3,9 +3,6 @@ title: 不要心存侥幸
 pubDatetime: 2013-05-30T00:00:00+08:00
 description: 不要心存侥幸
 slug: be-vigilant-all-the-time
-category: 技术
-tags:
-  - 部署
 ---
 已经过去了整整12个小时，不过依然清晰的记得早上宕机的那漫长的十分钟，如此煎熬。
 

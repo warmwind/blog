@@ -3,11 +3,6 @@ title: Validation Refactor -- Command Pattern
 pubDatetime: 2011-03-17T00:00:00+08:00
 description: Validation Refactor -- Command Pattern
 slug: validation-refactor
-category: 技术
-tags:
-  - Command Pattern
-  - Refactor
-  - Test
 ---
 曾经遇到过几次如下的代码
 

@@ -3,12 +3,6 @@ title: Nginx 与 Unicorn
 pubDatetime: 2014-03-10T00:00:00+08:00
 description: Nginx 与 Unicorn
 slug: nginx-unicorn
-category: 技术
-tags:
-  - Capistrano
-  - Nginx
-  - Rails
-  - 部署
 ---
 Capistrano, Nginx 与 Unicorn的搭配作为Rails应用的部署方式是现在成熟与流行的模式，[Deploying Rails app using Nginx, Unicorn, Postgres and Capistrano to Digital Ocean](https://coderwall.com/p/yz8cha)这篇文章详细介绍了如何来使用，本文希望稍微深入一些来看看Nginx与Unicorn之间是如何通信的，以及Unicorn如何实现部署时做到了零宕机。
 

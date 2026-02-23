@@ -3,10 +3,6 @@ title: "! 'Inside Ruby: Object Model'"
 pubDatetime: 2012-02-02T00:00:00+08:00
 description: "! 'Inside Ruby: Object Model'"
 slug: inside-ruby-object-model
-category: 技术
-tags:
-  - Metaprogramming
-  - Ruby
 ---
 今天来重新了解一下ruby的Object Model，之所以是重新，因为是从内部来看，而不是从外部的使用上。
 

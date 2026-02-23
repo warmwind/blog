@@ -3,9 +3,6 @@ title: Tricks On Upgrading Rails From 3.2 to 4.0
 pubDatetime: 2014-08-26T00:00:00+08:00
 description: Tricks On Upgrading Rails From 3.2 to 4.0
 slug: tricks-on-upgrading-rails-from-3-2-to-4-0
-category: 技术
-tags:
-  - Rails,Mongoid,Capistrano,Upgrade
 ---
 
 很久一段时间以来，我们使用的都是Rails3.2 + Mongoid3，虽然Rails4发布已经快一年的时间了，但由于mongoid3不能支持Rails4，所以升级就一推再推，不过终于在近期Mongoid发布4.0以后完成了这次期盼已经的升级。心情是兴奋地，不过过程还是曲折的，不少细节，只看升级文档，或者google，不看源码还是真心不好解决。本文不是升级指导，因已经有很多文章，本文将对这次升级遇到的问题做个简单的介绍，包括了Rails，Mongoid，Capistrano。

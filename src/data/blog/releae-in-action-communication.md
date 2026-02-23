@@ -3,10 +3,6 @@ title: 软件发布实战 -- 沟通
 pubDatetime: 2011-11-04T00:00:00+08:00
 description: 软件发布实战 -- 沟通
 slug: releae-in-action-communication
-category: 工作
-tags:
-  - Release
-  - Migration
 ---
 沟通在任何一项团队活动中都非常重要, 下面的一个例子发生在我们的一次发布中.
 

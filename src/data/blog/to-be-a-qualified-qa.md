@@ -3,10 +3,6 @@ title: 做一个合格的兼职QA
 pubDatetime: 2010-12-08T00:00:00+08:00
 description: 做一个合格的兼职QA
 slug: to-be-a-qualified-qa
-category: 工作
-tags:
-  - DEV
-  - QA
 ---
 因进度需要，暂时支援一下QA。虽然每天的工作都会和QA接触，不过真正开始成为一个QA的时候，才发现要做的工作很多。
 

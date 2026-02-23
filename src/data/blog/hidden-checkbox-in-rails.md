@@ -3,9 +3,6 @@ title: Rails中隐藏的check_box
 pubDatetime: 2013-06-02T00:00:00+08:00
 description: Rails中隐藏的check_box
 slug: hidden-checkbox-in-rails
-category: 技术
-tags:
-  - Rails
 ---
 Rails中，我们经常会在form中使用check\_box这个helpler方法，在controller中，可以通过params[:category]来获取category的值。然而，如果检查一下check_box这个helper方法生成的html代码，会有点不如想象那样直接可懂。
 

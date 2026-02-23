@@ -3,10 +3,6 @@ title: Web Framework大杂烩之Data Binding
 pubDatetime: 2011-01-11T00:00:00+08:00
 description: Web Framework大杂烩之Data Binding
 slug: web-framework-data-binding
-category: 技术
-tags:
-  - Rails
-  - Spring MVC
 ---
 昨天在使用Spring MVC做界面，一边做一边在想着前面使用ASP.NET MVC时是如何实现的。在花了一段时间把CRUD搞定之后，不禁感叹，做到这个程度，似乎也就是做了Rails中下面的一句话：
 

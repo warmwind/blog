@@ -4,11 +4,6 @@ pubDatetime: 2010-12-08T00:00:00+08:00
 description: Half a year in TW
 slug: half-year-in-tw
 draft: true
-category: 工作
-tags:
-  - 压力
-  - coach
-  - 结对编程
 ---
 出国，第一次，一个人，直接去客户现场，RoR从未用过，手头资料有几张图表和几封邮件， 准备的时间是出发前的几天下班晚上。
 

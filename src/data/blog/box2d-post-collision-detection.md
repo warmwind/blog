@@ -3,11 +3,6 @@ title: Box2D-Post Collision Detection
 pubDatetime: 2011-06-01T00:00:00+08:00
 description: Box2D-Post Collision Detection
 slug: box2d-post-collision-detection
-category: 技术
-tags:
-  - Box2D
-  - Collision Detection
-  - Physics Engine
 ---
 [Demo](/apps.html#angry_tank)
 

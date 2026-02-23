@@ -3,10 +3,6 @@ title: 重视贡献，为成果而工作
 pubDatetime: 2023-01-29T00:00:00+08:00
 description: 重视贡献，为成果而工作
 slug: focus-on-contribution
-category: 管理
-tags:
-  - 客户
-  - 团队
 ---
 > 有效的管理者重视对外界的贡献。他们并非为工作而工作，而是为成果而工作。
 > 

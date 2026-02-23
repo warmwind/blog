@@ -3,10 +3,6 @@ title: 人人都可以是「优质」用户
 pubDatetime: 2023-02-25T00:00:00+08:00
 description: 人人都可以是「优质」用户
 slug: to-become-an-high-quality-customer
-category: 创业
-tags:
-  - 用户
-  - 创业
 ---
 
 ## 遇见优质用户是幸运，要珍惜

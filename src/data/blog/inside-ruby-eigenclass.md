@@ -3,10 +3,6 @@ title: "! 'Inside Ruby: Eigenclass'"
 pubDatetime: 2012-02-03T00:00:00+08:00
 description: "! 'Inside Ruby: Eigenclass'"
 slug: inside-ruby-eigenclass
-category: 技术
-tags:
-  - Metaprogramming
-  - Ruby
 ---
 在[Inside Ruby: Object Model](/2012/02/02/inside-ruby-object-model.html)中提到，object拥有method，但是method并不存在于object中，而是在class中，这样同一个class的不同实例可以共享method。
 

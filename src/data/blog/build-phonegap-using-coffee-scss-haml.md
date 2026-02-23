@@ -3,10 +3,6 @@ title: Build Phonegap Application using CoffeeScipt Scss and Haml
 pubDatetime: 2013-06-04T00:00:00+08:00
 description: Build Phonegap Application using CoffeeScipt Scss and Haml
 slug: build-phonegap-using-coffee-scss-haml
-category: 技术
-tags:
-  - PhoneGap
-  - CoffeeScript
 ---
 Refer to [phonegap-scaffold](https://github.com/warmwind/phonegap-scaffold)
 

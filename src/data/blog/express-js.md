@@ -3,11 +3,6 @@ title: Express Js
 pubDatetime: 2011-07-04T00:00:00+08:00
 description: Express Js
 slug: express-js
-category: 技术
-tags:
-  - Express
-  - Javascript
-  - NodeJS
 ---
 Javascript通常运行于客户端浏览器，可以方便的操作HTML中的DOM元素，另外，提供也提供了一些事件响应机制，将表单验证等很多功能置于前台完成，降低前端与服务器端的交互次数，提高用户体验。在服务器端，有很多的框架可以选择，包括SSH，Spring MVC，ASP.Net MVC等，这些框架提供了良好的结构，可以创建强健的Web应用。
 

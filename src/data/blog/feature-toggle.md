@@ -3,9 +3,6 @@ title: Feature Toggle
 pubDatetime: 2012-01-29T00:00:00+08:00
 description: Feature Toggle
 slug: feature-toggle
-category: 技术
-tags:
-  - Feature Toggle
 ---
 每个迭代(两周)发布一次，所有功能必须完整可用。这对项目的计划，story的划分都提出了很高的要求。然而有的功能很难在一个迭代内完成，例如某个story在临近迭代结束的时候开始，或者某个系统的某个特性需要持续若干迭代的开发， 在整体完成之前不能出现在产品中。那么如何控制未完成的功能不出现在产品中而又不影响新的代码开发呢？这时就需要引入Feature Toggle。
 

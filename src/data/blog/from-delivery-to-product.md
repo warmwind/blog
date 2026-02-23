@@ -3,13 +3,6 @@ title: 从交付到产品
 pubDatetime: 2013-02-13T00:00:00+08:00
 description: 从交付到产品
 slug: from-delivery-to-product
-category: 工作
-tags:
-  - 压力
-  - Delivery
-  - 产品
-  - 客户
-  - Rails
 ---
 这是一个七人的小团队产品组，正式加入刚好有一个月了。说长不长，不过可总结的倒是有一些。之所以会有些感慨，因为相对于前面所有的项目，这是比较特别的一个。
 

@@ -3,11 +3,6 @@ title: 路漫漫
 pubDatetime: 2011-01-23T00:00:00+08:00
 description: 路漫漫
 slug: on-the-way
-category: 工作
-tags:
-  - 压力
-  - 沟通
-  - Showcase
 ---
 还有一个星期就将结束此次悉尼之行，不用再穿着衬衫皮鞋，有机会舒服的坐在自己宽敞的Office里，吃点水果，听听session，想起来感觉真好。
 

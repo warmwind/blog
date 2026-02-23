@@ -3,10 +3,6 @@ title: 「二次创业」的窘境
 pubDatetime: 2023-02-09T00:00:00+08:00
 description: 「二次创业」的窘境
 slug: second-startup
-category: 管理
-tags:
-  - 团队
-  - 创业
 ---
 [《创新者的窘境》](https://book.douban.com/subject/4243770/)一书提到一种现象：一个运营良好的企业，有充分的客户基础，他们倾听客户声音，不断增强产品，但却最终倒闭。听起来似乎不合理，但却真实的发生。
 

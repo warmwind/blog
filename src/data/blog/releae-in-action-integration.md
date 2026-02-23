@@ -3,12 +3,6 @@ title: 软件发布实战 -- 集成
 pubDatetime: 2011-10-16T00:00:00+08:00
 description: 软件发布实战 -- 集成
 slug: releae-in-action-integration
-category: 工作
-tags:
-  - Release
-  - Integration
-  - Heroku
-  - Test
 ---
 作为一个程序员， 每天开心的新程序，让所有的测试通，最后打浏览器，输入“localhost/newapp”， 看到开发的功能展现在眼前, 那种愉悦和满足不言而喻。
 

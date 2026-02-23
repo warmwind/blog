@@ -3,10 +3,6 @@ title: "! 'MapReduce: 一个i和1导致的悲剧'"
 pubDatetime: 2012-11-26T00:00:00+08:00
 description: "! 'MapReduce: 一个i和1导致的悲剧'"
 slug: mapreduce-loop-problem
-category: 技术
-tags:
-  - MapReduce
-  - MongoDB
 ---
 听说MapReduce已经很久了，这两天才第一次真正的尝试一下。要说的是因为一个很简单的错误，折腾了好一会儿，刚好让我有了更多的理解。因祸得福吧。
 

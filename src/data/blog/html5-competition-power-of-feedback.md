@@ -3,11 +3,6 @@ title: "! 'HTML5大赛感 (二) : Power of Feedback'"
 pubDatetime: 2010-12-12T00:00:00+08:00
 description: "! 'HTML5大赛感 (二) : Power of Feedback'"
 slug: html5-competition-power-of-feedback
-category: 工作
-tags:
-  - Feedback
-  - HTML5
-  - Showcase
 ---
 [Demo](/apps.html#magic_grid)
 
