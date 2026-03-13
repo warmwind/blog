@@ -13,6 +13,10 @@ slug: effective-harnesses-for-long-running-agents-zh
 - 封面图：<https://cdn.sanity.io/images/4zrzovbb/website/32ea71b3e8e87a990f6df4c4def2b9e52815e977-2400x1260.png>
 - 文中动图：<https://cdn.sanity.io/images/4zrzovbb/website/f94c2257964fb2d623f1e81f874977ebfc0986bc-1920x1080.gif>
 
+![封面图（原文）](https://cdn.sanity.io/images/4zrzovbb/website/32ea71b3e8e87a990f6df4c4def2b9e52815e977-2400x1260.png)
+
+![Claude 测试 claude.ai clone（原文动图）](https://cdn.sanity.io/images/4zrzovbb/website/f94c2257964fb2d623f1e81f874977ebfc0986bc-1920x1080.gif)
+
 ---
 
 随着 AI agent 能力增强，开发者越来越多地让它们承担复杂任务，这些任务可能持续数小时甚至数天。不过，让 agent 在多个 context window 之间持续、稳定地推进工作，仍是一个开放问题。
