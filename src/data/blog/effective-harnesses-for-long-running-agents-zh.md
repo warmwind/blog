@@ -1,5 +1,5 @@
 ---
-title: Effective harnesses for long-running agents（中文翻译）
+title: 长时运行 Agent 的有效 Harness（中文翻译）
 pubDatetime: 2026-03-13T23:05:00+08:00
 description: Anthropic Engineering 文章《Effective harnesses for long-running agents》中文翻译（含原文与原图引用）。
 slug: effective-harnesses-for-long-running-agents-zh

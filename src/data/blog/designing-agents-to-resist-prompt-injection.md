@@ -1,5 +1,5 @@
 ---
-title: Designing AI agents to resist prompt injection（中文翻译）
+title: 设计可抵御 Prompt Injection 的 AI Agent（中文翻译）
 pubDatetime: 2026-03-14T15:00:00+08:00
 description: OpenAI 文章《Designing AI agents to resist prompt injection》的中文翻译（含原文引用）。
 slug: designing-agents-to-resist-prompt-injection

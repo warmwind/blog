@@ -1,5 +1,5 @@
 ---
-title: The Anatomy of an Agent Harness（中文翻译）
+title: 解析 Agent Harness：核心结构与设计（中文翻译）
 pubDatetime: 2026-03-14T10:00:00+08:00
 description: LangChain 博客文章《The Anatomy of an Agent Harness》的中文翻译（含原文引用）。
 slug: the-anatomy-of-an-agent-harness

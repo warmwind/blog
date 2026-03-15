@@ -1,5 +1,5 @@
 ---
-title: "Building RAG workflows in n8n: choosing the right Pinecone node（中文翻译）"
+title: "在 n8n 中构建 RAG 工作流：如何选择合适的 Pinecone 节点（中文翻译）"
 pubDatetime: 2026-03-15T10:00:00+08:00
 description: "Pinecone Learn 文章《Building RAG workflows in n8n: choosing the right Pinecone node》的中文翻译（含原文引用）。"
 slug: building-rag-workflows-in-n8n-choosing-the-right-pinecone-node
