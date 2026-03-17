@@ -6,15 +6,15 @@ slug: that-person-has-disappeared-movie-notes
 postType: movie
 ---
 
-![海报](https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2910988186.webp)
+![海报](/media/movie/that-person-has-disappeared/poster.webp)
 
-![剧照1](https://img3.doubanio.com/view/photo/m/public/p2909858262.webp)
+![剧照1](/media/movie/that-person-has-disappeared/still1.webp)
 
-![剧照2](https://img3.doubanio.com/view/photo/m/public/p2910051957.webp)
+![剧照2](/media/movie/that-person-has-disappeared/still2.webp)
 
-![剧照3](https://img2.doubanio.com/view/photo/m/public/p2921044581.webp)
+![剧照3](/media/movie/that-person-has-disappeared/still3.webp)
 
-![剧照4](https://img3.doubanio.com/view/photo/m/public/p2920619542.webp)
+![剧照4](/media/movie/that-person-has-disappeared/still4.webp)
 
 这部《那个人消失了》最值得复盘的不是“最后揭晓”，而是它如何一步步把观众带进错误理解，再把你拉回来。影片表面是公寓失踪案，底层其实是“叙述权争夺战”。
 
