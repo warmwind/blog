@@ -6,6 +6,10 @@ slug: roberto-baggio-solitude-and-romance
 postType: soccer
 ---
 
+![罗伯特·巴乔（1994世界杯）](/media/football/baggio/italy-1994.jpg)
+
+![罗伯特·巴乔（尤文图斯时期）](/media/football/baggio/juventus-celebration.png)
+
 如果你是80后球迷，罗伯特·巴乔这个名字，几乎等于“足球里的诗意”。
 
 他不是那种靠身体碾压对手的球员，也不是靠高频冲刺制造存在感的类型。巴乔最迷人的地方，在于他总能用一种近乎轻描淡写的方式，把复杂局面处理得像一幅画：一个转身、一次挑传、一脚搓射，比赛的纹理就变了。
