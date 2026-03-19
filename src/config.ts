@@ -8,7 +8,6 @@ export const SITE = {
   lightAndDarkMode: true,
   postPerIndex: 4,
   postPerPage: 20,
-  scheduledPostMargin: 0,
   showBackButton: true,
   editPost: {
     enabled: false,
