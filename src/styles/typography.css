@@ -44,7 +44,11 @@
     }
 
     img {
-      @apply mx-auto max-w-xs border border-border sm:max-w-sm;
+      @apply mx-auto border border-border;
+    }
+
+    img[alt^="海报"] {
+      @apply max-w-xs sm:max-w-sm;
     }
 
     figcaption {
