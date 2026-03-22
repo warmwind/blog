@@ -6,7 +6,7 @@ slug: prisoners-movie-notes
 postType: movie
 ---
 
-![poster](/media/movie/prisoners/poster.webp)
+![poster](/media/movie/prisoners/poster.jpg)
 
 - **导演**：丹尼斯·维伦纽瓦
 - **编剧**：亚伦·古兹科夫斯基
@@ -24,7 +24,7 @@ postType: movie
 
 两家人开始疯狂搜寻。安娜的哥哥拉尔夫回忆起街上曾停着一辆破旧的房车（RV），女孩们之前曾在车旁玩耍。警方迅速锁定这辆车，并在当晚找到了它。司机是一名智力发育迟缓的青年亚历克斯·琼斯（保罗·达诺 饰），他试图驾车逃跑时撞上了一棵树，随即被逮捕。
 
-![剧照1](/media/movie/prisoners/still1.webp)
+![剧照1](/media/movie/prisoners/still1.jpg)
 
 ## 嫌疑人释放与父亲的失控
 
@@ -34,7 +34,7 @@ postType: movie
 
 对警方彻底失望的凯勒做出了一个极端决定：他找到一处废弃公寓楼，将亚历克斯绑架并秘密囚禁起来，用暴力手段逼迫他交代女孩的下落。邻居富兰克林起初极力反对，但在绝望和凯勒的施压下也成了共犯。两家的妻子虽然痛苦，却在道德困境中无力阻止。
 
-![剧照2](/media/movie/prisoners/still2.webp)
+![剧照2](/media/movie/prisoners/still2.jpg)
 
 ## 洛基的调查：迷宫符号与死胡同
 
@@ -44,7 +44,7 @@ postType: movie
 
 洛基接着追查到另一个可疑人物鲍勃·泰勒。此人行为极其诡异：家中堆满了迷宫图案的画作和装着猪血的箱子，还曾从商店偷走儿童衣物。警方一度认为他就是真正的绑匪，但泰勒在审讯室里突然从警员身上抢过手枪开枪自杀。后续调查表明，泰勒本人也是一个曾经被绑架的受害者，他是在强迫性地模仿当年施加在自己身上的行为，而非真正的作案人。这条线索再次断裂。
 
-![剧照3](/media/movie/prisoners/still3.webp)
+![剧照3](/media/movie/prisoners/still3.jpg)
 
 ## 凯勒的私刑与道德崩塌
 
@@ -56,7 +56,7 @@ postType: movie
 
 洛基去探望乔伊时，乔伊看着凯勒的脸突然变得恐惧——这是因为凯勒曾出现在囚禁她的地方附近。洛基由此开始怀疑凯勒牵涉其中。与此同时，乔伊的证词中有一些细节指向了一个出乎意料的方向。
 
-![剧照4](/media/movie/prisoners/still4.webp)
+![剧照4](/media/movie/prisoners/still4.jpg)
 
 ## 真相揭露：霍莉·琼斯与"对上帝的战争"
 
@@ -72,7 +72,7 @@ postType: movie
 
 洛基通过汇总种种线索——乔伊的描述、迷宫吊坠的来源、霍莉家附近的药物痕迹——最终锁定霍莉就是真凶。他赶到霍莉家时，霍莉正准备带着安娜逃走。在对峙中，霍莉用枪射中了洛基，但洛基在重伤之下开枪击毙了霍莉，并在房屋内找到了被下药昏迷但仍然活着的安娜。安娜被紧急送往医院，最终与家人团聚。亚历克斯（巴里·米尔兰）也被解救，与他真正的亲人重新联系。
 
-![剧照5](/media/movie/prisoners/still5.webp)
+![剧照5](/media/movie/prisoners/still5.jpg)
 
 但凯勒仍然下落不明。
 
