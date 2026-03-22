@@ -1,5 +1,5 @@
 ---
-title: 《那个人消失了》剧情梳理：五层反转与一个快递员的冒险
+title: 《那个人消失了》（2024）：五层反转与一个快递员的冒险
 pubDatetime: 2026-03-17T22:00:00+08:00
 description: 详细拆解《那个人消失了》的多重反转结构，从灵异惊悚到搞笑推理再到催泪结局，梳理人物关系、关键伏笔与结尾真相。
 slug: that-person-has-disappeared-movie-notes
