@@ -6,7 +6,7 @@ slug: the-gorge-movie-notes
 postType: movie
 ---
 
-![海报](/media/movie/the-gorge-movie-notes/poster.jpg)
+![poster](/media/movie/the-gorge-movie-notes/poster.jpg)
 
 - **导演**：斯科特·德瑞克森
 - **编剧**：扎克·迪恩

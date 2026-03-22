@@ -6,7 +6,7 @@ slug: ce-ancora-domani-movie-notes
 postType: movie
 ---
 
-![海报](/media/movie/ce-ancora-domani/poster.jpg)
+![poster](/media/movie/ce-ancora-domani/poster.jpg)
 
 - **导演**：宝拉·柯特莱西（Paola Cortellesi）
 - **编剧**：宝拉·柯特莱西 / 富里奥·安德烈奥蒂 / 吉利亚·卡伦达

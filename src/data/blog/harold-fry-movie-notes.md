@@ -6,7 +6,7 @@ slug: harold-fry-movie-notes
 postType: movie
 ---
 
-![海报](/media/movie/harold-fry/poster.jpg)
+![poster](/media/movie/harold-fry/poster.jpg)
 
 - **导演**：希提·麦克唐纳（Hettie Macdonald）
 - **编剧**：蕾秋·乔伊斯（Rachel Joyce）

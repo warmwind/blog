@@ -6,7 +6,7 @@ slug: prisoners-movie-notes
 postType: movie
 ---
 
-![海报](/media/movie/prisoners/poster.webp)
+![poster](/media/movie/prisoners/poster.webp)
 
 - **导演**：丹尼斯·维伦纽瓦
 - **编剧**：亚伦·古兹科夫斯基

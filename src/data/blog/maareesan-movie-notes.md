@@ -6,7 +6,7 @@ slug: maareesan-movie-notes
 postType: movie
 ---
 
-![海报](/media/movie/maareesan/poster.jpg)
+![poster](/media/movie/maareesan/poster.jpg)
 
 - **导演**：苏迪什·尚卡尔（Sudheesh Shankar）
 - **编剧**：V·克里希纳·穆尔蒂（V. Krishna Moorthy）

@@ -6,7 +6,7 @@ slug: companion-movie-notes
 postType: movie
 ---
 
-![海报](/media/movie/companion/poster.jpg)
+![poster](/media/movie/companion/poster.jpg)
 
 - **导演**：德鲁·汉考克
 - **编剧**：德鲁·汉考克

@@ -6,7 +6,7 @@ slug: the-lost-bus-movie-notes
 postType: movie
 ---
 
-![海报](/media/movie/the-lost-bus/poster.jpg)
+![poster](/media/movie/the-lost-bus/poster.jpg)
 
 - **导演**：保罗·格林格拉斯（Paul Greengrass）
 - **编剧**：保罗·格林格拉斯 / 布拉德·英格尔斯比 / 莉齐·约翰逊

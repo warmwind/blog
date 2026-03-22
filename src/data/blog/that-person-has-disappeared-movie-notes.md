@@ -6,7 +6,7 @@ slug: that-person-has-disappeared-movie-notes
 postType: movie
 ---
 
-![海报](/media/movie/that-person-has-disappeared/poster.webp)
+![poster](/media/movie/that-person-has-disappeared/poster.webp)
 
 - **导演**：水野格
 - **编剧**：水野格

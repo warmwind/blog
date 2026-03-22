@@ -6,7 +6,7 @@ slug: finch-movie-notes
 postType: movie
 ---
 
-![海报](/media/movie/finch/poster.jpg)
+![poster](/media/movie/finch/poster.jpg)
 
 - **导演**：米格尔·萨普什尼克
 - **编剧**：克雷格·勒克 / 伊沃尔·鲍威尔

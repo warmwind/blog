@@ -6,7 +6,7 @@ slug: drop-movie-notes
 postType: movie
 ---
 
-![海报](/media/movie/drop/poster.jpg)
+![poster](/media/movie/drop/poster.jpg)
 
 - **导演**：克里斯托弗·兰登
 - **编剧**：吉莉安·雅各布斯 / 克里斯·罗奇

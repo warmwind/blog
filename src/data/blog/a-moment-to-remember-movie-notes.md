@@ -6,7 +6,7 @@ slug: a-moment-to-remember-movie-notes
 postType: movie
 ---
 
-![海报](/media/movie/a-moment-to-remember/poster.jpg)
+![poster](/media/movie/a-moment-to-remember/poster.jpg)
 
 - **导演**：李宰汉
 - **编剧**：李宰汉 / 金英夏

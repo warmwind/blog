@@ -6,7 +6,7 @@ slug: the-ruse-movie-notes
 postType: movie
 ---
 
-![海报](/media/movie/the-ruse/poster.jpg)
+![poster](/media/movie/the-ruse/poster.jpg)
 
 - **导演**：斯蒂文·梅纳（Stevan Mena）
 - **编剧**：斯蒂文·梅纳（Stevan Mena）

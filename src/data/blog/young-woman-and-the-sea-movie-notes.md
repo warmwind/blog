@@ -6,7 +6,7 @@ slug: young-woman-and-the-sea-movie-notes
 postType: movie
 ---
 
-![海报](/media/movie/young-woman-and-the-sea/poster.jpg)
+![poster](/media/movie/young-woman-and-the-sea/poster.jpg)
 
 - **导演**：约阿希姆·朗宁
 - **编剧**：杰夫·纳桑森

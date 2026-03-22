@@ -6,7 +6,7 @@ slug: revelations-movie-notes
 postType: movie
 ---
 
-![海报](/media/movie/revelations/poster.jpg)
+![poster](/media/movie/revelations/poster.jpg)
 
 - **导演**：延尚昊
 - **编剧**：延尚昊 / 崔圭硕

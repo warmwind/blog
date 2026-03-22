@@ -47,7 +47,7 @@
       @apply mx-auto border border-border;
     }
 
-    img[alt^="海报"] {
+    img[alt^="poster"] {
       @apply max-w-xs sm:max-w-sm;
     }
 

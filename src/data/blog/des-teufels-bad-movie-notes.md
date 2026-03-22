@@ -6,7 +6,7 @@ slug: des-teufels-bad-movie-notes
 postType: movie
 ---
 
-![海报](/media/movie/des-teufels-bad/poster.jpg)
+![poster](/media/movie/des-teufels-bad/poster.jpg)
 
 - **导演**：赛佛林·费奥拉 / 维罗妮卡·弗兰茨
 - **编剧**：赛佛林·费奥拉 / 维罗妮卡·弗兰茨

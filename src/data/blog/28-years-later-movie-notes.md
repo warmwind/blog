@@ -6,7 +6,7 @@ slug: 28-years-later-movie-notes
 postType: movie
 ---
 
-![海报](/media/movie/28-years-later/poster.jpg)
+![poster](/media/movie/28-years-later/poster.jpg)
 
 - **导演**：丹尼·博伊尔
 - **编剧**：亚历克斯·加兰
