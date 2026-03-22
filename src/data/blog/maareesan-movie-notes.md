@@ -86,4 +86,4 @@ postType: movie
 
 这部电影最耐看的地方，不是反转本身，而是反转背后那个问题：当法律无法为受害者做任何事的时候，一个父亲还能做什么？维拉的答案是极端的，但电影没有急着做道德审判，而是把这个问题留给了观众。
 
-豆瓣链接：<https://movie.douban.com/subject/37493412/>
+> 豆瓣链接：[妄人妄途 Maareesan](https://movie.douban.com/subject/37493412/)

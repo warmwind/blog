@@ -84,4 +84,4 @@ postType: movie
 
 这部电影改编自日剧《Pure Soul》，由李宰汉执导，孙艺珍和郑雨盛的表演撑起了整部影片。孙艺珍将秀珍从灵动到茫然的退化过程演绎得层次分明，郑雨盛则用克制而沉默的方式呈现了一个"无能为力但不放弃"的丈夫形象。影片2004年在韩国上映后引发了巨大反响，至今仍被视为韩国爱情电影的经典之作。
 
-豆瓣链接：<https://movie.douban.com/subject/1308804/>
+> 豆瓣链接：[我脑中的橡皮擦 A Moment to Remember](https://movie.douban.com/subject/1308804/)

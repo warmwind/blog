@@ -44,4 +44,4 @@ postType: movie
 
 影片最终指向一个核心命题：魔鬼和怪物都是人类自己创造出来、用以为自身行为辩护的。不论驱动你的是神谕、仇恨还是愧疚，当你跳过求证直接进入审判，你就已经站在了恶的那一边。
 
-豆瓣链接：<https://movie.douban.com/subject/36660929/>
+> 豆瓣链接：[来自谁的启示 Revelations](https://movie.douban.com/subject/36660929/)

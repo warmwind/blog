@@ -50,4 +50,4 @@ postType: movie
 
 整体来说，这部电影用克制而扎实的方式讲述了一个真实的传奇故事，没有过度煽情，值得一看。
 
-豆瓣链接：<https://movie.douban.com/subject/26656728/>
+> 豆瓣链接：[泳者之心 Young Woman and the Sea](https://movie.douban.com/subject/26656728/)
