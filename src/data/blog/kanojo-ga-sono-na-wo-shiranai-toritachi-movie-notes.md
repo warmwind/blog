@@ -6,7 +6,7 @@ slug: kanojo-ga-sono-na-wo-shiranai-toritachi-movie-notes
 postType: movie
 ---
 
-![poster](/media/movie/kanojo-ga-sono-na-wo-shiranai-toritachi/poster.webp)
+![poster](/media/movie/kanojo-ga-sono-na-wo-shiranai-toritachi/poster.jpg)
 
 - **导演**：白石和弥
 - **编剧**：浅野妙子
