@@ -6,7 +6,7 @@ slug: what-you-wish-for-movie-notes
 postType: movie
 ---
 
-![海报](/media/movie/what-you-wish-for-movie-notes/poster.jpg)
+![poster](/media/movie/what-you-wish-for-movie-notes/poster.jpg)
 
 - **导演**：尼古拉斯·汤姆奈
 - **编剧**：尼古拉斯·汤姆奈
