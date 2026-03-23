@@ -14,7 +14,7 @@ postType: movie
 - **上映日期**：2022年5月25日（戛纳电影节）/ 2023年2月8日（韩国）
 - **片长**：134分钟
 - **获奖**：第75届戛纳电影节国际影评人周闭幕影片（首部获此殊荣的韩国电影）
-- **评分**：[豆瓣](https://movie.douban.com/subject/35739931/) 7.8 / [IMDB](https://www.imdb.com/title/tt14897726/) 7.4
+- **评分**：[豆瓣](https://movie.douban.com/subject/35739931/) 8.3 / [IMDB](https://www.imdb.com/title/tt19820538/) 7.2
 
 以下内容包含完整剧透。
 

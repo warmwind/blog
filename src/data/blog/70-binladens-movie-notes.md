@@ -13,7 +13,7 @@ postType: movie
 - **主演**：艾玛·苏亚雷斯 / 娜塔莉·波萨 / 乌戈·席尔瓦
 - **上映日期**：2018年（西班牙）
 - **片长**：92分钟
-- **评分**：[豆瓣](https://movie.douban.com/subject/30257439/) 7.0 / [IMDB](https://www.imdb.com/title/tt7763554/) 6.2
+- **评分**：[豆瓣](https://movie.douban.com/subject/30257439/) 6.3 / [IMDB](https://www.imdb.com/title/tt7972178/) 5.9
 
 以下内容包含完整剧透。
 

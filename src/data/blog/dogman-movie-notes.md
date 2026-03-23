@@ -13,7 +13,7 @@ postType: movie
 - **主演**：卡莱伯·兰德里·琼斯 / 克里斯托弗·邓汉 / 马里莎·贝伦森 / 克雷蒙斯·施伊克
 - **上映日期**：2023年8月31日（威尼斯电影节）/ 2023年12月15日（中国大陆）
 - **片长**：114分钟
-- **评分**：[豆瓣](https://movie.douban.com/subject/36190992/) 7.5 / [IMDB](https://www.imdb.com/title/tt17009348/) 6.8
+- **评分**：[豆瓣](https://movie.douban.com/subject/35736202/) 8.2 / [IMDB](https://www.imdb.com/title/tt17009348/) 6.8
 
 以下内容包含完整剧透。
 

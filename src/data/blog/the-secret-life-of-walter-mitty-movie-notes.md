@@ -14,7 +14,7 @@ postType: movie
 - **主演**：本·斯蒂勒 / 克里斯汀·韦格 / 亚当·斯科特 / 西恩·潘 / 凯瑟琳·哈恩
 - **上映日期**：2013年12月25日（美国）
 - **片长**：114分钟
-- **评分**：[豆瓣](https://movie.douban.com/subject/2133323/) 8.3 / [IMDB](https://www.imdb.com/title/tt0359950/) 7.3
+- **评分**：[豆瓣](https://movie.douban.com/subject/2133323/) 8.6 / [IMDB](https://www.imdb.com/title/tt0359950/) 7.3
 
 以下内容包含完整剧透。
 
