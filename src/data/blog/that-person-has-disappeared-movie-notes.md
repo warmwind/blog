@@ -6,16 +6,7 @@ slug: that-person-has-disappeared-movie-notes
 postType: movie
 ---
 
-![poster](/media/movie/that-person-has-disappeared/poster.webp)
-
-- **导演**：水野格
-- **编剧**：水野格
-- **主演**：高桥文哉 / 田中圭 / 中村伦也 / 菊地凛子 / 染谷将太
-- **上映日期**：2024年9月20日（日本）
-- **片长**：104分钟
-- **评分**：[豆瓣](https://movie.douban.com/subject/36901661/) 7.6 / [IMDB](https://www.imdb.com/title/tt33429914/) 6.7
-
-以下内容包含完整剧透。
+![海报](/media/movie/that-person-has-disappeared/poster.jpg)
 
 ## 一栋"会吃人"的公寓
 
@@ -23,7 +14,7 @@ postType: movie
 
 青年快递员丸子梦九郎（高桥文哉 饰）被分配负责这栋"消失者公寓"的配送工作。他性格内向、生活单调，每天机械地重复着送件、签收、离开的流程，唯一的精神寄托是沉迷一部网络小说《转生间谍》。对他而言，这不过是又一份普通工作——但这栋公寓即将彻底改写他麻木的人生。
 
-![剧照1](/media/movie/that-person-has-disappeared/still1.webp)
+![剧照1](/media/movie/that-person-has-disappeared/still1.jpg)
 
 ## 第一层：灵异惊悚——偶像就住在隔壁
 
@@ -31,7 +22,7 @@ postType: movie
 
 前半段导演水野格刻意营造出一种封闭空间恐怖的氛围。走廊的长镜头、门缝透出的灯光、电梯里的视角局限——这些手法让观众和丸子一起形成了第一层判断：这栋楼里可能真的有超自然力量在"吞噬"住户。更让丸子不安的是，小宫的小说突然停更，人也彻底失联了。
 
-![剧照2](/media/movie/that-person-has-disappeared/still2.webp)
+![剧照2](/media/movie/that-person-has-disappeared/still2.jpg)
 
 ## 第二层：中二喜剧——快递员变身侦探
 
@@ -39,7 +30,7 @@ postType: movie
 
 丸子报警无果，决心自己追查小宫的下落。他开始与不同住户交谈，获得了同一事件的多个版本：关于那些"消失"的住户，A说是半夜被人带走的，B说是自己默默搬走的，C则声称从未见过这个人。没有人在说谎，但每个人都只说出了部分真话，拼出的图景完全不同。
 
-![剧照3](/media/movie/that-person-has-disappeared/still3.webp)
+![剧照3](/media/movie/that-person-has-disappeared/still3.jpg)
 
 ## 第三层：卧底反转——所有人都不是他们自称的那个人
 
@@ -55,15 +46,15 @@ postType: movie
 
 导演在这里完成了一次精妙的伏笔回收：那些散落在前半段看似只是氛围铺垫的细节——签收的先后顺序、走廊里短暂的停顿、门口一闪而过的物品——在真相揭晓后，每一个都变成了关键证据。回头看才会发现，答案其实从开头就已经给出了。
 
-![剧照4](/media/movie/that-person-has-disappeared/still4.webp)
+![剧照4](/media/movie/that-person-has-disappeared/still4.jpg)
+
+![剧照5](/media/movie/that-person-has-disappeared/still5.jpg)
 
 ## 结局：冰冷诡计里的人性微光
 
 影片的最后阶段，色调暗了下来，气氛从喜剧和推理急转为真正的紧张与感动。当真相一层层剥开，故事的核心浮出水面：这不只是一个悬疑解谜的故事，而是一个普通人为了守护自己在乎的人，直面远超自身能力的危险的故事。
 
 丸子不是侦探，不是警察，只是一个沉迷小说的快递员。但正是因为他对小宫作品的热爱和对细节的敏感，他成了唯一能读懂求救信号的人。最终，这个看似最不可能成为英雄的人，用自己的方式拯救了困境中的偶像。
-
-![剧照5](/media/movie/that-person-has-disappeared/still5.webp)
 
 结局被许多观众形容为"纯爱动漫式的收尾"——在经历了惊悚、荒诞、烧脑的多重反转之后，导演水野格给了观众一个出乎意料的温暖结局。冰冷的诡计和层层谎言之下，最终透出的是人与人之间真挚的羁绊。不到最后一秒，你无法分辨真相与虚构的边界，而当一切尘埃落定，留在心里的不是恐惧，而是感动。
 
@@ -72,3 +63,5 @@ postType: movie
 这部电影最独特的地方在于它的类型混搭。开场是灵异惊悚，前期是中二单恋喜剧，中段是幽默的过家家推理，后半段突然变成严肃的本格推理，结尾又直接打破次元壁，给出一个充满温情的收束。五种类型风格在114分钟里无缝切换，每一次转向都让人完全猜不到下一步的走向。
 
 更难得的是，这种混搭不是简单的拼贴。每个类型阶段都在为后面的反转埋伏笔，伏线的回收严丝合缝。水野格证明了他在《重启人生》中展现的叙事功力不是偶然——他擅长在看似轻松的外壳下藏入精密的结构，让观众笑着笑着就哭了。
+
+> 豆瓣链接：[那个人消失了 あの人が消えた](https://movie.douban.com/subject/36901661/)

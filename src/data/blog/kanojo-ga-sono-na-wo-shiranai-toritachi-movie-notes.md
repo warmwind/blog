@@ -6,7 +6,7 @@ slug: kanojo-ga-sono-na-wo-shiranai-toritachi-movie-notes
 postType: movie
 ---
 
-![poster](/media/movie/kanojo-ga-sono-na-wo-shiranai-toritachi/poster.jpg)
+![海报](/media/movie/kanojo-ga-sono-na-wo-shiranai-toritachi/poster.jpg)
 
 - **导演**：白石和弥
 - **编剧**：浅野妙子
@@ -29,7 +29,7 @@ postType: movie
 
 在百货商店的珠宝柜台，十和子认识了店员水岛真（松坂桃李 饰）。水岛年轻、帅气、工作体面，是十和子理想中的男性类型——和记忆里的黑崎一样光鲜，和阵治截然相反。两人迅速发展出肉体关系。对十和子来说，水岛是逃离灰暗生活的出口，是她能抓住的另一种人生的可能性。
 
-![剧照1](/media/movie/kanojo-ga-sono-na-wo-shiranai-toritachi/still1.webp)
+![剧照1](/media/movie/kanojo-ga-sono-na-wo-shiranai-toritachi/still1.jpg)
 
 但水岛远不是她想象中的白马王子。随着交往加深，真相一层层剥开：水岛已婚，有孩子，和十和子在一起不过是寻求婚外的刺激。他对十和子的兴趣来自占有欲和新鲜感，而非感情。当十和子试图让这段关系走向认真时，水岛立刻退缩，暴露出骨子里的冷漠和自保——他绝不会为了十和子放弃稳定的家庭。
 
@@ -37,7 +37,7 @@ postType: movie
 
 与此同时，影片用一个个细碎的日常场景默默拼凑着阵治的全貌。他确实粗糙——大嗓门，不修边幅，毫无浪漫细胞。但在这些表象之下，他对十和子的付出是绝对的、不设任何前提的。工资全部上交，从不过问十和子的行踪，做好饭默默等她回来。十和子明显在和别人来往，他假装不知道。他把阵治演成了一个窝囊到没有底线的人，但在每一个沉默的间隙里，都能感觉到某种不寻常的沉重。他不像是软弱，更像是在承受着什么。
 
-![剧照2](/media/movie/kanojo-ga-sono-na-wo-shiranai-toritachi/still2.webp)
+![剧照2](/media/movie/kanojo-ga-sono-na-wo-shiranai-toritachi/still2.jpg)
 
 影片中反复出现一个画面：阵治趴在窗口，用望远镜看向十和子出门的方向。这个动作初看像是监视，让人不舒服。阵治还有一个习惯——他总喜欢跟十和子念叨自己看到了什么鸟，十和子从来不耐烦听，也从不记那些鸟的名字。
 
@@ -45,7 +45,7 @@ postType: movie
 
 另一条线在不知不觉中收紧。一名刑警登门拜访十和子，告诉她前男友黑崎已经失踪五年了，警方正在调查此案。十和子坚持说自己什么都不知道，最后一次见黑崎就是分手那天。
 
-![剧照3](/media/movie/kanojo-ga-sono-na-wo-shiranai-toritachi/still3.webp)
+![剧照3](/media/movie/kanojo-ga-sono-na-wo-shiranai-toritachi/still3.jpg)
 
 十和子开始注意到阵治的一些异常举动——他暗中跟踪她，有一次和同事打架沾了一身血回来。她心中渐渐生出一个可怕的怀疑：是不是阵治杀了黑崎？
 
@@ -57,7 +57,7 @@ postType: movie
 
 杀死黑崎的人不是阵治——而是十和子自己。
 
-![剧照4](/media/movie/kanojo-ga-sono-na-wo-shiranai-toritachi/still4.webp)
+![剧照4](/media/movie/kanojo-ga-sono-na-wo-shiranai-toritachi/still4.jpg)
 
 分手三年后，黑崎突然联系了十和子。当十和子得知黑崎当年的所有背叛和利用之后，在极度的愤怒和绝望中，她用刀刺死了黑崎。然而这段记忆在巨大的心理创伤下被她的意识完全封锁了——她彻底忘记了自己杀人的事实，反而在记忆中将黑崎重塑成了一个完美恋人的幻影，用八年时间苦苦等待一个已经被自己亲手杀死的人。
 
@@ -71,7 +71,7 @@ postType: movie
 
 说完，阵治从公园的围栏翻身跳了下去。
 
-![剧照5](/media/movie/kanojo-ga-sono-na-wo-shiranai-toritachi/still5.webp)
+![剧照5](/media/movie/kanojo-ga-sono-na-wo-shiranai-toritachi/still5.jpg)
 
 阵治坠落的那一刻，无数只鸟儿从天空中振翅飞过。十和子眼角滑下泪水，画面暗去，浮现出她内心的独白："阵治，我唯一的爱。"
 

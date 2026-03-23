@@ -6,16 +6,7 @@ slug: a-moment-to-remember-movie-notes
 postType: movie
 ---
 
-![poster](/media/movie/a-moment-to-remember/poster.jpg)
-
-- **导演**：李宰汉
-- **编剧**：李宰汉 / 金英夏
-- **主演**：郑雨盛 / 孙艺珍
-- **上映日期**：2004年11月5日（韩国）
-- **片长**：117分钟
-- **评分**：[豆瓣](https://movie.douban.com/subject/1308804/) 7.8 / [IMDB](https://www.imdb.com/title/tt0428870/) 8.1
-
-以下内容包含完整剧透。
+![海报](/media/movie/a-moment-to-remember/poster.jpg)
 
 ## 便利店里的初遇
 
@@ -25,7 +16,7 @@ postType: movie
 
 这次荒唐的"抢可乐"事件，就是两人命运交汇的起点。
 
-![两人恋爱初期的甜蜜时光](/media/movie/a-moment-to-remember/still1.webp)
+![两人恋爱初期的甜蜜时光](/media/movie/a-moment-to-remember/still1.jpg)
 
 ## 工地上的重逢与恋爱
 
@@ -33,7 +24,7 @@ postType: movie
 
 秀珍被哲洙身上那种粗犷却真诚的气质所吸引，主动展开了追求。哲洙起初因为自卑而犹豫——他清楚自己的身份和秀珍之间的鸿沟。但秀珍的坦率和热情让他无法抗拒，两个人很快坠入爱河。他们一起骑摩托兜风、在街头打闹、开心地自拍，度过了一段无忧无虑的甜蜜时光。
 
-![两人开心地一起自拍](/media/movie/a-moment-to-remember/still2.webp)
+![两人开心地一起自拍](/media/movie/a-moment-to-remember/still2.jpg)
 
 ## 顶住压力步入婚姻
 
@@ -41,11 +32,9 @@ postType: movie
 
 两人结了婚，开始了简单而温馨的新婚生活。哲洙一边在工地工作，一边继续学习建筑设计，亲手为两人设计梦想中的房子。秀珍则学着做家务、照顾家庭。在这段日子里，秀珍还帮助哲洙修复了他与母亲之间多年的隔阂。
 
-![婚礼当天的两人](/media/movie/a-moment-to-remember/still3.webp)
+![婚礼当天的两人](/media/movie/a-moment-to-remember/still3.jpg)
 
 这段婚后的日常——厨房里的热气、饭桌上的对话、相互依偎的夜晚——是全片最平静也最珍贵的时光。
-
-![婚后厨房里的日常](/media/movie/a-moment-to-remember/still4.webp)
 
 ## 遗忘的征兆悄然浮现
 
@@ -55,7 +44,7 @@ postType: movie
 
 终于，他们去了医院。检查结果如晴天霹雳：秀珍被确诊患有早发性阿尔茨海默症。这种退行性脑部疾病通常出现在老年人身上，而秀珍年仅27岁就发病，大脑正在逐渐萎缩死亡，记忆会不可逆转地一点点消失。
 
-![恋爱时一起在街头大笑的两人](/media/movie/a-moment-to-remember/still5.webp)
+![恋爱时一起在街头大笑的两人](/media/movie/a-moment-to-remember/still4.jpg)
 
 ## 记忆加速崩塌
 
@@ -65,7 +54,7 @@ postType: movie
 
 然而最致命的打击还是来了。有一天，秀珍看着哲洙的脸，叫出了前男友的名字，并对他说"我爱你"。她已经分不清眼前的人是谁了——她把哲洙当成了别人。哲洙愣在原地，内心彻底崩塌。他去找了秀珍的医生，医生向他详细解释了病情的残酷走向：秀珍的记忆会继续退化，最终她会忘记所有人，包括他。
 
-![两人曾经幸福的恋爱时光](/media/movie/a-moment-to-remember/still1.webp)
+![两人曾经幸福的恋爱时光](/media/movie/a-moment-to-remember/still5.jpg)
 
 ## 秀珍的出走与信
 
@@ -81,8 +70,6 @@ postType: movie
 
 奇迹般的一幕发生了——在那个熟悉的空间里，秀珍想起来了。她想起了那罐被抢走的可乐，想起了眼前这个男人，想起了他们一起走过的所有日子。
 
-![两人之间超越记忆的羁绊](/media/movie/a-moment-to-remember/still3.webp)
-
 ## 结局：夕阳下的最后一程
 
 在便利店短暂的记忆回闪之后，哲洙带着秀珍上了车。夕阳西下，车子向远方驶去。车里的哲洙对秀珍说出了"我爱你"。他知道，也许几个小时之后，秀珍就会再次忘记这一切——忘记便利店，忘记他的名字，忘记今天发生的所有事情。但此刻，她记得。此刻就够了。
@@ -92,3 +79,5 @@ postType: movie
 ---
 
 这部电影改编自日剧《Pure Soul》，由李宰汉执导，孙艺珍和郑雨盛的表演撑起了整部影片。孙艺珍将秀珍从灵动到茫然的退化过程演绎得层次分明，郑雨盛则用克制而沉默的方式呈现了一个"无能为力但不放弃"的丈夫形象。影片2004年在韩国上映后引发了巨大反响，至今仍被视为韩国爱情电影的经典之作。
+
+> 豆瓣链接：[我脑中的橡皮擦 A Moment to Remember](https://movie.douban.com/subject/1308804/)

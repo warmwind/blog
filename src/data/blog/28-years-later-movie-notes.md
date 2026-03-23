@@ -6,16 +6,7 @@ slug: 28-years-later-movie-notes
 postType: movie
 ---
 
-![poster](/media/movie/28-years-later/poster.jpg)
-
-- **导演**：丹尼·博伊尔
-- **编剧**：亚历克斯·加兰
-- **主演**：朱迪·科默 / 阿伦·泰勒-约翰逊 / 拉尔夫·费因斯 / 杰克·奥康奈尔 / 阿尔菲·威廉姆斯
-- **上映日期**：2025年6月20日（美国）
-- **片长**：115分钟
-- **评分**：[豆瓣](https://movie.douban.com/subject/36144741/) 5.6 / [IMDB](https://www.imdb.com/title/tt10548174/) 6.6
-
-以下内容包含完整剧透。
+![海报](/media/movie/28-years-later/poster.jpg)
 
 ## 序幕：二十八年前的那一天
 
@@ -78,3 +69,5 @@ Kelson 将 Spike 和 Isla 带回了自己的住所——一座用消毒处理过
 ## 简评
 
 Danny Boyle 时隔多年回归这个系列，把丧尸片拍成了一部关于告别与成长的公路电影。影片真正打动人的不是感染者有多恐怖，而是 Spike 在失去母亲之后仍然选择走向未知。结尾 Jimmy Crystal 的登场为续集《惊变28年：骨殿》留下了巨大悬念——大陆上正在成形的邪教式新秩序，也许比病毒本身更令人不安。
+
+> 豆瓣链接：[惊变28年 28 Years Later](https://movie.douban.com/subject/36144741/)
