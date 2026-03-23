@@ -13,7 +13,8 @@ postType: movie
 - **主演**：尼克·斯塔尔 / 布莱恩·格罗 / 塔姆馨·托波尔斯基 / 兰迪·瓦斯克斯 / 佩内洛普·米契尔 / 胡安·卡洛斯·梅西耶
 - **上映日期**：2023年7月30日（蒙特利尔奇幻电影节）/ 2024年5月31日（美国）
 - **片长**：101分钟
-- **评分**：[豆瓣](https://movie.douban.com/subject/36471609/) 6.7 / [IMDB](https://www.imdb.com/title/tt13638858/) 6.7
+- **获奖**：Grimmfest 2023 最佳导演、最佳编剧、最佳女演员、观众奖
+- **评分**：[豆瓣](https://movie.douban.com/subject/36471609/) 6.3 / [IMDB](https://www.imdb.com/title/tt13638858/) 6.7
 
 以下内容包含完整剧透。
 
