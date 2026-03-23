@@ -13,7 +13,7 @@ postType: movie
 - **主演**：凯文·科斯特纳 / 加里·奥德曼 / 汤米·李·琼斯 / 瑞恩·雷诺兹 / 加尔·加朵
 - **上映日期**：2016年4月15日（美国）/ 2016年5月13日（中国大陆）
 - **片长**：113分钟
-- **评分**：[豆瓣](https://movie.douban.com/subject/25900945/) 6.5 / [IMDB](https://www.imdb.com/title/tt3014866/) 6.3
+- **评分**：[豆瓣](https://movie.douban.com/subject/25944714/) 6.6 / [IMDB](https://www.imdb.com/title/tt3014866/) 6.3
 
 以下内容包含完整剧透。
 

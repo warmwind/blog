@@ -14,7 +14,7 @@ postType: movie
 - **主演**：法利·格兰杰 / 罗伯特·沃克 / 露丝·罗曼 / 帕特里夏·希区柯克
 - **上映日期**：1951年6月30日（美国）
 - **片长**：101分钟
-- **评分**：[豆瓣](https://movie.douban.com/subject/1295650/) 8.3 / [IMDB](https://www.imdb.com/title/tt0044079/) 7.9
+- **评分**：[豆瓣](https://movie.douban.com/subject/1298505/) 8.1 / [IMDB](https://www.imdb.com/title/tt0044079/) 7.9
 
 以下内容包含完整剧透。
 
