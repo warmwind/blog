@@ -6,7 +6,16 @@ slug: companion-movie-notes
 postType: movie
 ---
 
-![海报](/media/movie/companion/poster.jpg)
+![poster](/media/movie/companion/poster.jpg)
+
+- **导演**：德鲁·汉考克
+- **编剧**：德鲁·汉考克
+- **主演**：索菲·撒切尔 / 杰克·奎德 / 卢卡斯·盖奇 / 梅根·苏里 / 鲁伯特·弗兰德
+- **上映日期**：2025年1月31日（美国）
+- **片长**：97分钟
+- **评分**：[豆瓣](https://movie.douban.com/subject/36421270/) 6.8 / [IMDB](https://www.imdb.com/title/tt26584495/) 6.9
+
+以下内容包含完整剧透。
 
 德鲁·汉考克（Drew Hancock）的导演处女作《完美伴侣》（Companion，2025）把一个看似平常的湖畔度假故事拆解成了一部关于控制、觉醒与反抗的科幻惊悚片。索菲·撒切尔（Sophie Thatcher）和杰克·奎德（Jack Quaid）领衔主演，影片以 1000 万美元的中小成本收获了全球 3670 万美元票房，烂番茄新鲜度高达 93%。以下是完整剧情梳理，含剧透。
 
@@ -51,5 +60,3 @@ Iris 唤醒了 Patrick 关于 Eli 的记忆，打破了 Josh 对他的控制。P
 ![剧照5](/media/movie/companion/still5.jpg)
 
 影片在这个画面上结束。Iris 获得了自由，但和她长得一模一样的"姐妹"还被困在另一段被控制的关系里。这个结尾让整部电影的主题从个体觉醒延伸到了更广的追问：有多少"伴侣"——不管是机器人还是人类——还在被当作附属品对待，而浑然不知？
-
-> 豆瓣链接：[完美伴侣 Companion](https://movie.douban.com/subject/36421270/)

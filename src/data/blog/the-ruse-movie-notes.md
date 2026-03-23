@@ -6,7 +6,16 @@ slug: the-ruse-movie-notes
 postType: movie
 ---
 
-![海报](/media/movie/the-ruse/poster.jpg)
+![poster](/media/movie/the-ruse/poster.jpg)
+
+- **导演**：斯蒂文·梅纳（Stevan Mena）
+- **编剧**：斯蒂文·梅纳（Stevan Mena）
+- **主演**：维罗尼卡·卡特赖特 / 迈克尔·斯戴格 / 玛德琳·邓顿 / 德鲁·莫尔莱恩
+- **上映日期**：2025年5月16日（美国）
+- **片长**：105分钟
+- **评分**：[豆瓣](https://movie.douban.com/subject/36901173/) 暂无 / [IMDB](https://www.imdb.com/title/tt27146069/) 5.5
+
+以下内容包含完整剧透。
 
 《谜局》（The Ruse）是 2024 年由 Stevan Mena 编剧并执导的美国悬疑惊悚片，片长 105 分钟，主演包括 Veronica Cartwright、Madelyn Dundon、Michael Steger 和 T.C. Carter。影片以缅因州一栋偏僻的海边大宅为舞台，讲述了一场精心策划的谋财害命骗局。以下是完整剧情介绍，含重大剧透。
 
@@ -71,5 +80,3 @@ Dale 最终活了下来，洗清了嫌疑。而这场围绕遗产、谋杀与嫁
 ## 简评
 
 《谜局》前三分之二以照护劳动中的孤立感和不信任为基底，营造了不错的悬疑氛围；但结尾长达二十分钟的侦探独白式揭秘略显冗长，大量此前未铺垫的信息被一次性抛出，削弱了推理的参与感。Veronica Cartwright 对 Olivia 一角的演绎是全片最扎实的部分。整体而言，这是一部概念有趣但收尾略显仓促的悬疑片。
-
-> 豆瓣链接：[谜局 The Ruse](https://movie.douban.com/subject/36901173/)
