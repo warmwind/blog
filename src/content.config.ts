@@ -20,7 +20,7 @@ const blog = defineCollection({
       hideEditPost: z.boolean().optional(),
       timezone: z.string().optional(),
       postType: z
-        .enum(["default", "soccer", "movie"])
+        .enum(["default", "soccer"])
         .default("default"),
     }),
 });
