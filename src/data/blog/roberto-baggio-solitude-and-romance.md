@@ -3,6 +3,7 @@ title: 罗伯特·巴乔：忧郁、浪漫与天才的代价
 pubDatetime: 2026-03-19T22:30:00+08:00
 description: 一位80后球迷视角下的罗伯特·巴乔：球队轨迹、荣誉、世界杯记忆与“天才+脆弱”并存的独特气质。
 slug: roberto-baggio-solitude-and-romance
+heroImage: /media/football/baggio/italy-1994.jpg
 postType: soccer
 ---
 

@@ -3,6 +3,7 @@ title: 克林斯曼：金色轰炸机的轨迹与坐标
 pubDatetime: 2026-03-22T18:00:00+08:00
 description: 一位80后球迷视角下的克林斯曼：球队轨迹、荣誉、三驾马车、以及"流动+高效"并存的独特前锋模型。
 slug: klinsmann-golden-bomber
+heroImage: /media/football/klinsmann/inter-milan.jpg
 postType: soccer
 ---
 

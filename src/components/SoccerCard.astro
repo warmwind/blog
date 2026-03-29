@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { slugifyStr } from "@/utils/slugify";
+import { getPath } from "@/utils/getPath";
+
+type Props = CollectionEntry<"blog">;
+
+const { id, data, filePath } = Astro.props;
+const { title, heroImage } = data;
+const href = getPath(id, filePath);
+---
+
+<a
+  href={href}
+  class="group block overflow-hidden rounded-xl border border-skin-line/40 bg-skin-card transition-shadow duration-300 hover:shadow-lg"
+>
+  {heroImage && (
+    <div class="aspect-[3/4] overflow-hidden">
+      <img
+        src={heroImage}
+        alt={title}
+        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        loading="lazy"
+      />
+    </div>
+  )}
+  <div class="p-4">
+    <h3
+      class="text-lg font-semibold text-skin-accent"
+      style={{ viewTransitionName: slugifyStr(title.replaceAll(".", "-")) }}
+    >
+      {title}
+    </h3>
+  </div>
+</a>

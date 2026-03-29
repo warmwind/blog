@@ -3,6 +3,7 @@ title: 罗纳尔多：外星人降临与凡人的代价
 pubDatetime: 2026-03-29T20:00:00+08:00
 description: 一位80后球迷视角下的罗纳尔多：球队轨迹、荣誉、伤病与复出、以及"天赋+毁灭力"并存的独特前锋坐标。
 slug: ronaldo-the-phenomenon
+heroImage: /media/football/ronaldo/inter-milan.jpg
 postType: soccer
 ---
 

@@ -3,6 +3,7 @@ title: 齐达内：优雅是一种控制力
 pubDatetime: 2026-03-29T22:00:00+08:00
 description: 一位80后球迷视角下的齐达内：球队轨迹、荣誉、标志性时刻与"优雅+控制"并存的独特中场坐标。
 slug: zidane-elegance-and-control
+heroImage: /media/football/zidane/real-madrid.jpg
 postType: soccer
 ---
 

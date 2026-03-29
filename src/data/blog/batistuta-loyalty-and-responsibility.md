@@ -3,6 +3,7 @@ title: 巴蒂斯图塔：战神的忠诚与担当
 pubDatetime: 2026-03-17T22:00:00+08:00
 description: 一位80后球迷视角下的巴蒂斯图塔：球队轨迹、荣誉、外界评价与“忠诚+担当”的独特价值。
 slug: batistuta-loyalty-and-responsibility
+heroImage: /media/football/batistuta/fiorentina.jpg
 postType: soccer
 ---
 
