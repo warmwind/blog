@@ -1,8 +1,10 @@
 ---
-title: "快速正则搜索：为 Agent 工具构建文本索引（中文翻译）"
+title: "快速正则搜索：为 Agent 工具构建文本索引"
 pubDatetime: 2026-03-24T12:00:00+08:00
 description: "Cursor 研究博客《Fast regex search: indexing text for agent tools》中文翻译（含原文引用）。介绍如何通过本地文本索引加速大型代码库中 Agent 的正则表达式搜索。"
 slug: fast-regex-search-indexing-text-for-agent-tools-zh
+originalTitle: "Fast regex search: indexing text for agent tools"
+originalUrl: https://cursor.com/blog/fast-regex-search
 ---
 
 > 原文标题：Fast regex search: indexing text for agent tools

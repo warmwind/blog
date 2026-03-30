@@ -3,6 +3,8 @@ title: "LangChain 宣布与 NVIDIA 共建企业级 Agentic AI 平台"
 pubDatetime: 2026-03-23T18:00:00+08:00
 description: "LangChain 文章《LangChain Announces Enterprise Agentic AI Platform Built with NVIDIA》中文翻译（含原文引用）。"
 slug: langchain-nvidia-enterprise-agentic-ai-platform-zh
+originalTitle: "LangChain Announces Enterprise Agentic AI Platform Built with NVIDIA"
+originalUrl: https://blog.langchain.com/nvidia-enterprise/
 ---
 
 > 原文标题：LangChain Announces Enterprise Agentic AI Platform Built with NVIDIA

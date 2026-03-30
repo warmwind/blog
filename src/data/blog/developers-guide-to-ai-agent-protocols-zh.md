@@ -1,8 +1,10 @@
 ---
-title: "AI Agent 协议开发者指南（中文翻译）"
+title: "AI Agent 协议开发者指南"
 pubDatetime: 2026-03-21T22:00:00+08:00
 description: "Google Developers Blog《Developer's Guide to AI Agent Protocols》中文翻译（含原文引用）。"
 slug: developers-guide-to-ai-agent-protocols-zh
+originalTitle: "Developer's Guide to AI Agent Protocols"
+originalUrl: https://developers.googleblog.com/developers-guide-to-ai-agent-protocols/
 ---
 
 > 原文标题：Developer's Guide to AI Agent Protocols

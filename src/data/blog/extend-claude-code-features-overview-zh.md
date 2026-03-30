@@ -1,8 +1,10 @@
 ---
-title: "扩展 Claude Code（Features Overview）中文翻译"
+title: "扩展 Claude Code"
 pubDatetime: 2026-03-16T15:00:00+08:00
 description: "Claude Code 文档《Extend Claude Code》中文翻译（含原文引用）。"
 slug: extend-claude-code-features-overview-zh
+originalTitle: "Extend Claude Code"
+originalUrl: https://code.claude.com/docs/en/features-overview
 ---
 
 > 原文标题：Extend Claude Code  

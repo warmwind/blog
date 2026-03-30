@@ -1,8 +1,10 @@
 ---
-title: "81,000 人想从 AI 中得到什么（中文翻译）"
+title: "81,000 人想从 AI 中得到什么"
 pubDatetime: 2026-03-22T10:00:00+08:00
 description: "Anthropic 文章《What 81,000 People Want from AI》中文翻译（含原文引用）。Anthropic 对全球 159 个国家、70 种语言的 80,508 名 Claude 用户进行了史上最大规模定性访谈研究。"
 slug: what-81000-people-want-from-ai-zh
+originalTitle: "What 81,000 People Want from AI"
+originalUrl: https://www.anthropic.com/81k-interviews
 ---
 
 > 原文标题：What 81,000 People Want from AI

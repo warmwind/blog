@@ -1,8 +1,10 @@
 ---
-title: "用 LlamaParse 和 Gemini 3.1 构建智能金融助手（中文翻译）"
+title: "用 LlamaParse 和 Gemini 3.1 构建智能金融助手"
 pubDatetime: 2026-03-27T20:00:00+08:00
 description: "Google Developers Blog 文章《Build a smart financial assistant with LlamaParse and Gemini 3.1》中文翻译（含原文引用）。"
 slug: build-smart-financial-assistant-llamaparse-gemini-zh
+originalTitle: "Build a smart financial assistant with LlamaParse and Gemini 3.1"
+originalUrl: https://developers.googleblog.com/build-a-smart-financial-assistant-with-llamaparse-and-gemini-31/
 ---
 
 > 原文标题：Build a smart financial assistant with LlamaParse and Gemini 3.1

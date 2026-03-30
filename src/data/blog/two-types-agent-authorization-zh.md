@@ -1,8 +1,10 @@
 ---
-title: "两种不同的 Agent 授权类型（中文翻译）"
+title: "两种不同的 Agent 授权类型"
 pubDatetime: 2026-03-26T20:00:00+08:00
 description: "LangChain Blog 文章《Two different types of agent authorization》中文翻译（含原文引用）。"
 slug: two-types-agent-authorization-zh
+originalTitle: "Two different types of agent authorization"
+originalUrl: https://blog.langchain.com/two-different-types-of-agent-authorization/
 ---
 
 > 原文标题：Two different types of agent authorization

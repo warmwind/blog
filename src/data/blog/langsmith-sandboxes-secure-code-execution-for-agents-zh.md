@@ -1,8 +1,10 @@
 ---
-title: "LangSmith Sandboxes：为 Agents 提供安全代码执行（中文翻译）"
+title: "LangSmith Sandboxes：为 Agents 提供安全代码执行"
 pubDatetime: 2026-03-19T10:05:00+08:00
 description: "LangChain 博客《Introducing LangSmith Sandboxes: Secure Code Execution for Agents》中文翻译（含原文引用）。"
 slug: langsmith-sandboxes-secure-code-execution-for-agents-zh
+originalTitle: "Introducing LangSmith Sandboxes: Secure Code Execution for Agents"
+originalUrl: https://blog.langchain.com/introducing-langsmith-sandboxes-secure-code-execution-for-agents/
 ---
 
 > 原文标题：Introducing LangSmith Sandboxes: Secure Code Execution for Agents  

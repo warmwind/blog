@@ -1,8 +1,10 @@
 ---
-title: 自主式 Context Compression：上下文压缩实践（中文翻译）
+title: 自主式 Context Compression：上下文压缩实践
 pubDatetime: 2026-03-14T01:00:00+08:00
 description: LangChain 博客文章《Autonomous context compression》的中文翻译（含原文引用）。
 slug: autonomous-context-compression
+originalTitle: "Autonomous context compression"
+originalUrl: https://blog.langchain.com/autonomous-context-compression/
 ---
 
 > 原文标题：Autonomous context compression  

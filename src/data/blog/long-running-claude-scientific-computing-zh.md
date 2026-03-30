@@ -1,8 +1,10 @@
 ---
-title: "长时间运行的 Claude 用于科学计算（Anthropic Research 翻译）"
+title: "长时间运行的 Claude 用于科学计算"
 pubDatetime: 2026-03-28T14:00:00+08:00
 description: "Anthropic Research 文章《Long-running Claude for scientific computing》中文翻译（含原文引用）。介绍如何将多日 Agent 编码工作流应用于科学计算任务。"
 slug: long-running-claude-scientific-computing-zh
+originalTitle: "Long-running Claude for scientific computing"
+originalUrl: https://www.anthropic.com/research/long-running-Claude
 ---
 
 > 原文标题：Long-running Claude for scientific computing

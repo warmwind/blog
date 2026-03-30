@@ -1,8 +1,10 @@
 ---
-title: "面向长时间运行应用开发的 Harness 设计（中文翻译）"
+title: "面向长时间运行应用开发的 Harness 设计"
 pubDatetime: 2026-03-25T20:00:00+08:00
 description: "Anthropic Engineering 文章《Harness design for long-running application development》中文翻译（含原文引用）。"
 slug: harness-design-long-running-apps-zh
+originalTitle: "Harness design for long-running application development"
+originalUrl: https://www.anthropic.com/engineering/harness-design-long-running-apps
 ---
 
 > 原文标题：Harness design for long-running application development

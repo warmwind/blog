@@ -1,8 +1,10 @@
 ---
-title: "我们如何为 Deep Agents 构建评估（中文翻译）"
+title: "我们如何为 Deep Agents 构建评估"
 pubDatetime: 2026-03-29T20:00:00+08:00
 description: "LangChain Blog 文章《How we build evals for Deep Agents》中文翻译（含原文引用）。介绍 LangChain 团队如何为 Deep Agents 创建评估体系，涵盖数据来源、指标定义与运行方式。"
 slug: how-we-build-evals-for-deep-agents-zh
+originalTitle: "How we build evals for Deep Agents"
+originalUrl: https://blog.langchain.com/how-we-build-evals-for-deep-agents/
 ---
 
 > 原文标题：How we build evals for Deep Agents

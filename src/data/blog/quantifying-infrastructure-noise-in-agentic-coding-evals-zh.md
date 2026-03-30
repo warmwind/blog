@@ -3,6 +3,8 @@ title: "量化 agentic coding evals 中的基础设施噪声"
 pubDatetime: 2026-03-19T15:05:00+08:00
 description: "Anthropic 文章《Quantifying infrastructure noise in agentic coding evals》中文翻译（含原文引用）。"
 slug: quantifying-infrastructure-noise-in-agentic-coding-evals-zh
+originalTitle: "Quantifying infrastructure noise in agentic coding evals"
+originalUrl: https://www.anthropic.com/engineering/infrastructure-noise
 ---
 
 > 原文标题：Quantifying infrastructure noise in agentic coding evals  

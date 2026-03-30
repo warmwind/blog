@@ -1,8 +1,10 @@
 ---
-title: "从 model 到 agent：为 Responses API 配备 computer environment（中文翻译）"
+title: "从 model 到 agent：为 Responses API 配备 computer environment"
 pubDatetime: 2026-03-15T22:00:00+08:00
 description: "OpenAI 工程文章《From model to agent: Equipping the Responses API with a computer environment》中文翻译（含原文引用）。"
 slug: from-model-to-agent-responses-api-computer-environment
+originalTitle: "From model to agent: Equipping the Responses API with a computer environment"
+originalUrl: https://openai.com/index/equip-responses-api-computer-environment
 ---
 
 > 原文标题：From model to agent: Equipping the Responses API with a computer environment  

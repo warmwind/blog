@@ -1,8 +1,10 @@
 ---
-title: "知识需要一个 Meta-Knowledge 层（中文翻译）"
+title: "知识需要一个 Meta-Knowledge 层"
 pubDatetime: 2026-03-15T15:00:00+08:00
 description: "Pinecone Learn 文章《Knowledge needs a meta-knowledge layer》的中文翻译（含原文引用）。"
 slug: knowledge-needs-a-meta-knowledge-layer
+originalTitle: "Knowledge needs a meta-knowledge layer"
+originalUrl: https://www.pinecone.io/learn/series/beyond-retrieval/knowledge-needs-meta-knowledge/
 ---
 
 > 原文标题：Knowledge needs a meta-knowledge layer  

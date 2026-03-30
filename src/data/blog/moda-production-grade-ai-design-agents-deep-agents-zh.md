@@ -1,8 +1,10 @@
 ---
-title: "Moda 如何用 Deep Agents 构建生产级 AI 设计 Agent（中文翻译）"
+title: "Moda 如何用 Deep Agents 构建生产级 AI 设计 Agent"
 pubDatetime: 2026-03-25T22:00:00+08:00
 description: "LangChain Blog 文章《How Moda Builds Production-Grade AI Design Agents with Deep Agents》中文翻译（含原文引用）。"
 slug: moda-production-grade-ai-design-agents-deep-agents-zh
+originalTitle: "How Moda Builds Production-Grade AI Design Agents with Deep Agents"
+originalUrl: https://blog.langchain.com/how-moda-builds-production-grade-ai-design-agents-with-deep-agents/
 ---
 
 > 原文标题：How Moda Builds Production-Grade AI Design Agents with Deep Agents

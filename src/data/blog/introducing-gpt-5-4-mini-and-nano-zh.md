@@ -1,8 +1,10 @@
 ---
-title: "发布 GPT-5.4 mini 与 nano（中文翻译）"
+title: "发布 GPT-5.4 mini 与 nano"
 pubDatetime: 2026-03-18T22:00:00+08:00
 description: "OpenAI 文章《Introducing GPT-5.4 mini and nano》中文翻译（含原文引用）。"
 slug: introducing-gpt-5-4-mini-and-nano-zh
+originalTitle: "Introducing GPT-5.4 mini and nano"
+originalUrl: https://openai.com/index/introducing-gpt-5-4-mini-and-nano
 ---
 
 > 原文标题：Introducing GPT-5.4 mini and nano  

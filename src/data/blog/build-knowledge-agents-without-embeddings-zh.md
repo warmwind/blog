@@ -1,8 +1,10 @@
 ---
-title: "不用 Embedding 构建知识 Agent（中文翻译）"
+title: "不用 Embedding 构建知识 Agent"
 pubDatetime: 2026-03-23T18:00:00+08:00
 description: "Vercel 博客《Build knowledge agents without embeddings》中文翻译（含原文引用）。介绍用文件系统和 bash 替代向量数据库构建知识 Agent 的方法。"
 slug: build-knowledge-agents-without-embeddings-zh
+originalTitle: "Build knowledge agents without embeddings"
+originalUrl: https://vercel.com/blog/build-knowledge-agents-without-embeddings
 ---
 
 > 原文标题：Build knowledge agents without embeddings

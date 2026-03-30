@@ -1,8 +1,10 @@
 ---
-title: "Claude Code 如何工作（中文翻译）"
+title: "Claude Code 如何工作"
 pubDatetime: 2026-03-16T10:00:00+08:00
 description: "Anthropic 文档《How Claude Code works》中文翻译（含原文引用）。"
 slug: how-claude-code-works-zh
+originalTitle: "How Claude Code works"
+originalUrl: https://code.claude.com/docs/en/how-claude-code-works
 ---
 
 > 原文标题：How Claude Code works  

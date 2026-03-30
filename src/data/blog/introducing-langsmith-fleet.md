@@ -1,8 +1,10 @@
 ---
-title: 介绍 LangSmith Fleet：面向企业的 Agent 管理工作台（中文翻译）
+title: 介绍 LangSmith Fleet：面向企业的 Agent 管理工作台
 pubDatetime: 2026-03-20T00:49:42+08:00
 description: LangChain 博客文章《Introducing LangSmith Fleet》的中文翻译（含原文引用）。
 slug: introducing-langsmith-fleet
+originalTitle: "Introducing LangSmith Fleet"
+originalUrl: https://blog.langchain.com/introducing-langsmith-fleet/
 ---
 
 > 原文标题：Introducing LangSmith Fleet  

@@ -1,8 +1,10 @@
 ---
-title: "Agent 评估就绪清单（中文翻译）"
+title: "Agent 评估就绪清单"
 pubDatetime: 2026-03-28T20:00:00+08:00
 description: "LangChain Blog 文章《Agent Evaluation Readiness Checklist》中文翻译（含原文引用）。"
 slug: agent-evaluation-readiness-checklist-zh
+originalTitle: "Agent Evaluation Readiness Checklist"
+originalUrl: https://blog.langchain.com/agent-evaluation-readiness-checklist/
 ---
 
 > 原文标题：Agent Evaluation Readiness Checklist

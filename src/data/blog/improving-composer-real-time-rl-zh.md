@@ -1,8 +1,10 @@
 ---
-title: "用实时 RL 改进 Composer（Cursor Research 中文翻译）"
+title: "用实时 RL 改进 Composer"
 pubDatetime: 2026-03-28T12:00:00+08:00
 description: "Cursor 研究博客《Improving Composer through real-time RL》中文翻译（含原文引用）。Cursor 将在线强化学习应用于 Composer，利用真实用户交互作为奖励信号，每五小时即可交付改进版本。"
 slug: improving-composer-real-time-rl-zh
+originalTitle: "Improving Composer through real-time RL"
+originalUrl: https://cursor.com/blog/real-time-rl-for-composer
 ---
 
 > 原文标题：Improving Composer through real-time RL

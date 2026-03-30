@@ -20,6 +20,8 @@ const blog = defineCollection({
       canonicalURL: z.string().optional(),
       hideEditPost: z.boolean().optional(),
       timezone: z.string().optional(),
+      originalTitle: z.string().optional(),
+      originalUrl: z.string().optional(),
       postType: z
         .enum(["default", "soccer"])
         .default("default"),

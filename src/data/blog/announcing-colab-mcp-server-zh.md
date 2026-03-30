@@ -1,8 +1,10 @@
 ---
-title: "发布 Colab MCP Server：将任意 AI Agent 连接到 Google Colab（中文翻译）"
+title: "发布 Colab MCP Server：将任意 AI Agent 连接到 Google Colab"
 pubDatetime: 2026-03-22T20:00:00+08:00
 description: "Google Developers Blog《Announcing the Colab MCP Server: Connect Any AI Agent to Google Colab》中文翻译（含原文引用）。"
 slug: announcing-colab-mcp-server-zh
+originalTitle: "Announcing the Colab MCP Server: Connect Any AI Agent to Google Colab"
+originalUrl: https://developers.googleblog.com/announcing-the-colab-mcp-server-connect-any-ai-agent-to-google-colab/
 ---
 
 > 原文标题：Announcing the Colab MCP Server: Connect Any AI Agent to Google Colab

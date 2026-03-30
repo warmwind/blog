@@ -1,8 +1,10 @@
 ---
-title: "Claude 如何记住你的项目（Memory）中文翻译"
+title: "Claude 如何记住你的项目"
 pubDatetime: 2026-03-18T10:00:00+08:00
 description: "Claude Code 文档《How Claude remembers your project》中文翻译（含原文引用）。"
 slug: how-claude-remembers-your-project-memory-zh
+originalTitle: "How Claude remembers your project"
+originalUrl: https://code.claude.com/docs/en/memory
 ---
 
 > 原文标题：How Claude remembers your project  

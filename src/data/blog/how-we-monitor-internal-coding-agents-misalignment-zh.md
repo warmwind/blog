@@ -1,8 +1,10 @@
 ---
-title: "我们如何监控内部 coding agents 的失配行为（中文翻译）"
+title: "我们如何监控内部 coding agents 的失配行为"
 pubDatetime: 2026-03-20T10:05:00+08:00
 description: "OpenAI 文章《How we monitor internal coding agents for misalignment》中文翻译（含原文引用）。"
 slug: how-we-monitor-internal-coding-agents-misalignment-zh
+originalTitle: "How we monitor internal coding agents for misalignment"
+originalUrl: https://openai.com/index/how-we-monitor-internal-coding-agents-misalignment
 ---
 
 > 原文标题：How we monitor internal coding agents for misalignment  

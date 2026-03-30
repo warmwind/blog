@@ -1,8 +1,10 @@
 ---
-title: "用 Agent Skills 弥合知识鸿沟（中文翻译）"
+title: "用 Agent Skills 弥合知识鸿沟"
 pubDatetime: 2026-03-26T20:00:00+08:00
 description: "Google Developers Blog《Closing the knowledge gap with agent skills》中文翻译（含原文引用）。探索如何通过 agent skills 这种轻量级方式弥合大语言模型的知识鸿沟，Gemini 3.1 Pro 的成功率从 28.2% 跃升至 96.6%。"
 slug: closing-knowledge-gap-agent-skills-zh
+originalTitle: "Closing the knowledge gap with agent skills"
+originalUrl: https://developers.googleblog.com/closing-the-knowledge-gap-with-agent-skills/
 ---
 
 > 原文标题：Closing the knowledge gap with agent skills

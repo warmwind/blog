@@ -1,8 +1,10 @@
 ---
-title: "Cursor 发布 Composer 2：前沿水准的编程模型（中文翻译）"
+title: "Cursor 发布 Composer 2：前沿水准的编程模型"
 pubDatetime: 2026-03-25T23:00:00+08:00
 description: "Cursor 研究博客《Introducing Composer 2》中文翻译（含原文引用）。Composer 2 在多项编程基准测试中大幅领先，以极具竞争力的定价提供前沿级编程智能。"
 slug: introducing-composer-2-zh
+originalTitle: "Introducing Composer 2"
+originalUrl: https://cursor.com/blog/composer-2
 ---
 
 > 原文标题：Introducing Composer 2

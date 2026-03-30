@@ -16,34 +16,54 @@ type Props = {
 
 const { variant: Heading = "h2", id, data, filePath } = Astro.props;
 
-const { title, pubDatetime, modDatetime, timezone: postTimezone } = data;
+const {
+  title,
+  originalUrl,
+  pubDatetime,
+  modDatetime,
+  timezone: postTimezone,
+} = data;
 
 const isModified = modDatetime && modDatetime > pubDatetime;
 const datetime = dayjs(isModified ? modDatetime : pubDatetime).tz(
   postTimezone || SITE.timezone
 );
 const formattedDate = datetime.format("YYYY/MM/DD");
+const href = getPath(id, filePath);
 ---
 
-<li class="my-4 flex items-baseline gap-4">
+<li class="my-4 flex items-start gap-4">
   <time
     class="shrink-0 text-sm tabular-nums opacity-60"
     datetime={datetime.toISOString()}
+    style="margin-top: 2px;"
   >
     {formattedDate}
   </time>
-  <a
-    href={getPath(id, filePath)}
-    class:list={[
-      "text-lg font-medium text-accent/90 transition-colors duration-200",
-      "underline-offset-4 hover:text-accent hover:underline hover:decoration-solid",
-      "focus-visible:no-underline focus-visible:underline-offset-0",
-    ]}
-  >
-    <Heading
-      style={{ viewTransitionName: slugifyStr(title.replaceAll(".", "-")) }}
+  <div>
+    <a
+      href={href}
+      class:list={[
+        "text-lg font-medium text-accent/90 transition-colors duration-200",
+        "underline-offset-4 hover:text-accent hover:underline hover:decoration-solid",
+        "focus-visible:no-underline focus-visible:underline-offset-0",
+      ]}
     >
-      {title}
-    </Heading>
-  </a>
+      <Heading
+        style={{ viewTransitionName: slugifyStr(title.replaceAll(".", "-")) }}
+      >
+        {title}
+      </Heading>
+    </a>
+    {originalUrl && (
+      <a
+        href={originalUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-0.5 block text-sm opacity-60 transition-opacity hover:opacity-80"
+      >
+        {originalUrl}
+      </a>
+    )}
+  </div>
 </li>

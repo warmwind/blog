@@ -1,8 +1,10 @@
 ---
-title: "提升前沿 LLM 的 Instruction Hierarchy（中文翻译）"
+title: "提升前沿 LLM 的 Instruction Hierarchy"
 pubDatetime: 2026-03-23T21:00:00+08:00
 description: "OpenAI 文章《Improving instruction hierarchy in frontier LLMs》中文翻译（含原文引用）。介绍 IH-Challenge 训练数据集，强化指令优先级、安全可控性与 prompt injection 鲁棒性。"
 slug: improving-instruction-hierarchy-frontier-llms-zh
+originalTitle: "Improving instruction hierarchy in frontier LLMs"
+originalUrl: https://openai.com/index/instruction-hierarchy-challenge/
 ---
 
 > **本篇超出 7 天窗口**：原文发布于 2026 年 3 月 10 日（距今 13 天），7 天窗口内无未翻译的高质量技术深度文章，故放宽至 14 天。

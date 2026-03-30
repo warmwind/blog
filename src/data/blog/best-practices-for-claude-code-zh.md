@@ -1,8 +1,10 @@
 ---
-title: "Claude Code 最佳实践（Best Practices）中文翻译"
+title: "Claude Code 最佳实践"
 pubDatetime: 2026-03-16T16:00:00+08:00
 description: "Claude Code 文档《Best Practices for Claude Code》中文翻译（含原文引用）。"
 slug: best-practices-for-claude-code-zh
+originalTitle: "Best Practices for Claude Code"
+originalUrl: https://code.claude.com/docs/en/best-practices
 ---
 
 > 原文标题：Best Practices for Claude Code  

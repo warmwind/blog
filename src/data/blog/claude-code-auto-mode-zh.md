@@ -1,8 +1,10 @@
 ---
-title: "Claude Code Auto Mode：更安全地跳过权限审批（中文翻译）"
+title: "Claude Code Auto Mode：更安全地跳过权限审批"
 pubDatetime: 2026-03-26T12:00:00+08:00
 description: "Anthropic Engineering 文章《Claude Code auto mode: a safer way to skip permissions》中文翻译（含原文引用）。"
 slug: claude-code-auto-mode-zh
+originalTitle: "Claude Code auto mode: a safer way to skip permissions"
+originalUrl: https://www.anthropic.com/engineering/claude-code-auto-mode
 ---
 
 > 原文标题：Claude Code auto mode: a safer way to skip permissions
