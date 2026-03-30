@@ -1,10 +1,14 @@
 ---
 title: "Vibe Physics：AI 研究生"
-subtitle: "原文：https://www.anthropic.com/research/vibe-physics"
 pubDatetime: 2026-03-30T10:00:00+08:00
 description: "Harvard 物理学教授 Matthew Schwartz 指导 Claude Opus 4.5 完成了一项真实的理论物理研究计算的完整过程记录。"
 slug: vibe-physics-ai-grad-student-zh
+originalTitle: "Vibe Physics: The AI Grad Student"
+originalUrl: https://www.anthropic.com/research/vibe-physics
 ---
+
+> 原文标题：Vibe Physics: The AI Grad Student
+> 原文链接：https://www.anthropic.com/research/vibe-physics
 
 # Vibe Physics：AI 研究生
 
