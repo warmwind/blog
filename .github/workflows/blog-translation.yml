@@ -36,7 +36,21 @@ jobs:
           claude_args: "--model haiku"
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           show_full_output: true
-          additional_permissions: "WebSearch,WebFetch,Read,Write,Edit,Bash,Glob,Grep"
+          settings: |
+            {
+              "permissions": {
+                "allow": [
+                  "WebSearch",
+                  "WebFetch",
+                  "Read",
+                  "Write",
+                  "Edit",
+                  "Bash(*)",
+                  "Glob",
+                  "Grep"
+                ]
+              }
+            }
           prompt: |
             You are running autonomously in CI — do not ask for user input. Follow the /blog-translation-strict skill instructions fully:
             1. Search the web for recent AI/tech blog posts from these sources, published within the last 7 days:
