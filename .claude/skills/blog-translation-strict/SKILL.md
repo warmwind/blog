@@ -1,0 +1,1 @@
+/Users/oscarjiang/Projects/githubs/skills/githubs-blog/blog-translation-strict/SKILL.md

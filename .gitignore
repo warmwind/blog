@@ -23,4 +23,7 @@ public/pagefind/
 .env
 .env.*
 !.env.example
-.claude/
+.claude/*
+!.claude/skills/
+.claude/skills/*
+!.claude/skills/blog-translation-strict/
