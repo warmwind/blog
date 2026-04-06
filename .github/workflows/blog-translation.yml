@@ -66,6 +66,7 @@ jobs:
             3. For each selected article, translate it to Chinese following all the rules in the skill.
                - CRITICAL: Keep ALL images from the original article. Do not drop any image.
                - CRITICAL: Keep the exact same format as the original (headings, paragraphs, code blocks, tables, lists). Your job is ONLY translation — do not reorganize or reformat.
+               - CRITICAL: Set pubDatetime to the current translation time (now), NOT the original article's publish date. This ensures new translations appear at the top of the blog list.
             4. After all translations are done, run pnpm build once to verify all posts.
             5. Commit and push all translated posts to origin/main in a single commit.
-            If no suitable article is found within the 3-day window, expand to 7 days. If still nothing, exit gracefully with a message.
+            If no suitable article is found within the 3-day window, exit gracefully without creating any posts.
