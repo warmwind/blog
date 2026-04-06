@@ -37,4 +37,15 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           show_full_output: true
           prompt: |
-            /blog-translation-strict
+            You are running autonomously in CI — do not ask for user input. Follow the /blog-translation-strict skill instructions fully:
+            1. Search the web for recent AI/tech blog posts from these sources, published within the last 7 days:
+               - AI Labs: Anthropic Blog, OpenAI Blog, Google DeepMind Blog, Meta AI Blog, Mistral Blog, Cohere Blog
+               - Developer Platforms: Hugging Face Blog, LangChain Blog, LlamaIndex Blog, Vercel AI Blog, Weights & Biases Blog
+               - Cloud AI: AWS AI Blog, Google Cloud AI Blog, Azure AI Blog
+               - Aggregators & Community: Hacker News (top AI/ML stories), The Gradient, Towards Data Science
+               - Research & News: MIT Technology Review, The Batch (Andrew Ng), Simon Willison's Blog
+            2. Pick the best candidate that has NOT been translated yet (check src/data/blog/*.md for duplicates).
+            3. Translate it to Chinese following all the rules in the skill.
+            4. Run pnpm build to verify.
+            5. Commit and push to origin/main.
+            If no suitable article is found within the 7-day window, expand to 14 days. If still nothing, exit gracefully with a message.
