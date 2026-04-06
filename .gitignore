@@ -23,5 +23,4 @@ public/pagefind/
 .env
 .env.*
 !.env.example
-.claude/*
-!.claude/skills/
+.claude/
