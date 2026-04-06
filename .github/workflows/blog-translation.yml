@@ -30,7 +30,58 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run blog translation
+      - name: Select articles
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_args: "--model sonnet"
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          show_full_output: true
+          settings: |
+            {
+              "permissions": {
+                "allow": [
+                  "WebSearch",
+                  "WebFetch",
+                  "Read",
+                  "Write",
+                  "Bash(*)",
+                  "Glob",
+                  "Grep"
+                ]
+              }
+            }
+          prompt: |
+            You are running autonomously in CI — do not ask for user input.
+            Your job is ONLY to select articles. Do NOT translate anything.
+
+            1. Search the web for recent AI/tech blog posts from these sources, published within the last 3 days:
+               - AI Labs: Anthropic Blog, OpenAI Blog, Google DeepMind Blog, Meta AI Blog, Mistral Blog, Cohere Blog
+               - Developer Platforms: Hugging Face Blog, LangChain Blog, LlamaIndex Blog, Vercel AI Blog, Weights & Biases Blog
+               - Cloud AI: AWS AI Blog, Google Cloud AI Blog, Azure AI Blog
+               - Aggregators & Community: Hacker News (top AI/ML stories), The Gradient, Towards Data Science
+               - Research & News: MIT Technology Review, The Batch (Andrew Ng), Simon Willison's Blog
+            2. Select up to 3 of the best candidates that have NOT been translated yet (check src/data/blog/*.md for duplicates by originalUrl, title keywords, and slug).
+               - Only pick in-depth technical articles (architecture deep dives, research papers, engineering case studies, detailed tutorials with code, system design posts).
+               - Skip shallow announcement posts, product launches, marketing content, listicles, or brief news summaries.
+               - Prefer longer articles (1500+ words) with substantial technical depth.
+            3. Write the selection to /tmp/selected-articles.json as a JSON array:
+               [{"title": "...", "url": "...", "publishDate": "..."}]
+               If no suitable article is found, write an empty array [].
+
+      - name: Check selection
+        id: check
+        run: |
+          if [ ! -f /tmp/selected-articles.json ] || [ "$(cat /tmp/selected-articles.json)" = "[]" ]; then
+            echo "No articles selected, skipping translation."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Articles selected:"
+            cat /tmp/selected-articles.json
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Translate articles
+        if: steps.check.outputs.skip != 'true'
         uses: anthropics/claude-code-action@v1
         with:
           claude_args: "--model haiku"
@@ -52,21 +103,18 @@ jobs:
               }
             }
           prompt: |
-            You are running autonomously in CI — do not ask for user input. Follow the /blog-translation-strict skill instructions fully:
-            1. Search the web for recent AI/tech blog posts from these sources, published within the last 3 days:
-               - AI Labs: Anthropic Blog, OpenAI Blog, Google DeepMind Blog, Meta AI Blog, Mistral Blog, Cohere Blog
-               - Developer Platforms: Hugging Face Blog, LangChain Blog, LlamaIndex Blog, Vercel AI Blog, Weights & Biases Blog
-               - Cloud AI: AWS AI Blog, Google Cloud AI Blog, Azure AI Blog
-               - Aggregators & Community: Hacker News (top AI/ML stories), The Gradient, Towards Data Science
-               - Research & News: MIT Technology Review, The Batch (Andrew Ng), Simon Willison's Blog
-            2. Select up to 5 of the best candidates that have NOT been translated yet (check src/data/blog/*.md for duplicates).
-               - Only pick in-depth technical articles (architecture deep dives, research papers, engineering case studies, detailed tutorials with code, system design posts).
-               - Skip shallow announcement posts, product launches, marketing content, listicles, or brief news summaries.
-               - Prefer longer articles (1500+ words) with substantial technical depth.
-            3. For each selected article, translate it to Chinese following all the rules in the skill.
+            You are running autonomously in CI — do not ask for user input.
+            Follow the /blog-translation-strict skill instructions for translation.
+
+            Read the article list from /tmp/selected-articles.json.
+            For each article in the list, sequentially:
+            1. Fetch the full article content from its URL.
+            2. Translate it to Chinese following all the rules in the skill.
                - CRITICAL: Keep ALL images from the original article. Do not drop any image.
                - CRITICAL: Keep the exact same format as the original (headings, paragraphs, code blocks, tables, lists). Your job is ONLY translation — do not reorganize or reformat.
-               - CRITICAL: Set pubDatetime to the current translation time (now), NOT the original article's publish date. This ensures new translations appear at the top of the blog list.
-            4. After all translations are done, run pnpm build once to verify all posts.
+               - CRITICAL: Set pubDatetime to the current translation time (now), NOT the original article's publish date.
+            3. Write the translated post to src/data/blog/<slug>.md.
+
+            After all translations are done:
+            4. Run pnpm build once to verify all posts render correctly.
             5. Commit and push all translated posts to origin/main in a single commit.
-            If no suitable article is found within the 3-day window, exit gracefully without creating any posts.
