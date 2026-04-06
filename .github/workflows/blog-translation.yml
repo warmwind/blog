@@ -36,4 +36,3 @@ jobs:
           claude_args: "--model haiku"
           prompt: |
             /blog-translation-strict
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
