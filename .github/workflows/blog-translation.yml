@@ -8,7 +8,7 @@ on:
 jobs:
   translate:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     permissions:
       contents: write
       id-token: write
@@ -45,8 +45,11 @@ jobs:
                - Cloud AI: AWS AI Blog, Google Cloud AI Blog, Azure AI Blog
                - Aggregators & Community: Hacker News (top AI/ML stories), The Gradient, Towards Data Science
                - Research & News: MIT Technology Review, The Batch (Andrew Ng), Simon Willison's Blog
-            2. Pick the best candidate that has NOT been translated yet (check src/data/blog/*.md for duplicates).
-            3. Translate it to Chinese following all the rules in the skill.
-            4. Run pnpm build to verify.
-            5. Commit and push to origin/main.
+            2. Select up to 5 of the best candidates that have NOT been translated yet (check src/data/blog/*.md for duplicates).
+               - Only pick in-depth technical articles (architecture deep dives, research papers, engineering case studies, detailed tutorials with code, system design posts).
+               - Skip shallow announcement posts, product launches, marketing content, listicles, or brief news summaries.
+               - Prefer longer articles (1500+ words) with substantial technical depth.
+            3. For each selected article, translate it to Chinese following all the rules in the skill.
+            4. After all translations are done, run pnpm build once to verify all posts.
+            5. Commit and push all translated posts to origin/main in a single commit.
             If no suitable article is found within the 7-day window, expand to 14 days. If still nothing, exit gracefully with a message.
