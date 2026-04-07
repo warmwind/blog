@@ -34,7 +34,8 @@
       "sharp"
     ],
     "overrides": {
-      "defu": ">=6.1.5"
+      "defu": ">=6.1.5",
+      "vite": ">=6.4.2"
     }
   },
   "devDependencies": {
