@@ -7,8 +7,8 @@ originalTitle: "What 81,000 People Want from AI"
 originalUrl: https://www.anthropic.com/81k-interviews
 ---
 
-> 原文标题：What 81,000 People Want from AI
-> 原文链接：https://www.anthropic.com/81k-interviews
+原文标题：What 81,000 People Want from AI<br>
+原文链接：https://www.anthropic.com/81k-interviews
 
 # 81,000 人想从 AI 中得到什么
 

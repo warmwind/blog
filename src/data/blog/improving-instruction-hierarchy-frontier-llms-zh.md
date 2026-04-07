@@ -9,8 +9,8 @@ originalUrl: https://openai.com/index/instruction-hierarchy-challenge/
 
 > **本篇超出 7 天窗口**：原文发布于 2026 年 3 月 10 日（距今 13 天），7 天窗口内无未翻译的高质量技术深度文章，故放宽至 14 天。
 
-> 原文标题：Improving instruction hierarchy in frontier LLMs
-> 原文链接：https://openai.com/index/instruction-hierarchy-challenge/
+原文标题：Improving instruction hierarchy in frontier LLMs<br>
+原文链接：https://openai.com/index/instruction-hierarchy-challenge/
 
 # 提升前沿 LLM 的 Instruction Hierarchy
 

@@ -7,8 +7,8 @@ originalTitle: "Introducing GPT-5.4 mini and nano"
 originalUrl: https://openai.com/index/introducing-gpt-5-4-mini-and-nano
 ---
 
-> 原文标题：Introducing GPT-5.4 mini and nano  
-> 原文链接：https://openai.com/index/introducing-gpt-5-4-mini-and-nano
+原文标题：Introducing GPT-5.4 mini and nano  <br>
+原文链接：https://openai.com/index/introducing-gpt-5-4-mini-and-nano
 
 # 发布 GPT-5.4 mini 与 nano
 

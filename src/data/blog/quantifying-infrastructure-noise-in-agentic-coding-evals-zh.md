@@ -7,8 +7,8 @@ originalTitle: "Quantifying infrastructure noise in agentic coding evals"
 originalUrl: https://www.anthropic.com/engineering/infrastructure-noise
 ---
 
-> 原文标题：Quantifying infrastructure noise in agentic coding evals  
-> 原文链接：https://www.anthropic.com/engineering/infrastructure-noise
+原文标题：Quantifying infrastructure noise in agentic coding evals  <br>
+原文链接：https://www.anthropic.com/engineering/infrastructure-noise
 
 Agentic coding benchmarks，例如 SWE-bench 和 Terminal-Bench，通常被用来比较前沿模型的软件工程能力——而排行榜前几名之间往往只差几个百分点。这些分数常常被当作对模型相对能力的精确测量，并且越来越多地被用于决定部署哪种模型。然而，我们发现，仅基础设施配置本身，就可能造成超过这些差距的分数变化。在内部实验中，资源最充足与资源最少的配置之间，在 Terminal-Bench 2.0 上的差距达到了 6 个百分点（p < 0.01）。
 

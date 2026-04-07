@@ -1,20 +1,14 @@
 ---
-title: "58% of PRs in our largest monorepo merge without human review"
-pubDatetime: 2026-04-07T00:00:00Z
-description: "Vercel 技术文章翻译：在最大单一代码库中，58% 的 PR 在没有人工审核的情况下合并"
+title: 最大 Monorepo 中 58% 的 PR 无需人工审核即可合并
+pubDatetime: 2026-04-07T00:00:00+08:00
+description: Vercel 分享其最大 Monorepo 中如何实现 58% 的 PR 无需人工审核即可合并的工程实践
 slug: 58-percent-prs-monorepo-merge-without-review
 originalTitle: "58% of PRs in our largest monorepo merge without human review"
-originalUrl: "https://vercel.com/blog/58-percent-of-prs-in-our-largest-monorepo-merge-without-human-review"
-tags:
-  - Agent
-  - PR
-  - Automation
-  - Monorepo
-lang: zh-cn
+originalUrl: https://vercel.com/blog/58-percent-of-prs-in-our-largest-monorepo-merge-without-human-review
 ---
 
-> **原文标题**: 58% of PRs in our largest monorepo merge without human review
-> **原文链接**: https://vercel.com/blog/58-percent-of-prs-in-our-largest-monorepo-merge-without-human-review
+原文标题：58% of PRs in our largest monorepo merge without human review<br>
+原文链接：https://vercel.com/blog/58-percent-of-prs-in-our-largest-monorepo-merge-without-human-review
 
 9分钟阅读
 

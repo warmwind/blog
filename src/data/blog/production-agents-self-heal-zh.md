@@ -7,8 +7,8 @@ originalTitle: "How My Agents Self-Heal in Production"
 originalUrl: https://blog.langchain.com/production-agents-self-heal/
 ---
 
-> 原文标题：How My Agents Self-Heal in Production
-> 原文链接：https://blog.langchain.com/production-agents-self-heal/
+原文标题：How My Agents Self-Heal in Production<br>
+原文链接：https://blog.langchain.com/production-agents-self-heal/
 
 # 我的 Agent 如何在生产环境中自我修复
 

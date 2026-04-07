@@ -7,8 +7,8 @@ originalTitle: "Developer's Guide to AI Agent Protocols"
 originalUrl: https://developers.googleblog.com/developers-guide-to-ai-agent-protocols/
 ---
 
-> 原文标题：Developer's Guide to AI Agent Protocols
-> 原文链接：https://developers.googleblog.com/developers-guide-to-ai-agent-protocols/
+原文标题：Developer's Guide to AI Agent Protocols<br>
+原文链接：https://developers.googleblog.com/developers-guide-to-ai-agent-protocols/
 
 # AI Agent 协议开发者指南
 

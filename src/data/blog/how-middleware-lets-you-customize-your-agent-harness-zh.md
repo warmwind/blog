@@ -7,8 +7,8 @@ originalTitle: "How Middleware Lets You Customize Your Agent Harness"
 originalUrl: https://blog.langchain.com/how-middleware-lets-you-customize-your-agent-harness/
 ---
 
-> 原文标题：How Middleware Lets You Customize Your Agent Harness
-> 原文链接：https://blog.langchain.com/how-middleware-lets-you-customize-your-agent-harness/
+原文标题：How Middleware Lets You Customize Your Agent Harness<br>
+原文链接：https://blog.langchain.com/how-middleware-lets-you-customize-your-agent-harness/
 
 # Middleware 如何让你自定义 Agent Harness
 

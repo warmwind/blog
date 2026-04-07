@@ -7,8 +7,8 @@ originalTitle: "Long-running Claude for scientific computing"
 originalUrl: https://www.anthropic.com/research/long-running-Claude
 ---
 
-> 原文标题：Long-running Claude for scientific computing
-> 原文链接：https://www.anthropic.com/research/long-running-Claude
+原文标题：Long-running Claude for scientific computing<br>
+原文链接：https://www.anthropic.com/research/long-running-Claude
 > 作者：Siddharth Mishra-Sharma（Discovery 团队研究员）
 > 发布时间：2026 年 3 月 23 日
 

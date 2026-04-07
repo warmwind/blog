@@ -1,20 +1,14 @@
 ---
-title: "Building Intelligent Search with Amazon Bedrock and Amazon OpenSearch for hybrid RAG solutions"
-pubDatetime: 2026-04-07T00:00:00Z
-description: "AWS 技术文章翻译：使用 Amazon Bedrock 和 Amazon OpenSearch 构建混合 RAG 解决方案"
+title: 使用 Amazon Bedrock 和 Amazon OpenSearch 构建智能搜索以实现混合 RAG 解决方案
+pubDatetime: 2026-04-07T00:00:00+08:00
+description: 使用 Amazon Bedrock 和 Amazon OpenSearch 构建混合 RAG 解决方案的完整技术指南
 slug: building-intelligent-search-amazon-bedrock-opensearch
 originalTitle: "Building Intelligent Search with Amazon Bedrock and Amazon OpenSearch for hybrid RAG solutions"
-originalUrl: "https://aws.amazon.com/blogs/machine-learning/building-intelligent-search-with-amazon-bedrock-and-amazon-opensearch-for-hybrid-rag-solutions/"
-tags:
-  - RAG
-  - AWS
-  - Bedrock
-  - OpenSearch
-lang: zh-cn
+originalUrl: https://aws.amazon.com/blogs/machine-learning/building-intelligent-search-with-amazon-bedrock-and-amazon-opensearch-for-hybrid-rag-solutions/
 ---
 
-> **原文标题**: Building Intelligent Search with Amazon Bedrock and Amazon OpenSearch for hybrid RAG solutions
-> **原文链接**: https://aws.amazon.com/blogs/machine-learning/building-intelligent-search-with-amazon-bedrock-and-amazon-opensearch-for-hybrid-rag-solutions/
+原文标题：Building Intelligent Search with Amazon Bedrock and Amazon OpenSearch for hybrid RAG solutions<br>
+原文链接：https://aws.amazon.com/blogs/machine-learning/building-intelligent-search-with-amazon-bedrock-and-amazon-opensearch-for-hybrid-rag-solutions/
 
 # 使用 Amazon Bedrock 和 Amazon OpenSearch 构建智能搜索以实现混合 RAG 解决方案
 

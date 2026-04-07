@@ -7,8 +7,8 @@ originalTitle: "Introducing LangSmith Sandboxes: Secure Code Execution for Agent
 originalUrl: https://blog.langchain.com/introducing-langsmith-sandboxes-secure-code-execution-for-agents/
 ---
 
-> 原文标题：Introducing LangSmith Sandboxes: Secure Code Execution for Agents  
-> 原文链接：https://blog.langchain.com/introducing-langsmith-sandboxes-secure-code-execution-for-agents/
+原文标题：Introducing LangSmith Sandboxes: Secure Code Execution for Agents  <br>
+原文链接：https://blog.langchain.com/introducing-langsmith-sandboxes-secure-code-execution-for-agents/
 
 # LangSmith Sandboxes：为 Agents 提供安全代码执行
 

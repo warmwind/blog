@@ -7,8 +7,8 @@ originalTitle: "Build knowledge agents without embeddings"
 originalUrl: https://vercel.com/blog/build-knowledge-agents-without-embeddings
 ---
 
-> 原文标题：Build knowledge agents without embeddings
-> 原文链接：https://vercel.com/blog/build-knowledge-agents-without-embeddings
+原文标题：Build knowledge agents without embeddings<br>
+原文链接：https://vercel.com/blog/build-knowledge-agents-without-embeddings
 
 # 不用 Embedding 构建知识 Agent
 

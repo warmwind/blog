@@ -7,8 +7,8 @@ originalTitle: "Claude Code auto mode: a safer way to skip permissions"
 originalUrl: https://www.anthropic.com/engineering/claude-code-auto-mode
 ---
 
-> 原文标题：Claude Code auto mode: a safer way to skip permissions
-> 原文链接：https://www.anthropic.com/engineering/claude-code-auto-mode
+原文标题：Claude Code auto mode: a safer way to skip permissions<br>
+原文链接：https://www.anthropic.com/engineering/claude-code-auto-mode
 
 # Claude Code Auto Mode：更安全地跳过权限审批
 

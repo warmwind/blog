@@ -7,8 +7,8 @@ originalTitle: "How far does alignment midtraining generalize?"
 originalUrl: https://alignment.openai.com/how-far-does-alignment-midtraining-generalize/
 ---
 
-> 原文标题：How far does alignment midtraining generalize?
-> 原文链接：https://alignment.openai.com/how-far-does-alignment-midtraining-generalize/
+原文标题：How far does alignment midtraining generalize?<br>
+原文链接：https://alignment.openai.com/how-far-does-alignment-midtraining-generalize/
 
 # Alignment Midtraining 的泛化能力有多远？
 

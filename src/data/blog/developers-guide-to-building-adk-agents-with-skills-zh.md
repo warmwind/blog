@@ -7,8 +7,8 @@ originalTitle: "Developer's Guide to Building ADK Agents with Skills"
 originalUrl: https://developers.googleblog.com/developers-guide-to-building-adk-agents-with-skills/
 ---
 
-> 原文标题：Developer's Guide to Building ADK Agents with Skills
-> 原文链接：[developers.googleblog.com](https://developers.googleblog.com/developers-guide-to-building-adk-agents-with-skills/)
+原文标题：Developer's Guide to Building ADK Agents with Skills<br>
+原文链接：[developers.googleblog.com](https://developers.googleblog.com/developers-guide-to-building-adk-agents-with-skills/)
 > 发布时间：2026 年 4 月 1 日
 > 作者：Lavi Nigam（Developer Relations Engineer）、Shubham Saboo（Senior AI Product Manager）
 

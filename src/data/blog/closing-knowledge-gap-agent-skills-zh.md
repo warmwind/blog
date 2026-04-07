@@ -7,8 +7,8 @@ originalTitle: "Closing the knowledge gap with agent skills"
 originalUrl: https://developers.googleblog.com/closing-the-knowledge-gap-with-agent-skills/
 ---
 
-> 原文标题：Closing the knowledge gap with agent skills
-> 原文链接：https://developers.googleblog.com/closing-the-knowledge-gap-with-agent-skills/
+原文标题：Closing the knowledge gap with agent skills<br>
+原文链接：https://developers.googleblog.com/closing-the-knowledge-gap-with-agent-skills/
 
 # 用 Agent Skills 弥合知识鸿沟
 

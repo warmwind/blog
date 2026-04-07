@@ -7,8 +7,8 @@ originalTitle: "Agent Evaluation Readiness Checklist"
 originalUrl: https://blog.langchain.com/agent-evaluation-readiness-checklist/
 ---
 
-> 原文标题：Agent Evaluation Readiness Checklist
-> 原文链接：https://blog.langchain.com/agent-evaluation-readiness-checklist/
+原文标题：Agent Evaluation Readiness Checklist<br>
+原文链接：https://blog.langchain.com/agent-evaluation-readiness-checklist/
 
 # Agent 评估就绪清单
 

@@ -7,8 +7,8 @@ originalTitle: "Knowledge needs a meta-knowledge layer"
 originalUrl: https://www.pinecone.io/learn/series/beyond-retrieval/knowledge-needs-meta-knowledge/
 ---
 
-> 原文标题：Knowledge needs a meta-knowledge layer  
-> 原文链接：https://www.pinecone.io/learn/series/beyond-retrieval/knowledge-needs-meta-knowledge/
+原文标题：Knowledge needs a meta-knowledge layer  <br>
+原文链接：https://www.pinecone.io/learn/series/beyond-retrieval/knowledge-needs-meta-knowledge/
 
 ![](https://cdn.sanity.io/images/vr8gru94/production/7d2452cdf5a2c76bef94b8980bf2d80e03c5d071-2713x1342.png)
 

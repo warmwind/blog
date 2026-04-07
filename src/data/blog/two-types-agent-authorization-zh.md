@@ -7,8 +7,8 @@ originalTitle: "Two different types of agent authorization"
 originalUrl: https://blog.langchain.com/two-different-types-of-agent-authorization/
 ---
 
-> 原文标题：Two different types of agent authorization
-> 原文链接：https://blog.langchain.com/two-different-types-of-agent-authorization/
+原文标题：Two different types of agent authorization<br>
+原文链接：https://blog.langchain.com/two-different-types-of-agent-authorization/
 
 # 两种不同的 Agent 授权类型
 

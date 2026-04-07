@@ -7,8 +7,8 @@ originalTitle: "Best Practices for Claude Code"
 originalUrl: https://code.claude.com/docs/en/best-practices
 ---
 
-> 原文标题：Best Practices for Claude Code  
-> 原文链接：https://code.claude.com/docs/en/best-practices
+原文标题：Best Practices for Claude Code  <br>
+原文链接：https://code.claude.com/docs/en/best-practices
 
 # Claude Code 最佳实践
 

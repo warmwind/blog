@@ -7,8 +7,8 @@ originalTitle: "The Anatomy of an Agent Harness"
 originalUrl: https://blog.langchain.com/the-anatomy-of-an-agent-harness/
 ---
 
-> 原文标题：The Anatomy of an Agent Harness  
-> 原文链接：https://blog.langchain.com/the-anatomy-of-an-agent-harness/
+原文标题：The Anatomy of an Agent Harness  <br>
+原文链接：https://blog.langchain.com/the-anatomy-of-an-agent-harness/
 
 ![](https://blog.langchain.com/content/images/2026/03/LangSmith-for-Startups--4-.png)
 

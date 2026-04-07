@@ -7,8 +7,8 @@ originalTitle: "ADK Go 1.0 Arrives!"
 originalUrl: https://developers.googleblog.com/adk-go-10-arrives/
 ---
 
-> 原文标题：ADK Go 1.0 Arrives!
-> 原文链接：https://developers.googleblog.com/adk-go-10-arrives/
+原文标题：ADK Go 1.0 Arrives!<br>
+原文链接：https://developers.googleblog.com/adk-go-10-arrives/
 
 # ADK Go 1.0 Arrives!
 

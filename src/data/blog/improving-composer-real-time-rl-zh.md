@@ -7,8 +7,8 @@ originalTitle: "Improving Composer through real-time RL"
 originalUrl: https://cursor.com/blog/real-time-rl-for-composer
 ---
 
-> 原文标题：Improving Composer through real-time RL
-> 原文链接：https://cursor.com/blog/real-time-rl-for-composer
+原文标题：Improving Composer through real-time RL<br>
+原文链接：https://cursor.com/blog/real-time-rl-for-composer
 
 # 用实时 RL 改进 Composer
 

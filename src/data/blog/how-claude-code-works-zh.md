@@ -7,8 +7,8 @@ originalTitle: "How Claude Code works"
 originalUrl: https://code.claude.com/docs/en/how-claude-code-works
 ---
 
-> 原文标题：How Claude Code works  
-> 原文链接：https://code.claude.com/docs/en/how-claude-code-works
+原文标题：How Claude Code works  <br>
+原文链接：https://code.claude.com/docs/en/how-claude-code-works
 
 # Claude Code 如何工作
 

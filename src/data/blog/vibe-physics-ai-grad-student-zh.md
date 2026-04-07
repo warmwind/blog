@@ -7,8 +7,8 @@ originalTitle: "Vibe Physics: The AI Grad Student"
 originalUrl: https://www.anthropic.com/research/vibe-physics
 ---
 
-> 原文标题：Vibe Physics: The AI Grad Student
-> 原文链接：https://www.anthropic.com/research/vibe-physics
+原文标题：Vibe Physics: The AI Grad Student<br>
+原文链接：https://www.anthropic.com/research/vibe-physics
 
 # Vibe Physics：AI 研究生
 

@@ -7,8 +7,8 @@ originalTitle: "Open SWE: An Open-Source Framework for Internal Coding Agents"
 originalUrl: https://blog.langchain.com/open-swe-an-open-source-framework-for-internal-coding-agents/
 ---
 
-> 原文标题：Open SWE: An Open-Source Framework for Internal Coding Agents
-> 原文链接：https://blog.langchain.com/open-swe-an-open-source-framework-for-internal-coding-agents/
+原文标题：Open SWE: An Open-Source Framework for Internal Coding Agents<br>
+原文链接：https://blog.langchain.com/open-swe-an-open-source-framework-for-internal-coding-agents/
 
 # Open SWE：面向内部 Coding Agents 的开源框架
 

@@ -7,8 +7,8 @@ originalTitle: "How we build evals for Deep Agents"
 originalUrl: https://blog.langchain.com/how-we-build-evals-for-deep-agents/
 ---
 
-> 原文标题：How we build evals for Deep Agents
-> 原文链接：https://blog.langchain.com/how-we-build-evals-for-deep-agents/
+原文标题：How we build evals for Deep Agents<br>
+原文链接：https://blog.langchain.com/how-we-build-evals-for-deep-agents/
 
 # 我们如何为 Deep Agents 构建评估
 

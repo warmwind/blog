@@ -7,8 +7,8 @@ originalTitle: "Introducing LangSmith Fleet"
 originalUrl: https://blog.langchain.com/introducing-langsmith-fleet/
 ---
 
-> 原文标题：Introducing LangSmith Fleet  
-> 原文链接：https://blog.langchain.com/introducing-langsmith-fleet/
+原文标题：Introducing LangSmith Fleet  <br>
+原文链接：https://blog.langchain.com/introducing-langsmith-fleet/
 
 ![](https://blog.langchain.com/content/images/2026/03/Introducing-Fleet-2.png)
 

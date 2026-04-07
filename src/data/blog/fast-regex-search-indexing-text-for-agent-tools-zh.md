@@ -7,8 +7,8 @@ originalTitle: "Fast regex search: indexing text for agent tools"
 originalUrl: https://cursor.com/blog/fast-regex-search
 ---
 
-> 原文标题：Fast regex search: indexing text for agent tools
-> 原文链接：https://cursor.com/blog/fast-regex-search
+原文标题：Fast regex search: indexing text for agent tools<br>
+原文链接：https://cursor.com/blog/fast-regex-search
 
 # 快速正则搜索：为 Agent 工具构建文本索引
 

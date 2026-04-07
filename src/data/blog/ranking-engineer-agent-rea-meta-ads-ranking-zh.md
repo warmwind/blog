@@ -7,8 +7,8 @@ originalTitle: "Ranking Engineer Agent (REA): The Autonomous AI Agent Accelerati
 originalUrl: https://engineering.fb.com/2026/03/17/developer-tools/ranking-engineer-agent-rea-autonomous-ai-system-accelerating-meta-ads-ranking-innovation/
 ---
 
-> 原文标题：Ranking Engineer Agent (REA): The Autonomous AI Agent Accelerating Meta's Ads Ranking Innovation
-> 原文链接：https://engineering.fb.com/2026/03/17/developer-tools/ranking-engineer-agent-rea-autonomous-ai-system-accelerating-meta-ads-ranking-innovation/
+原文标题：Ranking Engineer Agent (REA): The Autonomous AI Agent Accelerating Meta's Ads Ranking Innovation<br>
+原文链接：https://engineering.fb.com/2026/03/17/developer-tools/ranking-engineer-agent-rea-autonomous-ai-system-accelerating-meta-ads-ranking-innovation/
 
 # Ranking Engineer Agent（REA）：加速 Meta 广告排序创新的自主 AI Agent
 

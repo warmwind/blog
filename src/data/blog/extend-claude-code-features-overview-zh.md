@@ -7,8 +7,8 @@ originalTitle: "Extend Claude Code"
 originalUrl: https://code.claude.com/docs/en/features-overview
 ---
 
-> 原文标题：Extend Claude Code  
-> 原文链接：https://code.claude.com/docs/en/features-overview
+原文标题：Extend Claude Code  <br>
+原文链接：https://code.claude.com/docs/en/features-overview
 
 # 扩展 Claude Code
 

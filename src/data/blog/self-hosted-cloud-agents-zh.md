@@ -7,8 +7,8 @@ originalTitle: "Self-hosted Cloud Agents"
 originalUrl: https://www.cursor.com/blog/self-hosted-cloud-agents
 ---
 
-> 原文标题：Self-hosted Cloud Agents
-> 原文链接：https://www.cursor.com/blog/self-hosted-cloud-agents
+原文标题：Self-hosted Cloud Agents<br>
+原文链接：https://www.cursor.com/blog/self-hosted-cloud-agents
 
 # 在你自己的基础设施中运行 Cloud Agents
 

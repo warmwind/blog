@@ -7,8 +7,8 @@ originalTitle: "Bring state-of-the-art agentic skills to the edge with Gemma 4"
 originalUrl: https://developers.googleblog.com/bring-state-of-the-art-agentic-skills-to-the-edge-with-gemma-4/
 ---
 
-> 原文标题：Bring state-of-the-art agentic skills to the edge with Gemma 4
-> 原文链接：https://developers.googleblog.com/bring-state-of-the-art-agentic-skills-to-the-edge-with-gemma-4/
+原文标题：Bring state-of-the-art agentic skills to the edge with Gemma 4<br>
+原文链接：https://developers.googleblog.com/bring-state-of-the-art-agentic-skills-to-the-edge-with-gemma-4/
 
 # Bring state-of-the-art agentic skills to the edge with Gemma 4
 

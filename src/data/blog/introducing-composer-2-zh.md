@@ -7,8 +7,8 @@ originalTitle: "Introducing Composer 2"
 originalUrl: https://cursor.com/blog/composer-2
 ---
 
-> 原文标题：Introducing Composer 2
-> 原文链接：https://cursor.com/blog/composer-2
+原文标题：Introducing Composer 2<br>
+原文链接：https://cursor.com/blog/composer-2
 
 # Composer 2 发布
 

@@ -7,8 +7,8 @@ originalTitle: "Autonomous context compression"
 originalUrl: https://blog.langchain.com/autonomous-context-compression/
 ---
 
-> 原文标题：Autonomous context compression  
-> 原文链接：https://blog.langchain.com/autonomous-context-compression/
+原文标题：Autonomous context compression  <br>
+原文链接：https://blog.langchain.com/autonomous-context-compression/
 
 ![](https://blog.langchain.com/content/images/2026/03/Screenshot-2026-03-06-at-3.40.34---PM.png)
 

@@ -7,8 +7,8 @@ originalTitle: "Open Models have crossed a threshold"
 originalUrl: https://blog.langchain.com/open-models-have-crossed-a-threshold/
 ---
 
-> 原文标题：Open Models have crossed a threshold
-> 原文链接：https://blog.langchain.com/open-models-have-crossed-a-threshold/
+原文标题：Open Models have crossed a threshold<br>
+原文链接：https://blog.langchain.com/open-models-have-crossed-a-threshold/
 
 ![](https://blog.langchain.com/content/images/size/w760/format/webp/2026/04/72.png)
 

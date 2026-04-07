@@ -7,8 +7,8 @@ originalTitle: "How Claude remembers your project"
 originalUrl: https://code.claude.com/docs/en/memory
 ---
 
-> 原文标题：How Claude remembers your project  
-> 原文链接：https://code.claude.com/docs/en/memory
+原文标题：How Claude remembers your project  <br>
+原文链接：https://code.claude.com/docs/en/memory
 
 # Claude 如何记住你的项目
 

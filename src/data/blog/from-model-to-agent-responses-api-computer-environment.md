@@ -7,8 +7,8 @@ originalTitle: "From model to agent: Equipping the Responses API with a computer
 originalUrl: https://openai.com/index/equip-responses-api-computer-environment
 ---
 
-> 原文标题：From model to agent: Equipping the Responses API with a computer environment  
-> 原文链接：https://openai.com/index/equip-responses-api-computer-environment
+原文标题：From model to agent: Equipping the Responses API with a computer environment  <br>
+原文链接：https://openai.com/index/equip-responses-api-computer-environment
 
 ![](https://images.ctfassets.net/kftzwdyauwt9/1j8ghdf39iWtEXQAL8Wjf5/37b3a6136cb493574a71ffe483a03467/OAI_Equip_Responses_API_with_a_computer_environment_The_shell_tool_is_just_another_tool_desktop-light__3_.svg?w=3840&q=90)
 

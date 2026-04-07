@@ -7,8 +7,8 @@ originalTitle: "How Moda Builds Production-Grade AI Design Agents with Deep Agen
 originalUrl: https://blog.langchain.com/how-moda-builds-production-grade-ai-design-agents-with-deep-agents/
 ---
 
-> 原文标题：How Moda Builds Production-Grade AI Design Agents with Deep Agents
-> 原文链接：https://blog.langchain.com/how-moda-builds-production-grade-ai-design-agents-with-deep-agents/
+原文标题：How Moda Builds Production-Grade AI Design Agents with Deep Agents<br>
+原文链接：https://blog.langchain.com/how-moda-builds-production-grade-ai-design-agents-with-deep-agents/
 
 # Moda 如何用 Deep Agents 构建生产级 AI 设计 Agent
 

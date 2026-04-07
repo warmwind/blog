@@ -9,8 +9,8 @@ originalUrl: https://blog.langchain.com/skills-in-langsmith-fleet/
 
 > 本篇超出 7 天窗口（原文发布于 2026-03-25，翻译时已超过 7 天）
 
-> 原文标题：Skills in LangSmith Fleet
-> 原文链接：https://blog.langchain.com/skills-in-langsmith-fleet/
+原文标题：Skills in LangSmith Fleet<br>
+原文链接：https://blog.langchain.com/skills-in-langsmith-fleet/
 
 ![](https://blog.langchain.com/content/images/size/w760/format/webp/2026/03/Fleet-Skills.png)
 

@@ -7,8 +7,8 @@ originalTitle: "Announcing ADK for Java 1.0.0: Building the Future of AI Agents 
 originalUrl: https://developers.googleblog.com/announcing-adk-for-java-100-building-the-future-of-ai-agents-in-java/
 ---
 
-> 原文标题：Announcing ADK for Java 1.0.0: Building the Future of AI Agents in Java
-> 原文链接：https://developers.googleblog.com/announcing-adk-for-java-100-building-the-future-of-ai-agents-in-java/
+原文标题：Announcing ADK for Java 1.0.0: Building the Future of AI Agents in Java<br>
+原文链接：https://developers.googleblog.com/announcing-adk-for-java-100-building-the-future-of-ai-agents-in-java/
 
 # Announcing ADK for Java 1.0.0: Building the Future of AI Agents in Java
 

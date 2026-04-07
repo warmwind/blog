@@ -7,8 +7,8 @@ originalTitle: "LangChain Announces Enterprise Agentic AI Platform Built with NV
 originalUrl: https://blog.langchain.com/nvidia-enterprise/
 ---
 
-> 原文标题：LangChain Announces Enterprise Agentic AI Platform Built with NVIDIA
-> 原文链接：https://blog.langchain.com/nvidia-enterprise/
+原文标题：LangChain Announces Enterprise Agentic AI Platform Built with NVIDIA<br>
+原文链接：https://blog.langchain.com/nvidia-enterprise/
 
 ![LangChain x NVIDIA](https://blog.langchain.com/content/images/size/w760/format/webp/2026/03/bg-2--1-.png)
 

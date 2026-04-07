@@ -7,8 +7,8 @@ originalTitle: "Harness design for long-running application development"
 originalUrl: https://www.anthropic.com/engineering/harness-design-long-running-apps
 ---
 
-> 原文标题：Harness design for long-running application development
-> 原文链接：https://www.anthropic.com/engineering/harness-design-long-running-apps
+原文标题：Harness design for long-running application development<br>
+原文链接：https://www.anthropic.com/engineering/harness-design-long-running-apps
 
 # 面向长时间运行应用开发的 Harness 设计
 

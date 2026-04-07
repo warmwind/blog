@@ -1,20 +1,14 @@
 ---
-title: "Vector Drift in Azure AI Search: Three Hidden Reasons Your RAG Accuracy Degrades After Deployment"
-pubDatetime: 2026-04-07T00:00:00Z
-description: "Azure 技术文章翻译：向量漂移导致 RAG 系统准确性下降的三个隐藏原因"
+title: Azure AI Search 中的向量漂移：RAG 准确性在部署后下降的三个隐藏原因
+pubDatetime: 2026-04-07T00:00:00+08:00
+description: 向量漂移导致 RAG 系统准确性下降的三个隐藏原因及解决方案
 slug: vector-drift-azure-ai-search-rag-accuracy
 originalTitle: "Vector Drift in Azure AI Search: Three Hidden Reasons Your RAG Accuracy Degrades After Deployment"
-originalUrl: "https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/vector-drift-in-azure-ai-search-three-hidden-reasons-your-rag-accuracy-degrades-/4493031"
-tags:
-  - RAG
-  - Azure
-  - Vector
-  - Drift
-lang: zh-cn
+originalUrl: https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/vector-drift-in-azure-ai-search-three-hidden-reasons-your-rag-accuracy-degrades-/4493031
 ---
 
-> **原文标题**: Vector Drift in Azure AI Search: Three Hidden Reasons Your RAG Accuracy Degrades After Deployment
-> **原文链接**: https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/vector-drift-in-azure-ai-search-three-hidden-reasons-your-rag-accuracy-degrades-/4493031
+原文标题：Vector Drift in Azure AI Search: Three Hidden Reasons Your RAG Accuracy Degrades After Deployment<br>
+原文链接：https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/vector-drift-in-azure-ai-search-three-hidden-reasons-your-rag-accuracy-degrades-/4493031
 
 ## 博客文章
 

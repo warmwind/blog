@@ -7,8 +7,8 @@ originalTitle: "Building RAG workflows in n8n: choosing the right Pinecone node"
 originalUrl: https://www.pinecone.io/learn/pinecone-assistant-vs-pinecone-vector-store-node-n8n/
 ---
 
-> 原文标题：Building RAG workflows in n8n: choosing the right Pinecone node  
-> 原文链接：https://www.pinecone.io/learn/pinecone-assistant-vs-pinecone-vector-store-node-n8n/
+原文标题：Building RAG workflows in n8n: choosing the right Pinecone node  <br>
+原文链接：https://www.pinecone.io/learn/pinecone-assistant-vs-pinecone-vector-store-node-n8n/
 
 ![](https://cdn.sanity.io/images/vr8gru94/production/ce3fa6b3fcfacb8ea550bde58dee212496f79603-1000x830.png)
 

@@ -7,8 +7,8 @@ originalTitle: "Announcing the Colab MCP Server: Connect Any AI Agent to Google 
 originalUrl: https://developers.googleblog.com/announcing-the-colab-mcp-server-connect-any-ai-agent-to-google-colab/
 ---
 
-> 原文标题：Announcing the Colab MCP Server: Connect Any AI Agent to Google Colab
-> 原文链接：https://developers.googleblog.com/announcing-the-colab-mcp-server-connect-any-ai-agent-to-google-colab/
+原文标题：Announcing the Colab MCP Server: Connect Any AI Agent to Google Colab<br>
+原文链接：https://developers.googleblog.com/announcing-the-colab-mcp-server-connect-any-ai-agent-to-google-colab/
 
 # 发布 Colab MCP Server：将任意 AI Agent 连接到 Google Colab
 

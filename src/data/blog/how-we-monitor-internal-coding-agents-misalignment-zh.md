@@ -7,8 +7,8 @@ originalTitle: "How we monitor internal coding agents for misalignment"
 originalUrl: https://openai.com/index/how-we-monitor-internal-coding-agents-misalignment
 ---
 
-> 原文标题：How we monitor internal coding agents for misalignment  
-> 原文链接：https://openai.com/index/how-we-monitor-internal-coding-agents-misalignment
+原文标题：How we monitor internal coding agents for misalignment  <br>
+原文链接：https://openai.com/index/how-we-monitor-internal-coding-agents-misalignment
 
 # 我们如何监控内部 coding agents 的失配行为
 

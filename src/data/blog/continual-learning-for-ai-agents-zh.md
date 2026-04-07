@@ -7,8 +7,8 @@ originalTitle: "Continual Learning for AI Agents"
 originalUrl: https://blog.langchain.com/continual-learning-for-ai-agents/
 ---
 
-> 原文标题：Continual Learning for AI Agents
-> 原文链接：https://blog.langchain.com/continual-learning-for-ai-agents/
+原文标题：Continual Learning for AI Agents<br>
+原文链接：https://blog.langchain.com/continual-learning-for-ai-agents/
 
 # AI Agent 的持续学习
 

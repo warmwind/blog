@@ -7,8 +7,8 @@ originalTitle: "Agent Responsibly"
 originalUrl: https://vercel.com/blog/agent-responsibly
 ---
 
-> 原文标题：Agent Responsibly
-> 原文链接：https://vercel.com/blog/agent-responsibly
+原文标题：Agent Responsibly<br>
+原文链接：https://vercel.com/blog/agent-responsibly
 
 # Agent Responsibly
 

@@ -7,8 +7,8 @@ originalTitle: "Designing AI agents to resist prompt injection"
 originalUrl: https://openai.com/index/designing-agents-to-resist-prompt-injection
 ---
 
-> 原文标题：Designing AI agents to resist prompt injection  
-> 原文链接：https://openai.com/index/designing-agents-to-resist-prompt-injection
+原文标题：Designing AI agents to resist prompt injection  <br>
+原文链接：https://openai.com/index/designing-agents-to-resist-prompt-injection
 
 ![](https://images.ctfassets.net/kftzwdyauwt9/7vwwEVWeYVswN8KAIIRiAZ/3b21f7147ba40289879f844649d6897e/OAI_Designing_AI_agentsto_resist_prompt_injection_SEO_16x9.png?w=1600&h=900&fit=fill)
 
