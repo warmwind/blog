@@ -1,7 +1,7 @@
 ---
-title: "Continual Learning for AI Agents"
+title: "AI Agent 的持续学习"
 pubDatetime: 2026-04-06T10:00:00+08:00
-description: "LangChain 博客《Continual Learning for AI Agents》中文翻译（含原文引用）。Harrison Chase 介绍 AI Agent 持续学习的三个层次：模型层、Harness 层和 Context 层，以及如何利用 Trace 驱动各层改进。"
+description: "Harrison Chase 介绍 AI Agent 持续学习的三个层次：模型层、Harness 层和 Context 层，以及如何利用 Trace 驱动各层改进。"
 slug: continual-learning-for-ai-agents-zh
 originalTitle: "Continual Learning for AI Agents"
 originalUrl: https://blog.langchain.com/continual-learning-for-ai-agents/
@@ -10,7 +10,7 @@ originalUrl: https://blog.langchain.com/continual-learning-for-ai-agents/
 > 原文标题：Continual Learning for AI Agents
 > 原文链接：https://blog.langchain.com/continual-learning-for-ai-agents/
 
-# Continual Learning for AI Agents
+# AI Agent 的持续学习
 
 ![封面图](https://blog.langchain.com/content/images/2026/04/HFEylQUaIAAA88g.jpeg)
 

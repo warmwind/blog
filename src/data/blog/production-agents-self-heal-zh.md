@@ -1,7 +1,7 @@
 ---
 title: "我的 Agent 如何在生产环境中自我修复"
 pubDatetime: 2026-04-04T10:00:00+08:00
-description: "LangChain 博客《How My Agents Self-Heal in Production》中文翻译（含原文引用）。介绍如何构建自愈式部署流水线，让 Agent 在每次部署后自动检测回归、分类因果关系并发起修复 PR，无需人工干预直到代码审查阶段。"
+description: "介绍如何构建自愈式部署流水线，让 Agent 在每次部署后自动检测回归、分类因果关系并发起修复 PR，无需人工干预直到代码审查阶段。"
 slug: production-agents-self-heal-zh
 originalTitle: "How My Agents Self-Heal in Production"
 originalUrl: https://blog.langchain.com/production-agents-self-heal/
@@ -10,7 +10,7 @@ originalUrl: https://blog.langchain.com/production-agents-self-heal/
 > 原文标题：How My Agents Self-Heal in Production
 > 原文链接：https://blog.langchain.com/production-agents-self-heal/
 
-# How My Agents Self-Heal in Production
+# 我的 Agent 如何在生产环境中自我修复
 
 ![封面图](https://blog.langchain.com/content/images/size/w760/format/webp/2026/04/68.png)
 

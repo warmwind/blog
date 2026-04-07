@@ -1,7 +1,7 @@
 ---
-title: Open Models have crossed a threshold
+title: 开源模型已经跨越了一个门槛
 pubDatetime: 2026-04-03T10:00:00+08:00
-description: LangChain 博客文章《Open Models have crossed a threshold》的中文翻译（含原文引用）。
+description: 开源模型在 Agent 能力上已经跨越了一个关键门槛，开始在实际任务中具备与闭源模型相当的竞争力。
 slug: open-models-crossed-threshold-zh
 originalTitle: "Open Models have crossed a threshold"
 originalUrl: https://blog.langchain.com/open-models-have-crossed-a-threshold/
