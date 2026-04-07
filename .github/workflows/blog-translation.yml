@@ -108,11 +108,14 @@ jobs:
 
             Read the article list from /tmp/selected-articles.json.
             For each article in the list, sequentially:
-            1. Fetch the full article content from its URL.
-            2. Translate it to Chinese following all the rules in the skill.
-               - CRITICAL: Keep ALL images from the original article. Do not drop any image.
-               - CRITICAL: Keep the exact same format as the original (headings, paragraphs, code blocks, tables, lists). Your job is ONLY translation — do not reorganize or reformat.
-               - CRITICAL: Set pubDatetime to the current translation time (now), NOT the original article's publish date.
+            1. Fetch the full article content using `curl -sL <url>` via Bash (do NOT use WebFetch — it summarizes content and loses details). Parse the HTML to extract the article body.
+            2. Translate EVERY SINGLE paragraph to Chinese. This is a FULL translation, NOT a summary.
+               - You MUST translate every paragraph, every sentence. Do NOT condense or skip any content.
+               - The translated article should be roughly the same length as the original.
+               - Keep ALL images, ALL code blocks, ALL blockquotes, ALL headings from the original.
+               - Keep the exact same structure (same number of headings, same number of paragraphs, same number of code blocks).
+               - Set pubDatetime to the current translation time (now), NOT the original article's publish date.
+               - Follow all other rules in the /blog-translation-strict skill.
             3. Write the translated post to src/data/blog/<slug>.md.
 
             After all translations are done:
