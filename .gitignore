@@ -25,5 +25,5 @@ public/pagefind/
 !.env.example
 .claude/*
 !.claude/skills/
-.claude/skills/*
-!.claude/skills/blog-translation-strict/
+!.claude/skills/**
+.claude/skills/*/published.txt
