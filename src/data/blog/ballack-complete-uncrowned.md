@@ -3,11 +3,11 @@ title: "巴拉克：全能中场的无冕轨迹"
 pubDatetime: 2026-04-21T21:00:00+08:00
 description: "一位80后球迷视角下的巴拉克：球队轨迹、荣誉、四亚军赛季、以及「全能」与「无冕」并存的德国中场坐标。"
 slug: ballack-complete-uncrowned
-heroImage: /media/football/ballack/bayern.jpg
+heroImage: /media/football/ballack/hero.jpg
 postType: soccer
 ---
 
-![巴拉克（拜仁慕尼黑时期）](/media/football/ballack/bayern.jpg)
+![巴拉克（切尔西时期，庆祝夺得2009-10英超冠军）](/media/football/ballack/hero.jpg)
 
 对80后球迷来说，巴拉克（Michael Ballack）几乎等同于「德国中场」这个概念本身。他不是天才型的花哨盘带者，也不是古典前腰那种纯粹的节拍器，但整个2000年代前后，只要提到「攻守兼备的全能中场」，大多数中国球迷的第一反应都是他。
 
