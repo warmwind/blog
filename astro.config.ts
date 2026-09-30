@@ -1,4 +1,5 @@
 import { defineConfig, envField } from "astro/config";
+import { unified } from "@astrojs/markdown-remark";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import remarkToc from "remark-toc";
@@ -16,25 +17,31 @@ import { SITE } from "./src/config";
 export default defineConfig({
   site: SITE.website,
   trailingSlash: "ignore",
+  compressHTML: true,
   integrations: [
     sitemap({
-      filter: page => SITE.showArchives || !page.endsWith("/archives"),
+      filter: (page) => !page.endsWith("/archives"),
     }),
   ],
   markdown: {
-    remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of contents" }]],
-    rehypePlugins: [
-      [
-        rehypeExternalLinks,
-        {
-          target: "_blank",
-          rel: ["noopener", "noreferrer"],
-          test: (node: { properties?: { href?: string } }) =>
-            typeof node.properties?.href === "string" &&
-            !node.properties.href.includes("oscarjiang.site"),
-        },
+    processor: unified({
+      remarkPlugins: [
+        remarkToc,
+        [remarkCollapse, { test: "Table of contents" }],
       ],
-    ],
+      rehypePlugins: [
+        [
+          rehypeExternalLinks,
+          {
+            target: "_blank",
+            rel: ["noopener", "noreferrer"],
+            test: (node: { properties?: { href?: string } }) =>
+              typeof node.properties?.href === "string" &&
+              !node.properties.href.includes("oscarjiang.site"),
+          },
+        ],
+      ],
+    }),
     shikiConfig: {
       themes: { light: "min-light", dark: "night-owl" },
       defaultColor: false,
@@ -67,8 +74,5 @@ export default defineConfig({
         optional: true,
       }),
     },
-  },
-  experimental: {
-    preserveScriptOrder: true,
   },
 });

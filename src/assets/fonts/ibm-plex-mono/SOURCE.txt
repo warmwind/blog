@@ -1,0 +1,6 @@
+IBM Plex Mono Regular (400) and Bold (700)
+Unmodified complete WOFF files from the official @ibm/plex-mono npm package, version 2.5.0.
+Source: https://github.com/IBM/plex
+Package: https://www.npmjs.com/package/@ibm/plex-mono/v/2.5.0
+License: SIL Open Font License 1.1; see LICENSE.txt (license text preserved; line endings and trailing whitespace normalized).
+Only OG image generation imports these fonts. No site typography or font family is changed.
