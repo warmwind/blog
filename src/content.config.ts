@@ -1,4 +1,5 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { z } from "astro/zod";
 import { glob } from "astro/loaders";
 import { SITE } from "@/config";
 
@@ -22,9 +23,7 @@ const blog = defineCollection({
       timezone: z.string().optional(),
       originalTitle: z.string().optional(),
       originalUrl: z.string().optional(),
-      postType: z
-        .enum(["default", "soccer"])
-        .default("default"),
+      postType: z.enum(["default", "soccer"]).default("default"),
     }),
 });
 

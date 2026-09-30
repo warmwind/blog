@@ -1,0 +1,8 @@
+IBM Plex Sans SC Regular (400) and Bold (700)
+Unmodified complete WOFF files from official @ibm/plex-sans-sc 1.1.0.
+Source: https://github.com/IBM/plex
+Package: https://www.npmjs.com/package/@ibm/plex-sans-sc/v/1.1.0
+License: SIL Open Font License 1.1; license text retained in LICENSE.txt with whitespace normalized.
+Only the two needed weights are included (10439768 bytes), preserving coverage for future Chinese titles.
+Used solely as the fallback for OG characters absent from IBM Plex Mono, not for site/body typography.
+No CSS, other weights, telemetry, or install scripts from the 124 MB package are included.
