@@ -13,7 +13,8 @@ import { SITE } from "@/config";
 export const getStaticPaths = (async ({ paginate }) => {
   const posts = await getCollection(
     "blog",
-    ({ data }) => !data.draft && (!data.postType || data.postType === "default")
+    ({ data }) =>
+      !data.draft && (!data.postType || data.postType === "default"),
   );
   return paginate(getSortedPosts(posts), { pageSize: SITE.postPerPage });
 }) satisfies GetStaticPaths;
@@ -27,7 +28,17 @@ const regularPosts = allPosts.filter(({ data }) => !data.featured);
 
 <Layout>
   <Header />
-  <main id="main-content" data-layout="index" class="app-layout pt-8">
+  <main id="main-content" data-layout="index" class="app-layout">
+    {
+      page.currentPage === 1 && (
+        <section class="home-intro" aria-label="介绍">
+          <span class="eyebrow">Notes by Oscar</span>
+          <h1>保持好奇，慢慢记录。</h1>
+          <p>关于创业、管理和技术，也聊足球与电影。</p>
+        </section>
+      )
+    }
+
     {
       featuredPosts.length > 0 && (
         <section
@@ -37,9 +48,9 @@ const regularPosts = allPosts.filter(({ data }) => !data.featured);
             { "border-b border-border/50": regularPosts.length > 0 },
           ]}
         >
-          <h2 class="text-xl font-semibold tracking-wide">置顶文章</h2>
+          <h2 class="section-heading">置顶文章</h2>
           <ul>
-            {featuredPosts.map(data => (
+            {featuredPosts.map((data) => (
               <Card variant="h3" {...data} />
             ))}
           </ul>
@@ -49,8 +60,11 @@ const regularPosts = allPosts.filter(({ data }) => !data.featured);
 
     {
       regularPosts.length > 0 && (
-        <section id="recent-posts" class="pb-4">
-          <h2 class="text-xl font-semibold tracking-wide">
+        <section
+          id="recent-posts"
+          class:list={["pb-4", { "pt-10": page.currentPage > 1 }]}
+        >
+          <h2 class="section-heading">
             文章
             <a
               target="_blank"
@@ -68,7 +82,7 @@ const regularPosts = allPosts.filter(({ data }) => !data.featured);
             </a>
           </h2>
           <ul>
-            {regularPosts.map(data => (
+            {regularPosts.map((data) => (
               <Card variant="h3" {...data} />
             ))}
           </ul>
